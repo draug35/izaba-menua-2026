@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="es">
+<html lang="eu">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -928,29 +928,29 @@
   <header class="hero page">
     <div class="hero-panel">
       <div class="hero-copy">
-        <p class="eyebrow">Cocina de campamento</p>
+        <p class="eyebrow">Udalekuko sukaldea</p>
         <h1>Izaba Menua 2026</h1>
-        <p class="subtitle">Menú completo para 53 personas · Del 2 al 11 · Cocina de campamento</p>
+        <p class="subtitle">53 lagunentzako menu osoa · 2tik 11ra · Udalekuko sukaldea</p>
       </div>
-      <aside class="hero-side" aria-label="Resumen rápido">
+      <aside class="hero-side" aria-label="Laburpen azkarra">
         <div class="quick-grid">
-          <div class="quick-item"><strong>53</strong><span>personas</span></div>
-          <div class="quick-item"><strong>2-11</strong><span>días de menú</span></div>
-          <div class="quick-item"><strong>Menús</strong><span>por día</span></div>
-          <div class="quick-item"><strong>Compra</strong><span>lista global</span></div>
-          <div class="quick-item"><strong>Aquí/allí</strong><span>compra separada</span></div>
+          <div class="quick-item"><strong>53</strong><span>lagun</span></div>
+          <div class="quick-item"><strong>2-11</strong><span>menu egunak</span></div>
+          <div class="quick-item"><strong>Menuak</strong><span>egunez egun</span></div>
+          <div class="quick-item"><strong>Erosketa</strong><span>zerrenda orokorra</span></div>
+          <div class="quick-item"><strong>Hemen/han</strong><span>erosketa bereizia</span></div>
         </div>
       </aside>
     </div>
   </header>
 
-  <nav class="site-nav" aria-label="Navegación principal">
+  <nav class="site-nav" aria-label="Nabigazio nagusia">
     <div class="nav-inner">
-      <a href="#menus">Menús por día</a>
-      <a href="#lista-total">Compra por bloques</a>
-      <a href="#comprar-aqui">Comprar aquí y llevar</a>
-      <a href="#comprar-alli">Comprar allí</a>
-      <a href="#dietas">Dietas y seguridad</a>
+      <a href="#menus">Eguneko menuak</a>
+      <a href="#lista-total">Erosketa blokeka</a>
+      <a href="#comprar-aqui">Hemen erosi eta eraman</a>
+      <a href="#comprar-alli">Han erosi</a>
+      <a href="#dietas">Dietak eta segurtasuna</a>
     </div>
   </nav>
 
@@ -958,12 +958,12 @@
     <section id="menus">
       <div class="section-head">
         <div>
-          <h2>Menús por día</h2>
-          <p class="section-note">Elige un día y usa el parte de cocina para situarte rápido; abre cantidades solo cuando toque preparar o comprar.</p>
+          <h2>Eguneko menuak</h2>
+          <p class="section-note">Aukeratu eguna eta erabili sukaldeko partea azkar kokatzeko; ireki kantitateak prestatzeko edo erosteko unean bakarrik.</p>
         </div>
-        <button class="button print" type="button" id="printButton">Imprimir vista</button>
+        <button class="button print" type="button" id="printButton">Inprimatu ikuspegia</button>
       </div>
-      <div class="day-filter" id="dayFilter" aria-label="Filtro por día"></div>
+      <div class="day-filter" id="dayFilter" aria-label="Egunaren araberako iragazkia"></div>
       <div class="kitchen-board" id="kitchenBoard" aria-live="polite"></div>
       <div class="days-grid" id="daysGrid"></div>
     </section>
@@ -971,32 +971,32 @@
     <section id="lista-total">
       <div class="section-head">
         <div>
-          <h2>Compra por bloques</h2>
-          <p class="section-note">La compra total está pensada para organizarse, no para leerla de golpe.</p>
+          <h2>Erosketa blokeka</h2>
+          <p class="section-note">Erosketa osoa antolatzeko dago pentsatuta, ez kolpe batean irakurtzeko.</p>
         </div>
       </div>
       <div class="shopping-explainer">
         <article>
-          <strong>Qué significa</strong>
-          <p>Estas cantidades son para todo el campamento, del día 2 al 11. No son cantidades de un solo día.</p>
+          <strong>Zer esan nahi du</strong>
+          <p>Kantitate hauek udaleku osorako dira, 2tik 11ra. Ez dira egun bakarreko kantitateak.</p>
         </article>
         <article>
-          <strong>Cómo usarlo</strong>
-          <p>Para cocinar hoy, usa el parte del día. Para organizar compra, empieza por estos bloques y abre la tabla solo para revisar producto por producto.</p>
+          <strong>Nola erabili</strong>
+          <p>Gaur sukaldatzeko, erabili eguneko partea. Erosketa antolatzeko, hasi bloke hauetatik eta ireki taula produktuz produktu berrikusteko bakarrik.</p>
         </article>
       </div>
       <div class="shopping-map" id="shoppingMap"></div>
       <details class="shopping-detail">
-        <summary>Ver listado maestro completo <span id="shoppingTotalCount">total del campamento</span></summary>
+        <summary>Ikusi zerrenda nagusi osoa <span id="shoppingTotalCount">udaleku osoko guztira</span></summary>
         <div class="table-wrap">
           <table>
             <thead>
               <tr>
-                <th>Categoría</th>
-                <th>Producto</th>
-                <th>Cantidad</th>
-                <th>Dónde comprar</th>
-                <th>Nota</th>
+                <th>Kategoria</th>
+                <th>Produktua</th>
+                <th>Kantitatea</th>
+                <th>Non erosi</th>
+                <th>Oharra</th>
               </tr>
             </thead>
             <tbody id="shoppingAll"></tbody>
@@ -1008,19 +1008,19 @@
     <section id="comprar-aqui">
       <div class="section-head">
         <div>
-          <h2>Comprar aquí y llevar</h2>
-          <p class="section-note">Secos, productos especiales, certificados y recursos que conviene no improvisar.</p>
+          <h2>Hemen erosi eta eraman</h2>
+          <p class="section-note">Lehorrak, produktu bereziak, ziurtatuak eta inprobisatzea komeni ez den baliabideak.</p>
         </div>
       </div>
       <div class="table-wrap">
         <table>
           <thead>
             <tr>
-              <th>Categoría</th>
-              <th>Producto</th>
-              <th>Cantidad</th>
-              <th>Dónde comprar</th>
-              <th>Nota</th>
+              <th>Kategoria</th>
+              <th>Produktua</th>
+              <th>Kantitatea</th>
+              <th>Non erosi</th>
+              <th>Oharra</th>
             </tr>
           </thead>
           <tbody id="shoppingBring"></tbody>
@@ -1031,19 +1031,19 @@
     <section id="comprar-alli">
       <div class="section-head">
         <div>
-          <h2>Comprar allí / por tandas</h2>
-          <p class="section-note">Frescos, frío, pan, fruta, verdura y carne. Son totales del campamento: comprar por tandas, no todo el primer día.</p>
+          <h2>Han erosi / txandaka</h2>
+          <p class="section-note">Freskoak, hotzekoak, ogia, fruta, barazkiak eta haragia. Udaleku osoko guztirakoak dira: erosi txandaka, ez dena lehen egunean.</p>
         </div>
       </div>
       <div class="table-wrap">
         <table>
           <thead>
             <tr>
-              <th>Categoría</th>
-              <th>Producto</th>
-              <th>Cantidad</th>
-              <th>Dónde comprar</th>
-              <th>Nota</th>
+              <th>Kategoria</th>
+              <th>Produktua</th>
+              <th>Kantitatea</th>
+              <th>Non erosi</th>
+              <th>Oharra</th>
             </tr>
           </thead>
           <tbody id="shoppingLocal"></tbody>
@@ -1054,47 +1054,47 @@
     <section id="dietas">
       <div class="section-head">
         <div>
-          <h2>Dietas y seguridad</h2>
-          <p class="section-note">Reglas cortas para evitar contaminación cruzada y resolver menús especiales con comida real.</p>
+          <h2>Dietak eta segurtasuna</h2>
+          <p class="section-note">Kutsadura gurutzatua saihesteko eta menu bereziak benetako janariarekin konpontzeko arau laburrak.</p>
         </div>
       </div>
       <div class="safety-grid">
         <article class="safety-card">
-          <h3>Sin gluten</h3>
+          <h3>Glutenik gabe</h3>
           <ul>
-            <li>Guardar productos sin gluten en caja cerrada.</li>
-            <li>Cocer pasta sin gluten antes de la pasta normal.</li>
-            <li>Servir primero a celíacos y alérgicos.</li>
-            <li>Revisar caldos, embutidos, salchichas, albóndigas, salsas, cacao, chocolate y postres.</li>
+            <li>Gorde glutenik gabeko produktuak kutxa itxi batean.</li>
+            <li>Egosi glutenik gabeko pasta pasta arrunta baino lehen.</li>
+            <li>Zerbitzatu lehenik zeliakoei eta alergikoei.</li>
+            <li>Berrikusi saldak, hestebeteak, saltxitxak, albondigak, saltsak, kakaoa, txokolatea eta postreak.</li>
           </ul>
         </article>
         <article class="safety-card">
-          <h3>Frutos secos</h3>
+          <h3>Fruitu lehorrak</h3>
           <ul>
-            <li>Preparar raciones especiales antes de sacar frutos secos.</li>
-            <li>Guardar frutos secos y cacahuetes lejos de panes y postres.</li>
-            <li>Vigilar trazas en chocolate y galletas.</li>
+            <li>Prestatu anoa bereziak fruitu lehorrak atera aurretik.</li>
+            <li>Gorde fruitu lehorrak eta kakahueteak ogietatik eta postreetatik urrun.</li>
+            <li>Begiratu txokolatean eta gailetetan arrastoak egon daitezkeen.</li>
           </ul>
         </article>
         <article class="safety-card">
-          <h3>Vegano</h3>
+          <h3>Beganoa</h3>
           <ul>
-            <li>No basta con quitar carne: debe haber proteína real.</li>
-            <li>Tener hummus, paté vegetal, garbanzos extra y soja texturizada.</li>
-            <li>Separar queso y salsas lácteas cuando haga falta.</li>
+            <li>Ez da nahikoa haragia kentzea: benetako proteina egon behar da.</li>
+            <li>Izan hummusa, pate begetala, garbantzu gehigarriak eta soja testurizatua.</li>
+            <li>Bereizi gazta eta esneki-saltsak behar denean.</li>
           </ul>
         </article>
         <article class="safety-card">
-          <h3>Utensilios</h3>
+          <h3>Tresnak</h3>
           <ul>
-            <li>Usar utensilios limpios para dietas especiales.</li>
-            <li>Preparar primero lo sin gluten y lo sin frutos secos.</li>
-            <li>Etiquetar raciones especiales antes del servicio.</li>
+            <li>Erabili tresna garbiak dieta berezietarako.</li>
+            <li>Prestatu lehenik glutenik gabekoa eta fruitu lehorrik gabekoa.</li>
+            <li>Etiketatu anoa bereziak zerbitzatu aurretik.</li>
           </ul>
         </article>
         <article class="safety-card rule-card">
-          <h3>Regla de cocina</h3>
-          <p>Primero se preparan y se apartan las raciones especiales; después se abre el servicio general. Si hay duda de etiqueta, ese producto no entra en la ración especial.</p>
+          <h3>Sukaldeko araua</h3>
+          <p>Lehenik anoa bereziak prestatu eta aparte gordetzen dira; gero irekitzen da zerbitzu orokorra. Etiketarekin zalantza badago, produktu hori ez da anoa berezian sartzen.</p>
         </article>
       </div>
     </section>
@@ -1102,504 +1102,504 @@
   </main>
 
   <footer class="page">
-    Izaba Menua 2026 · Menú de campamento para cocina real
+    Izaba Menua 2026 · Benetako sukalderako udaleku-menua
   </footer>
 
   <script>
     const breakfast = {
-      dish: "Desayuno fijo",
+      dish: "Gosari finkoa",
       ingredients: [
-        ["Pan", "común o sobrante del día anterior"],
-        ["Mantequilla", "compra total 5 kg aprox."],
-        ["Mermelada", "compra total 10 botes"],
-        ["Galletas tipo María", "10-12 paquetes grandes"],
-        ["Leche", "compra total 130 L"],
-        ["Bebida de avena/soja", "6-8 L"],
-        ["Cacao soluble", "4-5 kg"],
-        ["Sin gluten", "galletas 3-4 paquetes y pan 4-5 paquetes"]
+        ["Ogia", "arrunta edo aurreko eguneko soberakina"],
+        ["Gurina", "guztira 5 kg gutxi gorabehera"],
+        ["Marmelada", "guztira 10 pote"],
+        ["Maria motako gailetak", "10-12 pakete handi"],
+        ["Esnea", "guztira 130 L"],
+        ["Olo/soja edaria", "6-8 L"],
+        ["Kakao disolbagarria", "4-5 kg"],
+        ["Glutenik gabe", "3-4 gaileta-pakete eta 4-5 ogi-pakete"]
       ],
-      note: "Del 3 al 11. Guardar el material sin gluten separado y cerrado."
+      note: "3tik 11ra. Gorde glutenik gabeko materiala bereizita eta itxita."
     };
 
     const menuDays = [
       {
         day: 2,
-        label: "Día 2",
+        label: "2. eguna",
         services: {
           breakfast: null,
           lunch: {
-            dish: "Cada participante trae comida de casa.",
-            ingredients: [["Sin compra de cocina", "—"]],
-            note: "Evitar intercambio de comida si hay alergias."
+            dish: "Parte-hartzaile bakoitzak etxeko bazkaria dakar.",
+            ingredients: [["Sukaldeko erosketarik ez", "—"]],
+            note: "Alergiak badaude, saihestu janaria trukatzea."
           },
           snack: {
-            dish: "Sándwich de york y queso + fruta + frutos secos.",
+            dish: "York urdaiazpiko eta gazta sandwicha + fruta + fruitu lehorrak.",
             ingredients: [
-              ["Pan de molde", "7 paquetes"],
-              ["Jamón york natural", "55 lonchas"],
-              ["Queso en lonchas", "55 lonchas"],
-              ["Fruta", "53 piezas"],
-              ["Frutos secos / cacahuetes", "1,1-1,3 kg"],
-              ["Pan sin gluten", "1 paquete"],
-              ["York sin gluten", "4-6 lonchas"],
-              ["Queso sin gluten", "4-6 lonchas"]
+              ["Moldeko ogia", "7 pakete"],
+              ["York urdaiazpiko naturala", "55 xerra"],
+              ["Gazta xerratan", "55 xerra"],
+              ["Fruta", "53 pieza"],
+              ["Fruitu lehorrak / kakahueteak", "1,1-1,3 kg"],
+              ["Glutenik gabeko ogia", "pakete 1"],
+              ["Glutenik gabeko yorka", "4-6 xerra"],
+              ["Glutenik gabeko gazta", "4-6 xerra"]
             ],
-            note: "Preparar primero las raciones sin frutos secos y sin gluten."
+            note: "Prestatu lehenik fruitu lehorrik gabeko eta glutenik gabeko anoak."
           },
           dinner: {
-            dish: "Ensalada + pasta carbonara + yogur.",
+            dish: "Entsalada + pasta karbonara + jogurta.",
             ingredients: [
-              ["Lechuga", "13 unidades"],
+              ["Letxuga", "13 unitate"],
               ["Tomate", "6 kg"],
-              ["Cebolla", "2 kg"],
-              ["Aceitunas", "2 latas grandes"],
+              ["Tipula", "2 kg"],
+              ["Olibak", "2 lata handi"],
               ["Pasta", "7 kg"],
-              ["Pasta sin gluten", "500-750 g"],
+              ["Glutenik gabeko pasta", "500-750 g"],
               ["Bacon", "3-3,5 kg"],
-              ["Champiñones", "3 kg"],
-              ["Cebolla para salsa", "1,5 kg"],
-              ["Nata/leche evaporada o similar", "5-6 L"],
-              ["Queso rallado/en polvo", "1,5-2 kg"],
-              ["Yogures", "53 unidades"],
-              ["Pan", "15 barras"]
+              ["Txanpinoiak", "3 kg"],
+              ["Saltsarako tipula", "1,5 kg"],
+              ["Esnegaina/esne lurrundua edo antzekoa", "5-6 L"],
+              ["Gazta birrindua/hautsean", "1,5-2 kg"],
+              ["Jogurtak", "53 unitate"],
+              ["Ogia", "15 barra"]
             ],
-            note: "Cocer pasta sin gluten primero, con olla y escurridor limpios."
+            note: "Egosi glutenik gabeko pasta lehenik, lapiko eta iragazki garbiekin."
           }
         }
       },
       {
         day: 3,
-        label: "Día 3",
+        label: "3. eguna",
         services: {
           breakfast,
           lunch: {
-            dish: "Bocata de salchicha Frankfurt y queso + chocolate + fruta.",
+            dish: "Frankfurt saltxitxa eta gazta bokata + txokolatea + fruta.",
             ingredients: [
-              ["Pan", "25 barras"],
-              ["Pan sin gluten", "2-3 barras/paquetes"],
-              ["Salchichas Frankfurt", "115-120 unidades"],
-              ["Queso", "2 kg"],
-              ["Chocolate", "16 tabletas"],
-              ["Fruta", "53 piezas"]
+              ["Ogia", "25 barra"],
+              ["Glutenik gabeko ogia", "2-3 barra/pakete"],
+              ["Frankfurt saltxitxak", "115-120 unitate"],
+              ["Gazta", "2 kg"],
+              ["Txokolatea", "16 tableta"],
+              ["Fruta", "53 pieza"]
             ],
-            note: "Usar salchicha certificada para celíacos."
+            note: "Erabili zeliakoentzat ziurtatutako saltxitxa."
           },
           snack: {
-            dish: "Sándwich de pavo y queso + fruta + frutos secos.",
+            dish: "Indioilar eta gazta sandwicha + fruta + fruitu lehorrak.",
             ingredients: [
-              ["Pan de molde", "7 paquetes"],
-              ["Pavo natural", "55 lonchas"],
-              ["Queso", "55 lonchas"],
-              ["Fruta", "53 piezas"],
-              ["Frutos secos / cacahuetes", "1,1-1,3 kg"],
-              ["Pan sin gluten", "1 paquete"],
-              ["Pavo sin gluten", "4-6 lonchas"]
+              ["Moldeko ogia", "7 pakete"],
+              ["Indioilar naturala", "55 xerra"],
+              ["Gazta", "55 xerra"],
+              ["Fruta", "53 pieza"],
+              ["Fruitu lehorrak / kakahueteak", "1,1-1,3 kg"],
+              ["Glutenik gabeko ogia", "pakete 1"],
+              ["Glutenik gabeko indioilarra", "4-6 xerra"]
             ],
-            note: "Raciones especiales cerradas antes de sacar frutos secos."
+            note: "Anoa bereziak itxita utzi fruitu lehorrak atera aurretik."
           },
           dinner: {
-            dish: "Crema de calabacín + pechugas en tomate con patatas chips + natillas.",
+            dish: "Kalabazin-krema + oilasko-bularkiak tomatean patata frijituekin + natillak.",
             ingredients: [
-              ["Calabacín", "11 kg"],
-              ["Patata para crema", "4 kg"],
-              ["Cebolla", "1,5 kg"],
-              ["Caldo de verduras", "5 L"],
-              ["Agua", "5 L"],
-              ["Pechuga de pollo", "10-11 kg"],
-              ["Tomate frito", "2,5-3 kg"],
-              ["Patatas chips", "10 bolsas grandes"],
-              ["Natillas", "53 unidades"],
-              ["Pan", "15 barras"]
+              ["Kalabazina", "11 kg"],
+              ["Kremarako patata", "4 kg"],
+              ["Tipula", "1,5 kg"],
+              ["Barazki-salda", "5 L"],
+              ["Ura", "5 L"],
+              ["Oilasko-bularkia", "10-11 kg"],
+              ["Tomate frijitua", "2,5-3 kg"],
+              ["Patata frijituak", "10 poltsa handi"],
+              ["Natillak", "53 unitate"],
+              ["Ogia", "15 barra"]
             ],
-            note: "Revisar caldo y tomate para sin gluten."
+            note: "Berrikusi salda eta tomatea glutenik gabekoentzat."
           }
         }
       },
       {
         day: 4,
-        label: "Día 4",
+        label: "4. eguna",
         services: {
           breakfast,
           lunch: {
-            dish: "Lentejas con verduras y chorizo + fruta.",
+            dish: "Dilistak barazkiekin eta txorizoarekin + fruta.",
             ingredients: [
-              ["Lentejas cocidas", "17-18 kg"],
-              ["Pimiento verde", "1,2 kg"],
-              ["Zanahoria", "1,5-2 kg"],
-              ["Sofrito tomate/cebolla/puerro", "2 kg aprox."],
-              ["Ajo", "2 cabezas"],
-              ["Chorizo", "75-80 trozos"],
-              ["Caldo de verduras", "2 L"],
-              ["Vino blanco", "1 botella"],
-              ["Fruta", "53 piezas"],
-              ["Pan", "15 barras"]
+              ["Dilistak egosita", "17-18 kg"],
+              ["Piper berdea", "1,2 kg"],
+              ["Azenarioa", "1,5-2 kg"],
+              ["Tomate/tipula/porru sofritoa", "2 kg gutxi gorabehera"],
+              ["Baratxuria", "2 buru"],
+              ["Txorizoa", "75-80 zati"],
+              ["Barazki-salda", "2 L"],
+              ["Ardo zuria", "botila 1"],
+              ["Fruta", "53 pieza"],
+              ["Ogia", "15 barra"]
             ],
-            note: "Mejor chorizo aparte: simplifica vegano y sin gluten."
+            note: "Hobe txorizoa aparte: beganoa eta glutenik gabekoa errazten ditu."
           },
           snack: {
-            dish: "Sándwich de chocolate + fruta + frutos secos.",
+            dish: "Txokolate sandwicha + fruta + fruitu lehorrak.",
             ingredients: [
-              ["Pan de molde", "7 paquetes"],
-              ["Chocolate", "16 tabletas"],
-              ["Fruta", "53 piezas"],
-              ["Frutos secos / cacahuetes", "1,1-1,3 kg"],
-              ["Pan sin gluten", "1 paquete"],
-              ["Chocolate sin gluten", "2 tabletas"]
+              ["Moldeko ogia", "7 pakete"],
+              ["Txokolatea", "16 tableta"],
+              ["Fruta", "53 pieza"],
+              ["Fruitu lehorrak / kakahueteak", "1,1-1,3 kg"],
+              ["Glutenik gabeko ogia", "pakete 1"],
+              ["Glutenik gabeko txokolatea", "2 tableta"]
             ],
-            note: "Vigilar trazas de frutos secos en chocolate."
+            note: "Begiratu txokolatean fruitu lehorren arrastoak egon daitezkeen."
           },
           dinner: {
-            dish: "Ensalada + albóndigas en salsa española con patatas + yogur.",
+            dish: "Entsalada + albondigak saltsa espainiarrean patatekin + jogurta.",
             ingredients: [
-              ["Lechuga", "11 unidades"],
+              ["Letxuga", "11 unitate"],
               ["Tomate", "6 kg"],
-              ["Cebolla para ensalada", "3 kg"],
-              ["Atún", "8 latas medianas"],
-              ["Albóndigas", "260 unidades"],
-              ["Patata natural", "6-6,5 kg"],
-              ["Sofrito tomate/cebolla/puerro", "2 kg"],
-              ["Caldo de verduras", "2 L"],
-              ["Vino blanco", "1 botella"],
-              ["Maicena", "1 paquete"],
-              ["Zanahoria", "1,5 kg"],
-              ["Yogures", "53 unidades"],
-              ["Pan", "15 barras"]
+              ["Entsaladarako tipula", "3 kg"],
+              ["Atuna", "8 lata ertain"],
+              ["Albondigak", "260 unitate"],
+              ["Patata naturala", "6-6,5 kg"],
+              ["Tomate/tipula/porru sofritoa", "2 kg"],
+              ["Barazki-salda", "2 L"],
+              ["Ardo zuria", "botila 1"],
+              ["Maizena", "pakete 1"],
+              ["Azenarioa", "1,5 kg"],
+              ["Jogurtak", "53 unitate"],
+              ["Ogia", "15 barra"]
             ],
-            note: "Para celíacos: comprobar albóndigas o hacer proteína aparte."
+            note: "Zeliakoentzat: egiaztatu albondigak edo prestatu proteina aparte."
           }
         }
       },
       {
         day: 5,
-        label: "Día 5",
+        label: "5. eguna",
         services: {
           breakfast,
           lunch: {
-            dish: "Garbanzos especiados con verduras + arroz + fruta.",
+            dish: "Garbantzu espeziatuak barazkiekin + arroza + fruta.",
             ingredients: [
-              ["Garbanzos cocidos", "17-18 kg"],
-              ["Arroz", "3,5 kg"],
-              ["Cebolla", "2 kg"],
-              ["Zanahoria", "1,5-2 kg"],
-              ["Ajo", "2 cabezas"],
-              ["Tomate concentrado", "500 g"],
-              ["Leche de coco", "4 L"],
-              ["Curry/comino/cúrcuma", "cantidad suficiente"],
-              ["Fruta", "53 piezas"],
-              ["Pan", "15 barras"]
+              ["Garbantzuak egosita", "17-18 kg"],
+              ["Arroza", "3,5 kg"],
+              ["Tipula", "2 kg"],
+              ["Azenarioa", "1,5-2 kg"],
+              ["Baratxuria", "2 buru"],
+              ["Tomate kontzentratua", "500 g"],
+              ["Koko-esnea", "4 L"],
+              ["Curry/kuminoa/kurkuma", "behar adina"],
+              ["Fruta", "53 pieza"],
+              ["Ogia", "15 barra"]
             ],
-            note: "Plato base muy bueno para todos."
+            note: "Oinarrizko plater oso egokia denentzat."
           },
           snack: {
-            dish: "Sándwich de jamón/lomo y queso + fruta + frutos secos.",
+            dish: "Urdaiazpiko/solomo eta gazta sandwicha + fruta + fruitu lehorrak.",
             ingredients: [
-              ["Pan de molde", "7 paquetes"],
-              ["Jamón curado/lomo natural", "55-60 lonchas"],
-              ["Queso", "55 lonchas"],
-              ["Fruta", "53 piezas"],
-              ["Frutos secos / cacahuetes", "1,1-1,3 kg"],
-              ["Pan sin gluten", "1 paquete"],
-              ["Embutido sin gluten", "4-6 lonchas"]
+              ["Moldeko ogia", "7 pakete"],
+              ["Urdaiazpiko ondua/solomo naturala", "55-60 xerra"],
+              ["Gazta", "55 xerra"],
+              ["Fruta", "53 pieza"],
+              ["Fruitu lehorrak / kakahueteak", "1,1-1,3 kg"],
+              ["Glutenik gabeko ogia", "pakete 1"],
+              ["Glutenik gabeko hestebetea", "4-6 xerra"]
             ],
-            note: "Preparar sin gluten con cuchillo limpio."
+            note: "Prestatu glutenik gabekoa labana garbiarekin."
           },
           dinner: {
-            dish: "Ensalada de pasta + lomo en salsa de pimientos + yogur.",
+            dish: "Pasta-entsalada + solomoa piper-saltsan + jogurta.",
             ingredients: [
               ["Pasta", "4-4,5 kg"],
-              ["Pasta sin gluten", "500 g"],
-              ["Atún", "8 latas medianas"],
+              ["Glutenik gabeko pasta", "500 g"],
+              ["Atuna", "8 lata ertain"],
               ["Tomate", "2,5-3 kg"],
-              ["Maíz", "2,5 kg"],
-              ["Cebolla morada", "800 g-1 kg"],
-              ["Aceitunas", "2 latas grandes"],
-              ["Lomo", "150-160 filetes"],
-              ["Pimientos en lata", "2 kg"],
+              ["Artoa", "2,5 kg"],
+              ["Tipula morea", "800 g-1 kg"],
+              ["Olibak", "2 lata handi"],
+              ["Solomoa", "150-160 xerra"],
+              ["Piperrak latan", "2 kg"],
               ["Sofrito", "2 kg"],
-              ["Yogures", "53 unidades"],
-              ["Pan", "15 barras"]
+              ["Jogurtak", "53 unitate"],
+              ["Ogia", "15 barra"]
             ],
-            note: "Separar pasta sin gluten antes de mezclar."
+            note: "Bereizi glutenik gabeko pasta nahasi aurretik."
           }
         }
       },
       {
         day: 6,
-        label: "Día 6",
+        label: "6. eguna",
         services: {
           breakfast,
           lunch: {
-            dish: "Alubias blancas con verduras y chorizo + fruta.",
+            dish: "Babarrun zuriak barazkiekin eta txorizoarekin + fruta.",
             ingredients: [
-              ["Alubias blancas cocidas", "17-18 kg"],
-              ["Pimiento verde", "1,2 kg"],
-              ["Sofrito tomate/cebolla/puerro", "2 kg"],
-              ["Zanahoria", "1,5 kg"],
-              ["Calabacín", "1,5-2 kg"],
+              ["Babarrun zuriak egosita", "17-18 kg"],
+              ["Piper berdea", "1,2 kg"],
+              ["Tomate/tipula/porru sofritoa", "2 kg"],
+              ["Azenarioa", "1,5 kg"],
+              ["Kalabazina", "1,5-2 kg"],
               ["Patata", "4 kg"],
-              ["Chorizo", "75-80 trozos"],
-              ["Vino blanco", "1 botella"],
-              ["Fruta", "53 piezas"],
-              ["Pan", "15 barras"]
+              ["Txorizoa", "75-80 zati"],
+              ["Ardo zuria", "botila 1"],
+              ["Fruta", "53 pieza"],
+              ["Ogia", "15 barra"]
             ],
-            note: "Chorizo aparte."
+            note: "Txorizoa aparte."
           },
           snack: {
-            dish: "Sándwich de chocolate + fruta + frutos secos.",
+            dish: "Txokolate sandwicha + fruta + fruitu lehorrak.",
             ingredients: [
-              ["Pan de molde", "7 paquetes"],
-              ["Chocolate", "16 tabletas"],
-              ["Fruta", "53 piezas"],
-              ["Frutos secos / cacahuetes", "1,1-1,3 kg"],
-              ["Pan sin gluten", "1 paquete"],
-              ["Chocolate sin gluten", "2 tabletas"]
+              ["Moldeko ogia", "7 pakete"],
+              ["Txokolatea", "16 tableta"],
+              ["Fruta", "53 pieza"],
+              ["Fruitu lehorrak / kakahueteak", "1,1-1,3 kg"],
+              ["Glutenik gabeko ogia", "pakete 1"],
+              ["Glutenik gabeko txokolatea", "2 tableta"]
             ],
-            note: "Ración sin frutos secos cerrada antes."
+            note: "Fruitu lehorrik gabeko anoa aurretik itxita."
           },
           dinner: {
-            dish: "Ensalada + pechugas en salsa de queso con patatas chips + natillas.",
+            dish: "Entsalada + bularkiak gazta-saltsan patata frijituekin + natillak.",
             ingredients: [
-              ["Lechuga", "13 unidades"],
+              ["Letxuga", "13 unitate"],
               ["Tomate", "6 kg"],
-              ["Cebolla", "3 kg"],
-              ["Pechuga de pollo", "10-11 kg"],
-              ["Queso fundido", "2 kg"],
-              ["Queso azul", "300-400 g"],
-              ["Leche de coco/nata", "3,5-4 L"],
-              ["Patatas chips", "10 bolsas grandes"],
-              ["Natillas", "53 unidades"],
-              ["Pan", "15 barras"]
+              ["Tipula", "3 kg"],
+              ["Oilasko-bularkia", "10-11 kg"],
+              ["Gazta urtua", "2 kg"],
+              ["Gazta urdina", "300-400 g"],
+              ["Koko-esnea/esnegaina", "3,5-4 L"],
+              ["Patata frijituak", "10 poltsa handi"],
+              ["Natillak", "53 unitate"],
+              ["Ogia", "15 barra"]
             ],
-            note: "Salsa de queso aparte si hay dietas especiales."
+            note: "Gazta-saltsa aparte, dieta berezirik badago."
           }
         }
       },
       {
         day: 7,
-        label: "Día 7",
+        label: "7. eguna",
         services: {
           breakfast,
           lunch: {
-            dish: "Bocata de lomo y queso + chocolate + fruta.",
+            dish: "Solomo eta gazta bokata + txokolatea + fruta.",
             ingredients: [
-              ["Pan", "25 barras"],
-              ["Pan sin gluten", "2-3 barras/paquetes"],
-              ["Lomo natural", "105-110 filetes"],
-              ["Queso", "2,2 kg"],
-              ["Chocolate", "16 tabletas"],
-              ["Fruta", "53 piezas"]
+              ["Ogia", "25 barra"],
+              ["Glutenik gabeko ogia", "2-3 barra/pakete"],
+              ["Solomo naturala", "105-110 xerra"],
+              ["Gazta", "2,2 kg"],
+              ["Txokolatea", "16 tableta"],
+              ["Fruta", "53 pieza"]
             ],
-            note: "Queso aparte para quien no tome lácteos."
+            note: "Gazta aparte esnekirik hartzen ez duenarentzat."
           },
           snack: {
-            dish: "Sándwich de pavo y queso + fruta + frutos secos.",
+            dish: "Indioilar eta gazta sandwicha + fruta + fruitu lehorrak.",
             ingredients: [
-              ["Pan de molde", "7 paquetes"],
-              ["Pavo natural", "55 lonchas"],
-              ["Queso", "55 lonchas"],
-              ["Fruta", "53 piezas"],
-              ["Frutos secos / cacahuetes", "1,1-1,3 kg"],
-              ["Pan sin gluten", "1 paquete"],
-              ["Pavo sin gluten", "4-6 lonchas"]
+              ["Moldeko ogia", "7 pakete"],
+              ["Indioilar naturala", "55 xerra"],
+              ["Gazta", "55 xerra"],
+              ["Fruta", "53 pieza"],
+              ["Fruitu lehorrak / kakahueteak", "1,1-1,3 kg"],
+              ["Glutenik gabeko ogia", "pakete 1"],
+              ["Glutenik gabeko indioilarra", "4-6 xerra"]
             ],
-            note: "Preparar y cerrar la ración especial antes del servicio general."
+            note: "Prestatu eta itxi anoa berezia zerbitzu orokorra hasi aurretik."
           },
           dinner: {
-            dish: "Crema de verdura + salchichas con puré de patata + yogur.",
+            dish: "Barazki-krema + saltxitxak patata-purearekin + jogurta.",
             ingredients: [
-              ["Calabacín", "6,5-7 kg"],
-              ["Zanahoria", "1,5-2 kg"],
+              ["Kalabazina", "6,5-7 kg"],
+              ["Azenarioa", "1,5-2 kg"],
               ["Sofrito", "2 kg"],
-              ["Caldo de verduras", "6 L"],
-              ["Patata para crema", "3,5-4 kg"],
-              ["Salchichas", "200-210 unidades"],
-              ["Puré de patata", "1,5-1,8 kg"],
-              ["Leche", "1,5-2 L"],
-              ["Agua para puré", "4-5 L"],
-              ["Mantequilla", "750 g-1 kg"],
-              ["Yogures", "53 unidades"],
-              ["Pan", "15 barras"]
+              ["Barazki-salda", "6 L"],
+              ["Kremarako patata", "3,5-4 kg"],
+              ["Saltxitxak", "200-210 unitate"],
+              ["Patata-purea", "1,5-1,8 kg"],
+              ["Esnea", "1,5-2 L"],
+              ["Purearako ura", "4-5 L"],
+              ["Gurina", "750 g-1 kg"],
+              ["Jogurtak", "53 unitate"],
+              ["Ogia", "15 barra"]
             ],
-            note: "Revisar puré y salchichas para celíacos."
+            note: "Berrikusi purea eta saltxitxak zeliakoentzat."
           }
         }
       },
       {
         day: 8,
-        label: "Día 8",
+        label: "8. eguna",
         services: {
           breakfast,
           lunch: {
-            dish: "Garbanzos con verduras y chorizo + fruta.",
+            dish: "Garbantzuak barazkiekin eta txorizoarekin + fruta.",
             ingredients: [
-              ["Garbanzos cocidos", "17-18 kg"],
-              ["Pimiento verde", "1,2 kg"],
-              ["Sofrito tomate/cebolla/puerro", "2 kg"],
-              ["Zanahoria", "1,5 kg"],
-              ["Calabacín", "1,5-2 kg"],
+              ["Garbantzuak egosita", "17-18 kg"],
+              ["Piper berdea", "1,2 kg"],
+              ["Tomate/tipula/porru sofritoa", "2 kg"],
+              ["Azenarioa", "1,5 kg"],
+              ["Kalabazina", "1,5-2 kg"],
               ["Patata", "4 kg"],
-              ["Chorizo", "75-80 trozos"],
-              ["Vino blanco", "1 botella"],
-              ["Fruta", "53 piezas"],
-              ["Pan", "15 barras"]
+              ["Txorizoa", "75-80 zati"],
+              ["Ardo zuria", "botila 1"],
+              ["Fruta", "53 pieza"],
+              ["Ogia", "15 barra"]
             ],
-            note: "Chorizo aparte."
+            note: "Txorizoa aparte."
           },
           snack: {
-            dish: "Sándwich de Philadelphia + fruta + frutos secos.",
+            dish: "Philadelphia/gazta krema sandwicha + fruta + fruitu lehorrak.",
             ingredients: [
-              ["Pan de molde", "7 paquetes"],
-              ["Philadelphia/queso crema", "6-7 tarrinas de 250 g"],
-              ["Fruta", "53 piezas"],
-              ["Frutos secos / cacahuetes", "1,1-1,3 kg"],
-              ["Pan sin gluten", "1 paquete"],
-              ["Queso crema sin gluten", "1 tarrina"]
+              ["Moldeko ogia", "7 pakete"],
+              ["Philadelphia/gazta krema", "250 g-ko 6-7 ontzi"],
+              ["Fruta", "53 pieza"],
+              ["Fruitu lehorrak / kakahueteak", "1,1-1,3 kg"],
+              ["Glutenik gabeko ogia", "pakete 1"],
+              ["Glutenik gabeko gazta krema", "ontzi 1"]
             ],
-            note: "Evitar cuchillo común con migas."
+            note: "Saihestu ogi-apurrak dituen labana arrunta."
           },
           dinner: {
-            dish: "Pollo al curry con arroz + yogur.",
+            dish: "Oilaskoa curryan arrozarekin + jogurta.",
             ingredients: [
-              ["Arroz", "3,5 kg"],
-              ["Pechuga de pollo troceada", "10-11 kg"],
-              ["Leche de coco", "5,5-6 L"],
-              ["Sofrito tomate/cebolla/puerro", "2 kg"],
-              ["Pimiento rojo en lata", "1 bote grande"],
-              ["Curry suave", "cantidad suficiente"],
-              ["Cúrcuma/comino/jengibre", "cantidad suficiente"],
-              ["Yogures", "53 unidades"],
-              ["Pan", "12-15 barras"]
+              ["Arroza", "3,5 kg"],
+              ["Oilasko-bularkia zatituta", "10-11 kg"],
+              ["Koko-esnea", "5,5-6 L"],
+              ["Tomate/tipula/porru sofritoa", "2 kg"],
+              ["Piper gorria latan", "pote handi 1"],
+              ["Curry leuna", "behar adina"],
+              ["Kurkuma/kuminoa/jengibrea", "behar adina"],
+              ["Jogurtak", "53 unitate"],
+              ["Ogia", "12-15 barra"]
             ],
-            note: "Curry suave, no heroicidades."
+            note: "Curry leuna, heroikeriarik gabe."
           }
         }
       },
       {
         day: 9,
-        label: "Día 9",
+        label: "9. eguna",
         services: {
           breakfast,
           lunch: {
-            dish: "Bocata de lomo y queso + chocolate + fruta.",
+            dish: "Solomo eta gazta bokata + txokolatea + fruta.",
             ingredients: [
-              ["Pan", "25 barras"],
-              ["Pan sin gluten", "2-3 barras/paquetes"],
-              ["Lomo natural", "105-110 filetes"],
-              ["Queso", "2,2 kg"],
-              ["Chocolate", "16 tabletas"],
-              ["Fruta", "53 piezas"]
+              ["Ogia", "25 barra"],
+              ["Glutenik gabeko ogia", "2-3 barra/pakete"],
+              ["Solomo naturala", "105-110 xerra"],
+              ["Gazta", "2,2 kg"],
+              ["Txokolatea", "16 tableta"],
+              ["Fruta", "53 pieza"]
             ],
-            note: "Preparar alternativa sin gluten con pan certificado."
+            note: "Prestatu glutenik gabeko aukera ziurtatutako ogiarekin."
           },
           snack: {
-            dish: "Sándwich de pavo y queso + fruta + frutos secos.",
+            dish: "Indioilar eta gazta sandwicha + fruta + fruitu lehorrak.",
             ingredients: [
-              ["Pan de molde", "7 paquetes"],
-              ["Pavo natural", "55 lonchas"],
-              ["Queso", "55 lonchas"],
-              ["Fruta", "53 piezas"],
-              ["Frutos secos / cacahuetes", "1,1-1,3 kg"],
-              ["Pan sin gluten", "1 paquete"],
-              ["Pavo sin gluten", "4-6 lonchas"]
+              ["Moldeko ogia", "7 pakete"],
+              ["Indioilar naturala", "55 xerra"],
+              ["Gazta", "55 xerra"],
+              ["Fruta", "53 pieza"],
+              ["Fruitu lehorrak / kakahueteak", "1,1-1,3 kg"],
+              ["Glutenik gabeko ogia", "pakete 1"],
+              ["Glutenik gabeko indioilarra", "4-6 xerra"]
             ],
-            note: "Raciones especiales cerradas antes de sacar frutos secos."
+            note: "Anoa bereziak itxita utzi fruitu lehorrak atera aurretik."
           },
           dinner: {
-            dish: "Ensalada + albóndigas en salsa española con patatas + yogur.",
+            dish: "Entsalada + albondigak saltsa espainiarrean patatekin + jogurta.",
             ingredients: [
-              ["Lechuga", "11 unidades"],
+              ["Letxuga", "11 unitate"],
               ["Tomate", "6 kg"],
-              ["Cebolla para ensalada", "3 kg"],
-              ["Atún", "8 latas medianas"],
-              ["Albóndigas", "260 unidades"],
-              ["Patata natural", "6-6,5 kg"],
+              ["Entsaladarako tipula", "3 kg"],
+              ["Atuna", "8 lata ertain"],
+              ["Albondigak", "260 unitate"],
+              ["Patata naturala", "6-6,5 kg"],
               ["Sofrito", "2 kg"],
-              ["Caldo de verduras", "2 L"],
-              ["Vino blanco", "1 botella"],
-              ["Maicena", "1 paquete"],
-              ["Zanahoria", "1,5 kg"],
-              ["Yogures", "53 unidades"],
-              ["Pan", "15 barras"]
+              ["Barazki-salda", "2 L"],
+              ["Ardo zuria", "botila 1"],
+              ["Maizena", "pakete 1"],
+              ["Azenarioa", "1,5 kg"],
+              ["Jogurtak", "53 unitate"],
+              ["Ogia", "15 barra"]
             ],
-            note: "Repite logística del día 4."
+            note: "4. eguneko logistika bera errepikatu."
           }
         }
       },
       {
         day: 10,
-        label: "Día 10",
+        label: "10. eguna",
         services: {
           breakfast,
           lunch: {
-            dish: "Guisantes con patata + pechuga a la plancha con patatas chips + yogur.",
+            dish: "Ilarrak patatarekin + plantxako bularkia patata frijituekin + jogurta.",
             ingredients: [
-              ["Guisantes", "5 kg"],
-              ["Patata para guiso", "5 kg"],
-              ["Cebolla", "1,5-2 kg"],
-              ["Ajo", "1 cabeza"],
-              ["Caldo de verduras", "3-4 L"],
-              ["Pechuga de pollo", "8-9 kg"],
-              ["Patatas chips", "10 bolsas grandes"],
-              ["Yogures", "53 unidades"],
-              ["Pan", "15 barras"]
+              ["Ilarrak", "5 kg"],
+              ["Gisaturako patata", "5 kg"],
+              ["Tipula", "1,5-2 kg"],
+              ["Baratxuria", "buru 1"],
+              ["Barazki-salda", "3-4 L"],
+              ["Oilasko-bularkia", "8-9 kg"],
+              ["Patata frijituak", "10 poltsa handi"],
+              ["Jogurtak", "53 unitate"],
+              ["Ogia", "15 barra"]
             ],
-            note: "Añadir proteína vegana si procede."
+            note: "Gehitu proteina beganoa behar bada."
           },
           snack: {
-            dish: "Bocadillo/sándwich de chorizo Pamplona + fruta + frutos secos.",
+            dish: "Iruñeko txorizo bokata/sandwicha + fruta + fruitu lehorrak.",
             ingredients: [
-              ["Pan de molde o pan", "7 paquetes de molde o 15 barras"],
-              ["Chorizo Pamplona", "260 lonchas aprox."],
-              ["Fruta", "53 piezas"],
-              ["Frutos secos / cacahuetes", "1,1-1,3 kg"],
-              ["Pan sin gluten", "1 paquete"],
-              ["Alternativa sin gluten", "4-6 raciones"]
+              ["Moldeko ogia edo ogia", "7 moldeko pakete edo 15 barra"],
+              ["Iruñeko txorizoa", "260 xerra gutxi gorabehera"],
+              ["Fruta", "53 pieza"],
+              ["Fruitu lehorrak / kakahueteak", "1,1-1,3 kg"],
+              ["Glutenik gabeko ogia", "pakete 1"],
+              ["Glutenik gabeko alternatiba", "4-6 anoa"]
             ],
-            note: "Embutido certificado para celíacos."
+            note: "Zeliakoentzat ziurtatutako hestebetea."
           },
           dinner: {
-            dish: "Pasta boloñesa + natillas.",
+            dish: "Pasta boloniarra + natillak.",
             ingredients: [
               ["Pasta", "7 kg"],
-              ["Pasta sin gluten", "500-750 g"],
-              ["Carne picada", "5,5-6 kg"],
-              ["Champiñones", "3 kg"],
-              ["Sofrito tomate/cebolla/puerro", "2 kg"],
-              ["Pimiento verde", "1,2 kg"],
-              ["Tomate frito/triturado", "4-5 kg"],
-              ["Queso rallado", "2,5 kg"],
-              ["Natillas", "53 unidades"],
-              ["Pan", "15 barras"]
+              ["Glutenik gabeko pasta", "500-750 g"],
+              ["Haragi xehatua", "5,5-6 kg"],
+              ["Txanpinoiak", "3 kg"],
+              ["Tomate/tipula/porru sofritoa", "2 kg"],
+              ["Piper berdea", "1,2 kg"],
+              ["Tomate frijitua/birrindua", "4-5 kg"],
+              ["Gazta birrindua", "2,5 kg"],
+              ["Natillak", "53 unitate"],
+              ["Ogia", "15 barra"]
             ],
-            note: "Salsa base de tomate; queso aparte."
+            note: "Tomatezko oinarrizko saltsa; gazta aparte."
           }
         }
       },
       {
         day: 11,
-        label: "Día 11",
+        label: "11. eguna",
         services: {
           breakfast,
           lunch: {
-            dish: "Bocata de pavo y queso + chocolate + fruta.",
+            dish: "Indioilar eta gazta bokata + txokolatea + fruta.",
             ingredients: [
-              ["Pan", "25 barras"],
-              ["Pan sin gluten", "2-3 barras/paquetes"],
-              ["Pavo natural", "55-60 lonchas"],
-              ["Queso", "2,2 kg"],
-              ["Chocolate", "16 tabletas"],
-              ["Fruta", "53 piezas"]
+              ["Ogia", "25 barra"],
+              ["Glutenik gabeko ogia", "2-3 barra/pakete"],
+              ["Indioilar naturala", "55-60 xerra"],
+              ["Gazta", "2,2 kg"],
+              ["Txokolatea", "16 tableta"],
+              ["Fruta", "53 pieza"]
             ],
-            note: "Último día: no complicar."
+            note: "Azken eguna: ez konplikatu."
           },
           snack: {
-            dish: "Merienda opcional: fruta + frutos secos + galletas.",
+            dish: "Aukerako askaria: fruta + fruitu lehorrak + gailetak.",
             ingredients: [
-              ["Fruta", "53 piezas"],
-              ["Frutos secos / cacahuetes", "1,1 kg"],
-              ["Galletas", "4-5 paquetes"]
+              ["Fruta", "53 pieza"],
+              ["Fruitu lehorrak / kakahueteak", "1,1 kg"],
+              ["Gailetak", "4-5 pakete"]
             ],
-            note: "Solo si la salida es tarde."
+            note: "Irteera berandu bada bakarrik."
           },
           dinner: null
         }
@@ -1607,182 +1607,182 @@
     ];
 
     const shopping = [
-      ["Desayuno", "Bebida vegetal", "6-8 L", "Comprar aquí / llevar", "Avena o soja para desayunos y dietas."],
-      ["Desayuno", "Cacao soluble", "4-5 kg", "Comprar aquí / llevar", "Revisar etiqueta para sin gluten."],
-      ["Desayuno", "Galletas tipo María", "10-12 paquetes grandes", "Comprar aquí / llevar", "Seco, fácil de transportar."],
-      ["Sin gluten", "Galletas sin gluten", "3-4 paquetes", "Comprar aquí / llevar", "Guardar en caja cerrada."],
-      ["Sin gluten", "Pan sin gluten desayuno", "4-5 paquetes", "Comprar aquí / llevar", "No mezclar con pan común."],
-      ["Desayuno", "Mermelada", "10 botes", "Comprar aquí / llevar", "Comprar variedad sencilla."],
-      ["Sin gluten", "Pan sin gluten comidas/meriendas", "15-18 paquetes/barras", "Comprar aquí / llevar", "Producto crítico, mejor no improvisar."],
-      ["Meriendas", "Frutos secos/cacahuetes", "10-12 kg", "Comprar aquí / llevar", "Separar de raciones especiales."],
-      ["Meriendas", "Chocolate", "80-90 tabletas", "Comprar aquí / llevar", "Vigilar trazas de frutos secos y gluten."],
-      ["Legumbre", "Lentejas cocidas", "17-18 kg", "Comprar aquí / llevar", "Base día 4."],
-      ["Legumbre", "Garbanzos cocidos", "36-38 kg", "Comprar aquí / llevar", "Base días 5 y 8; útil para vegano."],
-      ["Legumbre", "Alubias blancas cocidas", "17-18 kg", "Comprar aquí / llevar", "Base día 6."],
-      ["Pasta y arroz", "Pasta común", "25-26 kg", "Comprar aquí / llevar", "Carbonara, ensalada de pasta y boloñesa."],
-      ["Sin gluten", "Pasta sin gluten", "2,5-3 kg", "Comprar aquí / llevar", "Cocer siempre primero."],
-      ["Pasta y arroz", "Arroz", "7 kg", "Comprar aquí / llevar", "Días 5 y 8."],
-      ["Pasta y arroz", "Puré de patata", "1,5-1,8 kg", "Comprar aquí / llevar", "Revisar sin gluten."],
-      ["Conservas", "Aceitunas", "4 latas grandes", "Comprar aquí / llevar", "Ensaladas."],
-      ["Conservas", "Maíz", "2,5 kg", "Comprar aquí / llevar", "Ensalada de pasta."],
-      ["Conservas", "Atún", "24 latas medianas", "Comprar aquí / llevar", "Ensaladas."],
-      ["Salsas", "Sofrito tomate/cebolla/puerro", "20-22 kg aprox.", "Comprar aquí / llevar", "Base de guisos y salsas."],
-      ["Salsas", "Tomate frito/triturado/concentrado", "15-18 kg total", "Comprar aquí / llevar", "Revisar etiqueta."],
-      ["Caldos", "Caldo de verduras", "25-30 L", "Comprar aquí / llevar", "Certificar sin gluten."],
-      ["Salsas", "Leche de coco/nata", "18-20 L", "Comprar aquí / llevar", "Separar uso vegano/lácteo."],
-      ["Básicos", "Maicena", "2 paquetes", "Comprar aquí / llevar", "Para salsa española."],
-      ["Básicos", "Aceite", "10 L", "Comprar aquí / llevar", "Cocina general."],
-      ["Básicos", "Sal, vinagre, especias", "cantidad suficiente", "Comprar aquí / llevar", "Curry, comino, cúrcuma, jengibre."],
-      ["Vegano", "Hummus/paté vegetal", "8-10 tarrinas/botes", "Comprar aquí / llevar", "Recurso de seguridad con proteína."],
-      ["Vegano", "Soja texturizada", "2-3 kg", "Comprar aquí / llevar", "Proteína real para sustituciones."],
-      ["Desayuno", "Leche", "130 L", "Comprar allí / por tandas", "Producto de volumen y frío."],
-      ["Desayuno", "Mantequilla", "5 kg aprox.", "Comprar allí / por tandas", "Frío; comprar por tandas."],
-      ["Pan", "Pan barra común", "230-240 barras total aprox.", "Comprar allí / por tandas", "Comprar fresco; usar sobrante para desayunos."],
-      ["Fruta", "Fruta variada", "850-950 piezas/raciones", "Comprar allí / por tandas", "Meriendas y comidas."],
-      ["Verdura", "Guisantes", "5 kg", "Comprar allí / por tandas", "Día 10."],
-      ["Verdura", "Lechuga", "48-50 unidades", "Comprar allí / por tandas", "Ensaladas."],
-      ["Verdura", "Tomate", "32-35 kg", "Comprar allí / por tandas", "Ensaladas y pasta."],
-      ["Verdura", "Cebolla", "20-22 kg", "Comprar allí / por tandas", "Guisos, ensaladas y salsas."],
-      ["Verdura", "Calabacín", "32-35 kg", "Comprar allí / por tandas", "Cremas y guisos."],
-      ["Verdura", "Zanahoria", "10-12 kg", "Comprar allí / por tandas", "Cremas, guisos y salsa."],
-      ["Verdura", "Patata", "45-50 kg", "Comprar allí / por tandas", "Cremas, guisos, salsa y guarniciones."],
-      ["Verdura", "Pimiento verde", "4-5 kg", "Comprar allí / por tandas", "Legumbres y boloñesa."],
-      ["Verdura", "Champiñón", "6 kg", "Comprar allí / por tandas", "Carbonara y boloñesa."],
-      ["Carne", "Pechuga de pollo", "39-42 kg", "Comprar allí / por tandas", "Comprar en frío y por tandas."],
-      ["Carne", "Lomo natural", "360-380 filetes aprox.", "Comprar allí / por tandas", "Bocatas y cena día 5."],
-      ["Carne", "Salchichas Frankfurt", "115-120 unidades", "Comprar allí / por tandas", "Certificadas para celíacos."],
-      ["Carne", "Salchichas cena", "200-210 unidades", "Comprar allí / por tandas", "Revisar etiqueta."],
-      ["Carne", "Albóndigas", "520 unidades", "Comprar allí / por tandas", "Comprobar sin gluten o preparar proteína aparte."],
-      ["Carne", "Carne picada", "5,5-6 kg", "Comprar allí / por tandas", "Boloñesa."],
-      ["Carne", "Bacon", "3-3,5 kg", "Comprar allí / por tandas", "Carbonara."],
-      ["Embutido", "Pavo natural", "175-180 lonchas", "Comprar allí / por tandas", "Revisar etiqueta sin gluten."],
-      ["Embutido", "Jamón york", "55 lonchas", "Comprar allí / por tandas", "Día 2."],
-      ["Embutido", "Chorizo guisos", "225-240 trozos", "Comprar allí / por tandas", "Servir aparte si hay dietas."],
-      ["Embutido", "Chorizo Pamplona", "260 lonchas", "Comprar allí / por tandas", "Certificado para celíacos."],
-      ["Postres", "Yogures", "371 unidades aprox.", "Comprar allí / por tandas", "Frío; comprar por tandas."],
-      ["Postres", "Natillas", "159 unidades", "Comprar allí / por tandas", "Revisar sin gluten."],
-      ["Lácteos", "Queso lonchas/bocatas", "8-9 kg aprox.", "Comprar allí / por tandas", "Separar para quien no tome lácteos."],
-      ["Lácteos", "Queso rallado/en polvo", "6-7 kg aprox.", "Comprar allí / por tandas", "Servir aparte cuando convenga."],
-      ["Lácteos", "Queso crema", "6-7 tarrinas", "Comprar allí / por tandas", "Evitar cuchillo común con migas."],
-      ["Vegano", "Yogur de soja", "12-16 unidades", "Comprar allí / por tandas", "Postre alternativo."]
+      ["Gosaria", "Edari begetala", "6-8 L", "Hemen erosi / eraman", "Oloa edo soja gosarietarako eta dietetarako."],
+      ["Gosaria", "Kakao disolbagarria", "4-5 kg", "Hemen erosi / eraman", "Berrikusi etiketa glutenik gabekoentzat."],
+      ["Gosaria", "Maria motako gailetak", "10-12 pakete handi", "Hemen erosi / eraman", "Lehorra, garraiatzeko erraza."],
+      ["Glutenik gabe", "Glutenik gabeko gailetak", "3-4 pakete", "Hemen erosi / eraman", "Gorde kutxa itxi batean."],
+      ["Glutenik gabe", "Gosarirako glutenik gabeko ogia", "4-5 pakete", "Hemen erosi / eraman", "Ez nahasi ogi arruntarekin."],
+      ["Gosaria", "Marmelada", "10 pote", "Hemen erosi / eraman", "Aukera sinpleak erosi."],
+      ["Glutenik gabe", "Bazkari/askarietarako glutenik gabeko ogia", "15-18 pakete/barra", "Hemen erosi / eraman", "Produktu kritikoa; hobe ez inprobisatzea."],
+      ["Askariak", "Fruitu lehorrak/kakahueteak", "10-12 kg", "Hemen erosi / eraman", "Bereizi anoa berezietatik."],
+      ["Askariak", "Txokolatea", "80-90 tableta", "Hemen erosi / eraman", "Begiratu fruitu lehorren eta glutenaren arrastoak."],
+      ["Lekaleak", "Dilistak egosita", "17-18 kg", "Hemen erosi / eraman", "4. eguneko oinarria."],
+      ["Lekaleak", "Garbantzuak egosita", "36-38 kg", "Hemen erosi / eraman", "5. eta 8. egunetako oinarria; beganoentzat erabilgarria."],
+      ["Lekaleak", "Babarrun zuriak egosita", "17-18 kg", "Hemen erosi / eraman", "6. eguneko oinarria."],
+      ["Pasta eta arroza", "Pasta arrunta", "25-26 kg", "Hemen erosi / eraman", "Karbonara, pasta-entsalada eta boloniarra."],
+      ["Glutenik gabe", "Glutenik gabeko pasta", "2,5-3 kg", "Hemen erosi / eraman", "Beti lehenik egosi."],
+      ["Pasta eta arroza", "Arroza", "7 kg", "Hemen erosi / eraman", "5. eta 8. egunak."],
+      ["Pasta eta arroza", "Patata-purea", "1,5-1,8 kg", "Hemen erosi / eraman", "Berrikusi glutenik gabea dela."],
+      ["Kontserbak", "Olibak", "4 lata handi", "Hemen erosi / eraman", "Entsaladak."],
+      ["Kontserbak", "Artoa", "2,5 kg", "Hemen erosi / eraman", "Pasta-entsalada."],
+      ["Kontserbak", "Atuna", "24 lata ertain", "Hemen erosi / eraman", "Entsaladak."],
+      ["Saltsak", "Tomate/tipula/porru sofritoa", "20-22 kg gutxi gorabehera", "Hemen erosi / eraman", "Gisatuen eta saltsen oinarria."],
+      ["Saltsak", "Tomate frijitua/birrindua/kontzentratua", "15-18 kg guztira", "Hemen erosi / eraman", "Berrikusi etiketa."],
+      ["Saldak", "Barazki-salda", "25-30 L", "Hemen erosi / eraman", "Ziurtatu glutenik gabea dela."],
+      ["Saltsak", "Koko-esnea/esnegaina", "18-20 L", "Hemen erosi / eraman", "Bereizi erabilera beganoa eta esnekiduna."],
+      ["Oinarrizkoak", "Maizena", "2 pakete", "Hemen erosi / eraman", "Saltsa espainiarrerako."],
+      ["Oinarrizkoak", "Olioa", "10 L", "Hemen erosi / eraman", "Sukalde orokorrerako."],
+      ["Oinarrizkoak", "Gatza, ozpina, espeziak", "behar adina", "Hemen erosi / eraman", "Curry, kuminoa, kurkuma, jengibrea."],
+      ["Beganoa", "Hummusa/pate begetala", "8-10 ontzi/pote", "Hemen erosi / eraman", "Proteinadun segurtasun-baliabidea."],
+      ["Beganoa", "Soja testurizatua", "2-3 kg", "Hemen erosi / eraman", "Ordezkapenetarako benetako proteina."],
+      ["Gosaria", "Esnea", "130 L", "Han erosi / txandaka", "Bolumen eta hotzeko produktua."],
+      ["Gosaria", "Gurina", "5 kg gutxi gorabehera", "Han erosi / txandaka", "Hotzekoa; txandaka erosi."],
+      ["Ogia", "Ogi barra arrunta", "230-240 barra guztira gutxi gorabehera", "Han erosi / txandaka", "Fresko erosi; soberakina gosarietarako erabili."],
+      ["Fruta", "Fruta askotarikoa", "850-950 pieza/anoa", "Han erosi / txandaka", "Askariak eta bazkariak."],
+      ["Barazkiak", "Ilarrak", "5 kg", "Han erosi / txandaka", "10. eguna."],
+      ["Barazkiak", "Letxuga", "48-50 unitate", "Han erosi / txandaka", "Entsaladak."],
+      ["Barazkiak", "Tomatea", "32-35 kg", "Han erosi / txandaka", "Entsaladak eta pasta."],
+      ["Barazkiak", "Tipula", "20-22 kg", "Han erosi / txandaka", "Gisatuak, entsaladak eta saltsak."],
+      ["Barazkiak", "Kalabazina", "32-35 kg", "Han erosi / txandaka", "Kremak eta gisatuak."],
+      ["Barazkiak", "Azenarioa", "10-12 kg", "Han erosi / txandaka", "Kremak, gisatuak eta saltsa."],
+      ["Barazkiak", "Patata", "45-50 kg", "Han erosi / txandaka", "Kremak, gisatuak, saltsa eta hornigaiak."],
+      ["Barazkiak", "Piper berdea", "4-5 kg", "Han erosi / txandaka", "Lekaleak eta boloniarra."],
+      ["Barazkiak", "Txanpinoia", "6 kg", "Han erosi / txandaka", "Karbonara eta boloniarra."],
+      ["Haragia", "Oilasko-bularkia", "39-42 kg", "Han erosi / txandaka", "Hotzean eta txandaka erosi."],
+      ["Haragia", "Solomo naturala", "360-380 xerra gutxi gorabehera", "Han erosi / txandaka", "Bokatak eta 5. eguneko afaria."],
+      ["Haragia", "Frankfurt saltxitxak", "115-120 unitate", "Han erosi / txandaka", "Zeliakoentzat ziurtatuak."],
+      ["Haragia", "Afarirako saltxitxak", "200-210 unitate", "Han erosi / txandaka", "Berrikusi etiketa."],
+      ["Haragia", "Albondigak", "520 unitate", "Han erosi / txandaka", "Egiaztatu glutenik gabeak direla edo prestatu proteina aparte."],
+      ["Haragia", "Haragi xehatua", "5,5-6 kg", "Han erosi / txandaka", "Boloniarra."],
+      ["Haragia", "Bacon", "3-3,5 kg", "Han erosi / txandaka", "Karbonara."],
+      ["Hestebeteak", "Indioilar naturala", "175-180 xerra", "Han erosi / txandaka", "Berrikusi glutenik gabeko etiketa."],
+      ["Hestebeteak", "York urdaiazpikoa", "55 xerra", "Han erosi / txandaka", "2. eguna."],
+      ["Hestebeteak", "Gisatuetarako txorizoa", "225-240 zati", "Han erosi / txandaka", "Aparte zerbitzatu dietak badaude."],
+      ["Hestebeteak", "Iruñeko txorizoa", "260 xerra", "Han erosi / txandaka", "Zeliakoentzat ziurtatua."],
+      ["Postreak", "Jogurtak", "371 unitate gutxi gorabehera", "Han erosi / txandaka", "Hotzekoa; txandaka erosi."],
+      ["Postreak", "Natillak", "159 unitate", "Han erosi / txandaka", "Berrikusi glutenik gabea dela."],
+      ["Esnekiak", "Gazta xerratan/bokatetarako", "8-9 kg gutxi gorabehera", "Han erosi / txandaka", "Bereizi esnekirik hartzen ez duenarentzat."],
+      ["Esnekiak", "Gazta birrindua/hautsean", "6-7 kg gutxi gorabehera", "Han erosi / txandaka", "Aparte zerbitzatu komeni denean."],
+      ["Esnekiak", "Gazta krema", "6-7 ontzi", "Han erosi / txandaka", "Saihestu ogi-apurrak dituen labana arrunta."],
+      ["Beganoa", "Soja-jogurta", "12-16 unitate", "Han erosi / txandaka", "Postre alternatiboa."]
     ];
 
     const shoppingBlocks = [
       {
-        title: "1. Comprar antes y llevar",
-        label: "No improvisar",
-        place: "Comprar aquí / llevar",
-        note: "Secos, certificados, dietas especiales y bases de despensa.",
+        title: "1. Aurretik erosi eta eraman",
+        label: "Ez inprobisatu",
+        place: "Hemen erosi / eraman",
+        note: "Lehorrak, ziurtatuak, dieta bereziak eta despentsako oinarriak.",
         items: [
-          "Sin gluten: pan, pasta y galletas.",
-          "Despensa: legumbres, pasta, arroz, conservas, salsas y caldos.",
-          "Seguridad vegana: hummus/paté vegetal y soja texturizada."
+          "Glutenik gabe: ogia, pasta eta gailetak.",
+          "Despentsa: lekaleak, pasta, arroza, kontserbak, saltsak eta saldak.",
+          "Segurtasun beganoa: hummusa/pate begetala eta soja testurizatua."
         ],
-        count: (row) => row[3] === "Comprar aquí / llevar"
+        count: (row) => row[3] === "Hemen erosi / eraman"
       },
       {
-        title: "2. Comprar allí",
-        label: "Fresco y frío",
-        place: "Comprar allí / por tandas",
-        note: "Producto voluminoso o delicado que conviene comprar cerca.",
+        title: "2. Han erosi",
+        label: "Freskoa eta hotzekoa",
+        place: "Han erosi / txandaka",
+        note: "Handia edo delikatua den produktua, inguruan erostea komeni dena.",
         items: [
-          "Pan, fruta, leche, mantequilla, yogures y natillas.",
-          "Verdura grande: lechuga, tomate, calabacín, patata y zanahoria.",
-          "Carne y embutido: pollo, lomo, salchichas, pavo y chorizo."
+          "Ogia, fruta, esnea, gurina, jogurtak eta natillak.",
+          "Barazki handiak: letxuga, tomatea, kalabazina, patata eta azenarioa.",
+          "Haragia eta hestebeteak: oilaskoa, solomoa, saltxitxak, indioilarra eta txorizoa."
         ],
-        count: (row) => row[3] === "Comprar allí / por tandas"
+        count: (row) => row[3] === "Han erosi / txandaka"
       },
       {
-        title: "3. Comprar por tandas",
-        label: "Día anterior",
-        place: "Comprar allí / por tandas",
-        note: "No comprar todo al principio: se estropea, ocupa y confunde.",
+        title: "3. Txandaka erosi",
+        label: "Aurreko eguna",
+        place: "Han erosi / txandaka",
+        note: "Ez erosi dena hasieran: hondatu, lekua hartu eta nahastu egiten da.",
         items: [
-          "Pan y fruta: mejor por tandas cortas.",
-          "Frío: lácteos, postres, pollo, carne y embutidos.",
-          "Volumen: leche, patata, lechuga, tomate y calabacín."
+          "Ogia eta fruta: hobe txanda laburretan.",
+          "Hotzekoa: esnekiak, postreak, oilaskoa, haragia eta hestebeteak.",
+          "Bolumena: esnea, patata, letxuga, tomatea eta kalabazina."
         ],
-        count: (row) => ["Pan", "Fruta", "Desayuno", "Carne", "Embutido", "Postres", "Lácteos", "Verdura"].includes(row[0]) && row[3] === "Comprar allí / por tandas"
+        count: (row) => ["Ogia", "Fruta", "Gosaria", "Haragia", "Hestebeteak", "Postreak", "Esnekiak", "Barazkiak"].includes(row[0]) && row[3] === "Han erosi / txandaka"
       }
     ];
 
     const serviceLabels = {
-      breakfast: "Desayuno",
-      lunch: "Comida",
-      snack: "Merienda",
-      dinner: "Cena"
+      breakfast: "Gosaria",
+      lunch: "Bazkaria",
+      snack: "Askaria",
+      dinner: "Afaria"
     };
 
     const emptyLabels = {
-      breakfast: "No hay desayuno de cocina previsto.",
-      lunch: "No hay comida de cocina prevista.",
-      snack: "No hay merienda prevista.",
-      dinner: "Sin cena prevista."
+      breakfast: "Ez dago sukaldeko gosaririk aurreikusita.",
+      lunch: "Ez dago sukaldeko bazkaririk aurreikusita.",
+      snack: "Ez dago askaririk aurreikusita.",
+      dinner: "Ez dago afaririk aurreikusita."
     };
 
     const daySummaries = {
-      2: { breakfast: "Sin desayuno", lunch: "Traen de casa", snack: "York + queso", dinner: "Ensalada + carbonara" },
-      3: { breakfast: "Fijo", lunch: "Frankfurt + queso", snack: "Pavo + queso", dinner: "Crema + pollo tomate" },
-      4: { breakfast: "Fijo", lunch: "Lentejas + chorizo", snack: "Chocolate", dinner: "Albóndigas + patata" },
-      5: { breakfast: "Fijo", lunch: "Garbanzos + arroz", snack: "Jamón/lomo + queso", dinner: "Pasta + lomo" },
-      6: { breakfast: "Fijo", lunch: "Alubias + chorizo", snack: "Chocolate", dinner: "Pollo queso + chips" },
-      7: { breakfast: "Fijo", lunch: "Lomo + queso", snack: "Pavo + queso", dinner: "Crema + salchichas" },
-      8: { breakfast: "Fijo", lunch: "Garbanzos + chorizo", snack: "Queso crema", dinner: "Pollo curry + arroz" },
-      9: { breakfast: "Fijo", lunch: "Lomo + queso", snack: "Pavo + queso", dinner: "Albóndigas + patata" },
-      10: { breakfast: "Fijo", lunch: "Guisantes + pollo", snack: "Chorizo Pamplona", dinner: "Pasta boloñesa" },
-      11: { breakfast: "Fijo", lunch: "Pavo + queso", snack: "Opcional fruta", dinner: "Sin cena" }
+      2: { breakfast: "Gosaririk ez", lunch: "Etxetik dakarte", snack: "York + gazta", dinner: "Entsalada + karbonara" },
+      3: { breakfast: "Finkoa", lunch: "Frankfurt + gazta", snack: "Indioilarra + gazta", dinner: "Krema + oilaskoa tomatean" },
+      4: { breakfast: "Finkoa", lunch: "Dilistak + txorizoa", snack: "Txokolatea", dinner: "Albondigak + patata" },
+      5: { breakfast: "Finkoa", lunch: "Garbantzuak + arroza", snack: "Urdaiazpikoa/solomoa + gazta", dinner: "Pasta + solomoa" },
+      6: { breakfast: "Finkoa", lunch: "Babarrunak + txorizoa", snack: "Txokolatea", dinner: "Oilaskoa gaztan + patatak" },
+      7: { breakfast: "Finkoa", lunch: "Solomoa + gazta", snack: "Indioilarra + gazta", dinner: "Krema + saltxitxak" },
+      8: { breakfast: "Finkoa", lunch: "Garbantzuak + txorizoa", snack: "Gazta krema", dinner: "Oilaskoa curryan + arroza" },
+      9: { breakfast: "Finkoa", lunch: "Solomoa + gazta", snack: "Indioilarra + gazta", dinner: "Albondigak + patata" },
+      10: { breakfast: "Finkoa", lunch: "Ilarrak + oilaskoa", snack: "Iruñeko txorizoa", dinner: "Pasta boloniarra" },
+      11: { breakfast: "Finkoa", lunch: "Indioilarra + gazta", snack: "Aukerakoa: fruta", dinner: "Afaririk ez" }
     };
 
     const kitchenNotes = {
       2: {
-        prep: "Apartar sin gluten y sin frutos secos antes de montar meriendas. Pasta sin gluten primero.",
-        fresh: "Fruta, lechuga, tomate, yogures, bacon y pan de cena.",
-        alerts: ["Comida de casa", "Frutos secos aparte", "Pasta sin gluten"]
+        prep: "Bereizi glutenik gabekoa eta fruitu lehorrik gabekoa askariak muntatu aurretik. Glutenik gabeko pasta lehenik.",
+        fresh: "Fruta, letxuga, tomatea, jogurtak, bacon eta afarirako ogia.",
+        alerts: ["Etxeko bazkaria", "Fruitu lehorrak aparte", "Glutenik gabeko pasta"]
       },
       3: {
-        prep: "Confirmar salchicha certificada. Dejar pavo/pan sin gluten cerrado antes de la merienda.",
-        fresh: "Pan, fruta, salchichas, pollo, calabacín, natillas y chips.",
-        alerts: ["Salchicha certificada", "Sin gluten primero", "Caldo revisado"]
+        prep: "Berretsi saltxitxa ziurtatua dela. Utzi indioilarra/glutenik gabeko ogia itxita askaria baino lehen.",
+        fresh: "Ogia, fruta, saltxitxak, oilaskoa, kalabazina, natillak eta patata frijituak.",
+        alerts: ["Saltxitxa ziurtatua", "Glutenik gabekoa lehenik", "Salda berrikusita"]
       },
       4: {
-        prep: "Cocer o calentar chorizo aparte. Albóndigas solo si son aptas; si no, proteína separada.",
-        fresh: "Fruta, lechuga, tomate, patata, zanahoria, yogures y pan.",
-        alerts: ["Chorizo aparte", "Albóndigas aptas", "Frutos secos tarde"]
+        prep: "Egosi edo berotu txorizoa aparte. Albondigak egokiak badira bakarrik; bestela, proteina bereizia.",
+        fresh: "Fruta, letxuga, tomatea, patata, azenarioa, jogurtak eta ogia.",
+        alerts: ["Txorizoa aparte", "Albondiga egokiak", "Fruitu lehorrak berandu"]
       },
       5: {
-        prep: "Plato base fácil para todos. Pasta sin gluten separada antes de mezclar la ensalada.",
-        fresh: "Fruta, tomate, lomo, yogures, pan y cebolla morada.",
-        alerts: ["Base vegana útil", "Cuchillo limpio", "Pasta separada"]
+        prep: "Denentzat egokia den oinarrizko platera. Glutenik gabeko pasta bereizi entsalada nahasi aurretik.",
+        fresh: "Fruta, tomatea, solomoa, jogurtak, ogia eta tipula morea.",
+        alerts: ["Oinarri begano erabilgarria", "Labana garbia", "Pasta bereizita"]
       },
       6: {
-        prep: "Chorizo aparte al mediodía. Salsa de queso separada por dietas en la cena.",
-        fresh: "Fruta, lechuga, tomate, pollo, natillas, chips y pan.",
-        alerts: ["Chorizo aparte", "Salsa aparte", "Lácteos"]
+        prep: "Txorizoa aparte eguerdian. Afarian gazta-saltsa bereizita dietengatik.",
+        fresh: "Fruta, letxuga, tomatea, oilaskoa, natillak, patata frijituak eta ogia.",
+        alerts: ["Txorizoa aparte", "Saltsa aparte", "Esnekiak"]
       },
       7: {
-        prep: "Queso aparte en bocatas. Revisar puré y salchichas antes de servir a celíacos.",
-        fresh: "Pan, fruta, lomo, pavo, verdura de crema, salchichas y yogures.",
-        alerts: ["Queso aparte", "Puré revisado", "Salchichas aptas"]
+        prep: "Gazta aparte bokatetan. Berrikusi purea eta saltxitxak zeliakoei zerbitzatu aurretik.",
+        fresh: "Ogia, fruta, solomoa, indioilarra, kremarako barazkiak, saltxitxak eta jogurtak.",
+        alerts: ["Gazta aparte", "Purea berrikusita", "Saltxitxa egokiak"]
       },
       8: {
-        prep: "Chorizo aparte. Evitar cuchillo con migas en queso crema. Curry suave.",
-        fresh: "Fruta, queso crema, pollo troceado, yogures, pan y verdura.",
-        alerts: ["Cuchillo limpio", "Chorizo aparte", "Curry suave"]
+        prep: "Txorizoa aparte. Saihestu ogi-apurrak dituen labana gazta kreman. Curry leuna.",
+        fresh: "Fruta, gazta krema, oilasko zatitua, jogurtak, ogia eta barazkiak.",
+        alerts: ["Labana garbia", "Txorizoa aparte", "Curry leuna"]
       },
       9: {
-        prep: "Repetir logística del día 4: albóndigas aptas o proteína aparte.",
-        fresh: "Pan, fruta, pavo, lechuga, tomate, patata, yogures y lomo.",
-        alerts: ["Albóndigas aptas", "Sin gluten primero", "Frutos secos tarde"]
+        prep: "Errepikatu 4. eguneko logistika: albondiga egokiak edo proteina aparte.",
+        fresh: "Ogia, fruta, indioilarra, letxuga, tomatea, patata, jogurtak eta solomoa.",
+        alerts: ["Albondiga egokiak", "Glutenik gabekoa lehenik", "Fruitu lehorrak berandu"]
       },
       10: {
-        prep: "Añadir proteína vegana si procede. Cocer pasta sin gluten primero y queso aparte.",
-        fresh: "Guisantes, patata, pollo, chorizo Pamplona, carne picada, natillas y pan.",
-        alerts: ["Proteína vegana", "Pasta sin gluten", "Queso aparte"]
+        prep: "Gehitu proteina beganoa behar bada. Egosi glutenik gabeko pasta lehenik eta gazta aparte.",
+        fresh: "Ilarrak, patata, oilaskoa, Iruñeko txorizoa, haragi xehatua, natillak eta ogia.",
+        alerts: ["Proteina beganoa", "Glutenik gabeko pasta", "Gazta aparte"]
       },
       11: {
-        prep: "Último día: bocatas simples y merienda solo si la salida se retrasa.",
-        fresh: "Pan, fruta, pavo, queso, chocolate y galletas si hay merienda.",
-        alerts: ["No complicar", "Merienda opcional", "Cerrar sobrantes"]
+        prep: "Azken eguna: bokata sinpleak eta askaria irteera atzeratzen bada bakarrik.",
+        fresh: "Ogia, fruta, indioilarra, gazta, txokolatea eta gailetak askaria badago.",
+        alerts: ["Ez konplikatu", "Aukerako askaria", "Soberakinak itxi"]
       }
     };
 
@@ -1804,9 +1804,9 @@
       const noteText = `${service.note || ""}`.toLowerCase();
       const alerts = [];
 
-      if (/gluten|cel[ií]ac|zeliaco/.test(fullText)) alerts.push("Sin gluten");
-      if (/frutos secos|cacahuete|cacahuetes|trazas/.test(fullText)) alerts.push("Frutos secos");
-      if (/vegano|vegana|dietas especiales|lácteos|lacteos|queso aparte|salsa .*aparte/.test(noteText)) alerts.push("Dietas");
+      if (/gluten|cel[ií]ac|zeliak|zeliako/.test(fullText)) alerts.push("Glutenik gabe");
+      if (/frutos secos|fruitu lehor|cacahuete|cacahuetes|kakahuete|trazas|arrasto/.test(fullText)) alerts.push("Fruitu lehorrak");
+      if (/vegano|vegana|begano|dieta berezi|lácteos|lacteos|esneki|queso aparte|gazta aparte|salsa .*aparte|saltsa .*aparte/.test(noteText)) alerts.push("Dietak");
 
       return alerts;
     }
@@ -1815,7 +1815,7 @@
       const card = createElement("article", `service-card${service ? "" : " empty"}`);
       const head = createElement("div", "service-head");
       head.appendChild(createElement("h4", "", serviceLabels[key]));
-      head.appendChild(createElement("span", "service-tag", service ? "Con compra" : "Sin servicio"));
+      head.appendChild(createElement("span", "service-tag", service ? "Erosketarekin" : "Zerbitzurik ez"));
       card.appendChild(head);
 
       const body = createElement("div", "service-body");
@@ -1834,7 +1834,7 @@
       }
 
       const detail = createElement("details", "service-detail");
-      detail.appendChild(createElement("summary", "", "Ver cantidades y nota"));
+      detail.appendChild(createElement("summary", "", "Ikusi kantitateak eta oharra"));
       const list = createElement("ul", "ingredients");
       service.ingredients.forEach(([name, amount]) => {
         const item = document.createElement("li");
@@ -1866,8 +1866,8 @@
 
       if (selectedDay === "all") {
         const intro = createElement("div", "kitchen-panel wide");
-        intro.appendChild(createElement("span", "kitchen-label", "Parte de cocina"));
-        intro.appendChild(createElement("p", "", "Elige un día para ver solo lo imprescindible: qué toca, qué preparar antes y qué comprar fresco."));
+        intro.appendChild(createElement("span", "kitchen-label", "Sukaldeko partea"));
+        intro.appendChild(createElement("p", "", "Aukeratu eguna ezinbestekoa bakarrik ikusteko: zer dagoen, zer prestatu aurretik eta zer erosi fresko."));
         kitchenBoard.appendChild(intro);
         return;
       }
@@ -1877,22 +1877,22 @@
       const notes = kitchenNotes[day.day];
 
       const main = createElement("div", "kitchen-panel");
-      main.appendChild(createElement("span", "kitchen-label", `${day.label} · 53 personas`));
+      main.appendChild(createElement("span", "kitchen-label", `${day.label} · 53 lagun`));
       const mainText = createElement("p", "kitchen-main");
-      mainText.appendChild(createElement("span", "kitchen-line", `Comida: ${summary.lunch}`));
-      mainText.appendChild(createElement("span", "kitchen-line", `Cena: ${summary.dinner}`));
+      mainText.appendChild(createElement("span", "kitchen-line", `Bazkaria: ${summary.lunch}`));
+      mainText.appendChild(createElement("span", "kitchen-line", `Afaria: ${summary.dinner}`));
       main.appendChild(mainText);
 
       const prep = createElement("div", "kitchen-panel");
-      prep.appendChild(createElement("span", "kitchen-label", "Preparar antes"));
+      prep.appendChild(createElement("span", "kitchen-label", "Aurretik prestatu"));
       prep.appendChild(createElement("p", "", notes.prep));
 
       const fresh = createElement("div", "kitchen-panel");
-      fresh.appendChild(createElement("span", "kitchen-label", "Compra fresca"));
+      fresh.appendChild(createElement("span", "kitchen-label", "Erosketa freskoa"));
       fresh.appendChild(createElement("p", "", notes.fresh));
 
       const alerts = createElement("div", "kitchen-panel wide");
-      alerts.appendChild(createElement("span", "kitchen-label", "Atención rápida"));
+      alerts.appendChild(createElement("span", "kitchen-label", "Arreta azkarra"));
       const chipWrap = createElement("div", "kitchen-chips");
       notes.alerts.forEach((alert) => chipWrap.appendChild(createElement("span", "kitchen-chip", alert)));
       alerts.appendChild(chipWrap);
@@ -1907,7 +1907,7 @@
 
         const title = createElement("div", "day-title");
         title.appendChild(createElement("h3", "", day.label));
-        title.appendChild(createElement("span", "", "53 personas"));
+        title.appendChild(createElement("span", "", "53 lagun"));
         card.appendChild(title);
         card.appendChild(renderDaySummary(day));
 
@@ -1928,17 +1928,17 @@
         card.classList.toggle("is-hidden", selectedDay !== "all" && card.dataset.day !== selectedDay);
       });
       renderKitchenBoard(selectedDay);
-      document.getElementById("printButton").textContent = selectedDay === "all" ? "Imprimir todo" : `Imprimir día ${selectedDay}`;
+      document.getElementById("printButton").textContent = selectedDay === "all" ? "Inprimatu dena" : `Inprimatu ${selectedDay}. eguna`;
     }
 
     function renderFilter() {
-      const allButton = createElement("button", "button is-active", "Todos");
+      const allButton = createElement("button", "button is-active", "Denak");
       allButton.type = "button";
       allButton.dataset.day = "all";
       dayFilter.appendChild(allButton);
 
       menuDays.forEach((day) => {
-        const button = createElement("button", "button", `Día ${day.day}`);
+        const button = createElement("button", "button", `${day.day}. eguna`);
         button.type = "button";
         button.dataset.day = String(day.day);
         dayFilter.appendChild(button);
@@ -1958,7 +1958,7 @@
         [category, product, amount].forEach((value) => row.appendChild(createElement("td", "", value)));
 
         const placeCell = document.createElement("td");
-        const placeBadge = createElement("span", `where${place.includes("allí") ? " local" : ""}`, place);
+        const placeBadge = createElement("span", `where${place.includes("Han") ? " local" : ""}`, place);
         placeCell.appendChild(placeBadge);
         row.appendChild(placeCell);
 
@@ -1982,11 +1982,11 @@
         card.appendChild(list);
 
         const count = shopping.filter(block.count).length;
-        card.appendChild(createElement("span", `where${block.place.includes("allí") ? " local" : ""}`, `${count} productos`));
+        card.appendChild(createElement("span", `where${block.place.includes("Han") ? " local" : ""}`, `${count} produktu`));
         target.appendChild(card);
       });
 
-      document.getElementById("shoppingTotalCount").textContent = `${shopping.length} productos · total del campamento`;
+      document.getElementById("shoppingTotalCount").textContent = `${shopping.length} produktu · udaleku osoko guztira`;
     }
 
     renderDays();
@@ -1994,8 +1994,8 @@
     setSelectedDay("all");
     renderShoppingMap();
     renderShopping("shoppingAll", shopping);
-    renderShopping("shoppingBring", shopping.filter((item) => item[3] === "Comprar aquí / llevar"));
-    renderShopping("shoppingLocal", shopping.filter((item) => item[3] === "Comprar allí / por tandas"));
+    renderShopping("shoppingBring", shopping.filter((item) => item[3] === "Hemen erosi / eraman"));
+    renderShopping("shoppingLocal", shopping.filter((item) => item[3] === "Han erosi / txandaka"));
 
     let detailsClosedBeforePrint = [];
     window.addEventListener("beforeprint", () => {

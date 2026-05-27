@@ -1,31 +1,31 @@
 # Izaba Menua 2026
 
-Repositorio para publicar una web estática con el menú completo del campamento de verano en Izaba para 53 personas, del día 2 al día 11.
+Izabako udalekuko menu osoa argitaratzeko webgune estatikoa. 53 lagunentzako menuak biltzen ditu, 2. egunetik 11. egunera.
 
-La página incluye menús por día, ingredientes y cantidades por servicio, lista global de compra, separación entre compra previa y compra allí, notas de dietas especiales y vista imprimible.
+Orriak egunez eguneko menuak, zerbitzu bakoitzeko osagaiak eta kantitateak, erosketa-zerrenda orokorra, aurretik erosi eta eraman beharreko produktuak, han erostekoak, dieta berezien oharrak eta inprimatzeko ikuspegia jasotzen ditu.
 
-## Uso local
+## Erabilera lokalean
 
-No necesita instalación, dependencias ni paso de compilación.
+Ez du instalaziorik, menpekotasunik edo konpilazio-pausorik behar.
 
-Abre directamente `index.html` en el navegador.
+Ireki zuzenean `index.html` nabigatzailean.
 
-## Publicación en GitHub Pages
+## GitHub Pages bidez argitaratzea
 
-1. Sube este repositorio a GitHub con el nombre `izaba-menua-2026`.
-2. En GitHub, entra en `Settings`.
-3. Abre `Pages`.
-4. En `Build and deployment`, selecciona `Deploy from a branch`.
-5. Elige la rama `main`.
-6. Elige la carpeta `/root`.
-7. Guarda los cambios.
+1. Igo biltegi hau GitHubera `izaba-menua-2026` izenarekin.
+2. GitHuben, sartu `Settings` atalean.
+3. Ireki `Pages`.
+4. `Build and deployment` atalean, aukeratu `Deploy from a branch`.
+5. Aukeratu `main` adarra.
+6. Aukeratu `/root` karpeta.
+7. Gorde aldaketak.
 
-URL esperada:
+Espero den URLa:
 
 https://draug35.github.io/izaba-menua-2026/
 
-## Archivos
+## Fitxategiak
 
-- `index.html`: web completa con HTML, CSS y JavaScript inline.
-- `.nojekyll`: evita el procesado de Jekyll en GitHub Pages.
-- `README.md`: instrucciones del repositorio y publicación.
+- `index.html`: HTML, CSS eta JavaScript inline dituen web osoa.
+- `.nojekyll`: GitHub Pagesen Jekyll prozesatzea saihesteko.
+- `README.md`: biltegiaren eta argitaratzearen azalpenak.
