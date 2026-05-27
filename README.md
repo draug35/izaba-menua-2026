@@ -22,7 +22,7 @@ Abre directamente `index.html` en el navegador.
 
 URL esperada:
 
-https://luken35.github.io/izaba-menua-2026/
+https://draug35.github.io/izaba-menua-2026/
 
 ## Archivos
 
