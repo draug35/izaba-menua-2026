@@ -509,6 +509,124 @@
       font-size: 0.94rem;
     }
 
+    .shopping-explainer {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .shopping-explainer article,
+    .shopping-card,
+    .shopping-detail {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 250, 240, 0.92);
+      box-shadow: 0 8px 22px rgba(55, 43, 24, 0.06);
+    }
+
+    .shopping-explainer article {
+      padding: 15px;
+    }
+
+    .shopping-explainer strong,
+    .shopping-card strong {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--earth);
+      font-size: 0.75rem;
+      font-weight: 900;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .shopping-explainer p,
+    .shopping-card p {
+      margin: 0;
+      color: var(--green-dark);
+      font-weight: 760;
+      line-height: 1.35;
+    }
+
+    .shopping-map {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin-bottom: 16px;
+    }
+
+    .shopping-card {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      padding: 16px;
+    }
+
+    .shopping-card h3 {
+      margin: 0;
+      color: var(--green-dark);
+      font-size: 1.18rem;
+    }
+
+    .shopping-card ul {
+      display: grid;
+      gap: 7px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .shopping-card li {
+      padding-left: 14px;
+      position: relative;
+    }
+
+    .shopping-card li::before {
+      content: "";
+      position: absolute;
+      top: 0.63em;
+      left: 0;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--clay);
+    }
+
+    .shopping-card .where {
+      align-self: start;
+    }
+
+    .shopping-detail {
+      margin-top: 8px;
+      overflow: hidden;
+    }
+
+    .shopping-detail summary {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      min-height: 52px;
+      padding: 14px 16px;
+      color: var(--green-dark);
+      font-weight: 900;
+      cursor: pointer;
+    }
+
+    .shopping-detail summary span {
+      color: var(--muted);
+      font-size: 0.9rem;
+      font-weight: 700;
+    }
+
+    .shopping-detail .table-wrap {
+      border-right: 0;
+      border-bottom: 0;
+      border-left: 0;
+      border-radius: 0;
+      box-shadow: none;
+    }
+
     .table-wrap {
       overflow-x: auto;
       border: 1px solid var(--line);
@@ -615,6 +733,8 @@
       .kitchen-board,
       .service-grid,
       .day-summary,
+      .shopping-explainer,
+      .shopping-map,
       .safety-grid {
         grid-template-columns: 1fr;
       }
@@ -717,6 +837,8 @@
       .hero-panel,
       .day-card,
       .service-card,
+      .shopping-card,
+      .shopping-detail,
       .table-wrap,
       .safety-card {
         border: 1px solid #bbb;
@@ -795,6 +917,10 @@
       .service-detail summary {
         display: none;
       }
+
+      .shopping-detail summary {
+        display: none;
+      }
     }
   </style>
 </head>
@@ -821,7 +947,7 @@
   <nav class="site-nav" aria-label="Navegación principal">
     <div class="nav-inner">
       <a href="#menus">Menús por día</a>
-      <a href="#lista-total">Lista total de compra</a>
+      <a href="#lista-total">Compra por bloques</a>
       <a href="#comprar-aqui">Comprar aquí y llevar</a>
       <a href="#comprar-alli">Comprar allí</a>
       <a href="#dietas">Dietas y seguridad</a>
@@ -845,24 +971,38 @@
     <section id="lista-total">
       <div class="section-head">
         <div>
-          <h2>Lista total de compra</h2>
-          <p class="section-note">Vista completa para revisar cantidades, ubicación de compra y avisos de dietas.</p>
+          <h2>Compra por bloques</h2>
+          <p class="section-note">La compra total está pensada para organizarse, no para leerla de golpe.</p>
         </div>
       </div>
-      <div class="table-wrap">
-        <table>
-          <thead>
-            <tr>
-              <th>Categoría</th>
-              <th>Producto</th>
-              <th>Cantidad</th>
-              <th>Dónde comprar</th>
-              <th>Nota</th>
-            </tr>
-          </thead>
-          <tbody id="shoppingAll"></tbody>
-        </table>
+      <div class="shopping-explainer">
+        <article>
+          <strong>Qué significa</strong>
+          <p>Estas cantidades son para todo el campamento, del día 2 al 11. No son cantidades de un solo día.</p>
+        </article>
+        <article>
+          <strong>Cómo usarlo</strong>
+          <p>Para cocinar hoy, usa el parte del día. Para organizar compra, empieza por estos bloques y abre la tabla solo para revisar producto por producto.</p>
+        </article>
       </div>
+      <div class="shopping-map" id="shoppingMap"></div>
+      <details class="shopping-detail">
+        <summary>Ver listado maestro completo <span id="shoppingTotalCount">total del campamento</span></summary>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Categoría</th>
+                <th>Producto</th>
+                <th>Cantidad</th>
+                <th>Dónde comprar</th>
+                <th>Nota</th>
+              </tr>
+            </thead>
+            <tbody id="shoppingAll"></tbody>
+          </table>
+        </div>
+      </details>
     </section>
 
     <section id="comprar-aqui">
@@ -892,7 +1032,7 @@
       <div class="section-head">
         <div>
           <h2>Comprar allí / por tandas</h2>
-          <p class="section-note">Frescos, frío, pan, fruta, verdura y carne para comprar cerca del campamento o por tandas.</p>
+          <p class="section-note">Frescos, frío, pan, fruta, verdura y carne. Son totales del campamento: comprar por tandas, no todo el primer día.</p>
         </div>
       </div>
       <div class="table-wrap">
@@ -1527,6 +1667,45 @@
       ["Vegano", "Yogur de soja", "12-16 unidades", "Comprar allí / por tandas", "Postre alternativo."]
     ];
 
+    const shoppingBlocks = [
+      {
+        title: "1. Comprar antes y llevar",
+        label: "No improvisar",
+        place: "Comprar aquí / llevar",
+        note: "Secos, certificados, dietas especiales y bases de despensa.",
+        items: [
+          "Sin gluten: pan, pasta y galletas.",
+          "Despensa: legumbres, pasta, arroz, conservas, salsas y caldos.",
+          "Seguridad vegana: hummus/paté vegetal y soja texturizada."
+        ],
+        count: (row) => row[3] === "Comprar aquí / llevar"
+      },
+      {
+        title: "2. Comprar allí",
+        label: "Fresco y frío",
+        place: "Comprar allí / por tandas",
+        note: "Producto voluminoso o delicado que conviene comprar cerca.",
+        items: [
+          "Pan, fruta, leche, mantequilla, yogures y natillas.",
+          "Verdura grande: lechuga, tomate, calabacín, patata y zanahoria.",
+          "Carne y embutido: pollo, lomo, salchichas, pavo y chorizo."
+        ],
+        count: (row) => row[3] === "Comprar allí / por tandas"
+      },
+      {
+        title: "3. Comprar por tandas",
+        label: "Día anterior",
+        place: "Comprar allí / por tandas",
+        note: "No comprar todo al principio: se estropea, ocupa y confunde.",
+        items: [
+          "Pan y fruta: mejor por tandas cortas.",
+          "Frío: lácteos, postres, pollo, carne y embutidos.",
+          "Volumen: leche, patata, lechuga, tomate y calabacín."
+        ],
+        count: (row) => ["Pan", "Fruta", "Desayuno", "Carne", "Embutido", "Postres", "Lácteos", "Verdura"].includes(row[0]) && row[3] === "Comprar allí / por tandas"
+      }
+    ];
+
     const serviceLabels = {
       breakfast: "Desayuno",
       lunch: "Comida",
@@ -1788,17 +1967,40 @@
       });
     }
 
+    function renderShoppingMap() {
+      const target = document.getElementById("shoppingMap");
+      target.textContent = "";
+
+      shoppingBlocks.forEach((block) => {
+        const card = createElement("article", "shopping-card");
+        card.appendChild(createElement("strong", "", block.label));
+        card.appendChild(createElement("h3", "", block.title));
+        card.appendChild(createElement("p", "", block.note));
+
+        const list = document.createElement("ul");
+        block.items.forEach((item) => list.appendChild(createElement("li", "", item)));
+        card.appendChild(list);
+
+        const count = shopping.filter(block.count).length;
+        card.appendChild(createElement("span", `where${block.place.includes("allí") ? " local" : ""}`, `${count} productos`));
+        target.appendChild(card);
+      });
+
+      document.getElementById("shoppingTotalCount").textContent = `${shopping.length} productos · total del campamento`;
+    }
+
     renderDays();
     renderFilter();
     setSelectedDay("all");
+    renderShoppingMap();
     renderShopping("shoppingAll", shopping);
     renderShopping("shoppingBring", shopping.filter((item) => item[3] === "Comprar aquí / llevar"));
     renderShopping("shoppingLocal", shopping.filter((item) => item[3] === "Comprar allí / por tandas"));
 
     let detailsClosedBeforePrint = [];
     window.addEventListener("beforeprint", () => {
-      detailsClosedBeforePrint = [...document.querySelectorAll(".service-detail:not([open])")];
-      document.querySelectorAll(".service-detail").forEach((detail) => {
+      detailsClosedBeforePrint = [...document.querySelectorAll(".service-detail:not([open]), .shopping-detail:not([open])")];
+      document.querySelectorAll(".service-detail, .shopping-detail").forEach((detail) => {
         detail.open = true;
       });
     });
