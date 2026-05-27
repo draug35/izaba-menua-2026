@@ -232,6 +232,86 @@
       color: #4d321c;
     }
 
+    .kitchen-board {
+      display: grid;
+      grid-template-columns: 1.15fr repeat(2, minmax(0, 0.9fr));
+      gap: 12px;
+      margin: 14px 0 18px;
+      padding: 14px;
+      border: 1px solid rgba(63, 95, 61, 0.24);
+      border-radius: 8px;
+      background: linear-gradient(135deg, rgba(63, 95, 61, 0.96), rgba(109, 127, 66, 0.93));
+      box-shadow: 0 12px 28px rgba(55, 43, 24, 0.12);
+      color: #fff8e9;
+    }
+
+    .kitchen-panel {
+      padding: 14px;
+      border: 1px solid rgba(255, 248, 233, 0.22);
+      border-radius: 8px;
+      background: rgba(255, 248, 233, 0.1);
+    }
+
+    .kitchen-panel.wide {
+      grid-column: 1 / -1;
+    }
+
+    .kitchen-label {
+      display: block;
+      margin-bottom: 7px;
+      color: rgba(255, 248, 233, 0.75);
+      font-size: 0.73rem;
+      font-weight: 850;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+    }
+
+    .kitchen-main {
+      display: grid;
+      gap: 8px;
+      margin: 0;
+      font-size: clamp(1.2rem, 3vw, 1.75rem);
+      font-weight: 900;
+      line-height: 1.15;
+    }
+
+    .kitchen-line {
+      display: block;
+    }
+
+    .kitchen-panel p {
+      margin: 0;
+      font-weight: 750;
+      line-height: 1.35;
+    }
+
+    .kitchen-chips,
+    .service-alerts {
+      display: flex;
+      gap: 7px;
+      flex-wrap: wrap;
+      margin-top: 10px;
+    }
+
+    .kitchen-chip,
+    .service-alert {
+      display: inline-flex;
+      align-items: center;
+      min-height: 28px;
+      padding: 5px 8px;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 850;
+      line-height: 1;
+      white-space: nowrap;
+    }
+
+    .kitchen-chip {
+      border: 1px solid rgba(255, 248, 233, 0.22);
+      background: rgba(255, 248, 233, 0.16);
+      color: #fff8e9;
+    }
+
     .days-grid {
       display: grid;
       gap: 18px;
@@ -364,6 +444,28 @@
       margin: 0 0 12px;
       font-weight: 800;
       color: var(--green-dark);
+    }
+
+    .service-alert {
+      background: #efe1c8;
+      color: #5a3a1f;
+    }
+
+    .service-detail {
+      margin-top: 12px;
+      border-top: 1px solid var(--line);
+    }
+
+    .service-detail summary {
+      min-height: 42px;
+      padding: 11px 0 0;
+      color: var(--earth);
+      font-weight: 850;
+      cursor: pointer;
+    }
+
+    .service-detail[open] summary {
+      margin-bottom: 8px;
     }
 
     .ingredients {
@@ -510,6 +612,7 @@
 
     @media (max-width: 900px) {
       .hero-panel,
+      .kitchen-board,
       .service-grid,
       .day-summary,
       .safety-grid {
@@ -558,6 +661,11 @@
       .day-filter {
         overflow-x: auto;
         flex-wrap: nowrap;
+      }
+
+      .kitchen-board {
+        margin-top: 12px;
+        padding: 10px;
       }
 
       .day-title {
@@ -617,10 +725,28 @@
       }
 
       .hero-panel,
+      .kitchen-board,
       .service-grid,
       .day-summary,
       .safety-grid {
         display: block;
+      }
+
+      .kitchen-board {
+        color: #000;
+        background: #fff;
+        box-shadow: none;
+      }
+
+      .kitchen-panel {
+        margin: 0 0 3mm;
+        border: 1px solid #bbb;
+        background: #fff;
+      }
+
+      .kitchen-label,
+      .kitchen-chip {
+        color: #000;
       }
 
       .hero-side {
@@ -631,10 +757,6 @@
       .quick-grid {
         display: grid;
         grid-template-columns: repeat(4, 1fr);
-      }
-
-      .day-card.is-hidden {
-        display: block !important;
       }
 
       .service-card {
@@ -664,6 +786,14 @@
 
       a {
         text-decoration: none;
+      }
+
+      .service-detail {
+        border-top: 0;
+      }
+
+      .service-detail summary {
+        display: none;
       }
     }
   </style>
@@ -703,11 +833,12 @@
       <div class="section-head">
         <div>
           <h2>Menús por día</h2>
-          <p class="section-note">Cada tarjeta recoge servicios, cantidades y notas de cocina para preparar primero lo delicado y no perder tiempo.</p>
+          <p class="section-note">Elige un día y usa el parte de cocina para situarte rápido; abre cantidades solo cuando toque preparar o comprar.</p>
         </div>
-        <button class="button print" type="button" id="printButton">Imprimir</button>
+        <button class="button print" type="button" id="printButton">Imprimir vista</button>
       </div>
       <div class="day-filter" id="dayFilter" aria-label="Filtro por día"></div>
+      <div class="kitchen-board" id="kitchenBoard" aria-live="polite"></div>
       <div class="days-grid" id="daysGrid"></div>
     </section>
 
@@ -1423,14 +1554,82 @@
       11: { breakfast: "Fijo", lunch: "Pavo + queso", snack: "Opcional fruta", dinner: "Sin cena" }
     };
 
+    const kitchenNotes = {
+      2: {
+        prep: "Apartar sin gluten y sin frutos secos antes de montar meriendas. Pasta sin gluten primero.",
+        fresh: "Fruta, lechuga, tomate, yogures, bacon y pan de cena.",
+        alerts: ["Comida de casa", "Frutos secos aparte", "Pasta sin gluten"]
+      },
+      3: {
+        prep: "Confirmar salchicha certificada. Dejar pavo/pan sin gluten cerrado antes de la merienda.",
+        fresh: "Pan, fruta, salchichas, pollo, calabacín, natillas y chips.",
+        alerts: ["Salchicha certificada", "Sin gluten primero", "Caldo revisado"]
+      },
+      4: {
+        prep: "Cocer o calentar chorizo aparte. Albóndigas solo si son aptas; si no, proteína separada.",
+        fresh: "Fruta, lechuga, tomate, patata, zanahoria, yogures y pan.",
+        alerts: ["Chorizo aparte", "Albóndigas aptas", "Frutos secos tarde"]
+      },
+      5: {
+        prep: "Plato base fácil para todos. Pasta sin gluten separada antes de mezclar la ensalada.",
+        fresh: "Fruta, tomate, lomo, yogures, pan y cebolla morada.",
+        alerts: ["Base vegana útil", "Cuchillo limpio", "Pasta separada"]
+      },
+      6: {
+        prep: "Chorizo aparte al mediodía. Salsa de queso separada por dietas en la cena.",
+        fresh: "Fruta, lechuga, tomate, pollo, natillas, chips y pan.",
+        alerts: ["Chorizo aparte", "Salsa aparte", "Lácteos"]
+      },
+      7: {
+        prep: "Queso aparte en bocatas. Revisar puré y salchichas antes de servir a celíacos.",
+        fresh: "Pan, fruta, lomo, pavo, verdura de crema, salchichas y yogures.",
+        alerts: ["Queso aparte", "Puré revisado", "Salchichas aptas"]
+      },
+      8: {
+        prep: "Chorizo aparte. Evitar cuchillo con migas en queso crema. Curry suave.",
+        fresh: "Fruta, queso crema, pollo troceado, yogures, pan y verdura.",
+        alerts: ["Cuchillo limpio", "Chorizo aparte", "Curry suave"]
+      },
+      9: {
+        prep: "Repetir logística del día 4: albóndigas aptas o proteína aparte.",
+        fresh: "Pan, fruta, pavo, lechuga, tomate, patata, yogures y lomo.",
+        alerts: ["Albóndigas aptas", "Sin gluten primero", "Frutos secos tarde"]
+      },
+      10: {
+        prep: "Añadir proteína vegana si procede. Cocer pasta sin gluten primero y queso aparte.",
+        fresh: "Guisantes, patata, pollo, chorizo Pamplona, carne picada, natillas y pan.",
+        alerts: ["Proteína vegana", "Pasta sin gluten", "Queso aparte"]
+      },
+      11: {
+        prep: "Último día: bocatas simples y merienda solo si la salida se retrasa.",
+        fresh: "Pan, fruta, pavo, queso, chocolate y galletas si hay merienda.",
+        alerts: ["No complicar", "Merienda opcional", "Cerrar sobrantes"]
+      }
+    };
+
     const daysGrid = document.getElementById("daysGrid");
     const dayFilter = document.getElementById("dayFilter");
+    const kitchenBoard = document.getElementById("kitchenBoard");
 
     function createElement(tag, className, text) {
       const element = document.createElement(tag);
       if (className) element.className = className;
       if (text) element.textContent = text;
       return element;
+    }
+
+    function getServiceAlerts(service) {
+      if (!service) return [];
+      const ingredientText = service.ingredients.map(([name, amount]) => `${name} ${amount}`).join(" ");
+      const fullText = `${service.dish} ${service.note || ""} ${ingredientText}`.toLowerCase();
+      const noteText = `${service.note || ""}`.toLowerCase();
+      const alerts = [];
+
+      if (/gluten|cel[ií]ac|zeliaco/.test(fullText)) alerts.push("Sin gluten");
+      if (/frutos secos|cacahuete|cacahuetes|trazas/.test(fullText)) alerts.push("Frutos secos");
+      if (/vegano|vegana|dietas especiales|lácteos|lacteos|queso aparte|salsa .*aparte/.test(noteText)) alerts.push("Dietas");
+
+      return alerts;
     }
 
     function renderService(key, service) {
@@ -1448,6 +1647,15 @@
       }
 
       body.appendChild(createElement("p", "dish", service.dish));
+      const alerts = getServiceAlerts(service);
+      if (alerts.length) {
+        const alertWrap = createElement("div", "service-alerts");
+        alerts.forEach((alert) => alertWrap.appendChild(createElement("span", "service-alert", alert)));
+        body.appendChild(alertWrap);
+      }
+
+      const detail = createElement("details", "service-detail");
+      detail.appendChild(createElement("summary", "", "Ver cantidades y nota"));
       const list = createElement("ul", "ingredients");
       service.ingredients.forEach(([name, amount]) => {
         const item = document.createElement("li");
@@ -1455,8 +1663,9 @@
         item.appendChild(createElement("span", "", amount));
         list.appendChild(item);
       });
-      body.appendChild(list);
-      if (service.note) body.appendChild(createElement("p", "note", service.note));
+      detail.appendChild(list);
+      if (service.note) detail.appendChild(createElement("p", "note", service.note));
+      body.appendChild(detail);
       card.appendChild(body);
       return card;
     }
@@ -1471,6 +1680,45 @@
         wrapper.appendChild(pill);
       });
       return wrapper;
+    }
+
+    function renderKitchenBoard(selectedDay) {
+      kitchenBoard.textContent = "";
+
+      if (selectedDay === "all") {
+        const intro = createElement("div", "kitchen-panel wide");
+        intro.appendChild(createElement("span", "kitchen-label", "Parte de cocina"));
+        intro.appendChild(createElement("p", "", "Elige un día para ver solo lo imprescindible: qué toca, qué preparar antes y qué comprar fresco."));
+        kitchenBoard.appendChild(intro);
+        return;
+      }
+
+      const day = menuDays.find((item) => String(item.day) === selectedDay);
+      const summary = daySummaries[day.day];
+      const notes = kitchenNotes[day.day];
+
+      const main = createElement("div", "kitchen-panel");
+      main.appendChild(createElement("span", "kitchen-label", `${day.label} · 53 personas`));
+      const mainText = createElement("p", "kitchen-main");
+      mainText.appendChild(createElement("span", "kitchen-line", `Comida: ${summary.lunch}`));
+      mainText.appendChild(createElement("span", "kitchen-line", `Cena: ${summary.dinner}`));
+      main.appendChild(mainText);
+
+      const prep = createElement("div", "kitchen-panel");
+      prep.appendChild(createElement("span", "kitchen-label", "Preparar antes"));
+      prep.appendChild(createElement("p", "", notes.prep));
+
+      const fresh = createElement("div", "kitchen-panel");
+      fresh.appendChild(createElement("span", "kitchen-label", "Compra fresca"));
+      fresh.appendChild(createElement("p", "", notes.fresh));
+
+      const alerts = createElement("div", "kitchen-panel wide");
+      alerts.appendChild(createElement("span", "kitchen-label", "Atención rápida"));
+      const chipWrap = createElement("div", "kitchen-chips");
+      notes.alerts.forEach((alert) => chipWrap.appendChild(createElement("span", "kitchen-chip", alert)));
+      alerts.appendChild(chipWrap);
+
+      kitchenBoard.append(main, prep, fresh, alerts);
     }
 
     function renderDays() {
@@ -1493,6 +1741,17 @@
       });
     }
 
+    function setSelectedDay(selectedDay) {
+      dayFilter.querySelectorAll("button").forEach((item) => {
+        item.classList.toggle("is-active", item.dataset.day === selectedDay);
+      });
+      daysGrid.querySelectorAll(".day-card").forEach((card) => {
+        card.classList.toggle("is-hidden", selectedDay !== "all" && card.dataset.day !== selectedDay);
+      });
+      renderKitchenBoard(selectedDay);
+      document.getElementById("printButton").textContent = selectedDay === "all" ? "Imprimir todo" : `Imprimir día ${selectedDay}`;
+    }
+
     function renderFilter() {
       const allButton = createElement("button", "button is-active", "Todos");
       allButton.type = "button";
@@ -1509,13 +1768,7 @@
       dayFilter.addEventListener("click", (event) => {
         const button = event.target.closest("button");
         if (!button) return;
-        const selectedDay = button.dataset.day;
-        dayFilter.querySelectorAll("button").forEach((item) => {
-          item.classList.toggle("is-active", item === button);
-        });
-        daysGrid.querySelectorAll(".day-card").forEach((card) => {
-          card.classList.toggle("is-hidden", selectedDay !== "all" && card.dataset.day !== selectedDay);
-        });
+        setSelectedDay(button.dataset.day);
       });
     }
 
@@ -1537,9 +1790,25 @@
 
     renderDays();
     renderFilter();
+    setSelectedDay("all");
     renderShopping("shoppingAll", shopping);
     renderShopping("shoppingBring", shopping.filter((item) => item[3] === "Comprar aquí / llevar"));
     renderShopping("shoppingLocal", shopping.filter((item) => item[3] === "Comprar allí / por tandas"));
+
+    let detailsClosedBeforePrint = [];
+    window.addEventListener("beforeprint", () => {
+      detailsClosedBeforePrint = [...document.querySelectorAll(".service-detail:not([open])")];
+      document.querySelectorAll(".service-detail").forEach((detail) => {
+        detail.open = true;
+      });
+    });
+
+    window.addEventListener("afterprint", () => {
+      detailsClosedBeforePrint.forEach((detail) => {
+        detail.open = false;
+      });
+      detailsClosedBeforePrint = [];
+    });
 
     document.getElementById("printButton").addEventListener("click", () => window.print());
   </script>
