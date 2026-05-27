@@ -1,0 +1,1509 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Izaba Menua 2026</title>
+  <style>
+    :root {
+      --cream: #f7f0df;
+      --paper: #fffaf0;
+      --green: #3f5f3d;
+      --green-dark: #273f2a;
+      --sage: #d9e2c6;
+      --moss: #6d7f42;
+      --earth: #8b5e34;
+      --clay: #b77149;
+      --ink: #2f2a22;
+      --muted: #6d665c;
+      --line: #dfd2bb;
+      --danger: #8d3f32;
+      --shadow: 0 16px 40px rgba(55, 43, 24, 0.12);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top left, rgba(217, 226, 198, 0.65), transparent 32rem),
+        linear-gradient(180deg, var(--cream), #f4ead5 48%, #f9f2e4);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.5;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    .page {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .hero {
+      padding: 34px 0 18px;
+    }
+
+    .hero-panel {
+      display: grid;
+      grid-template-columns: minmax(0, 1.3fr) minmax(280px, 0.7fr);
+      gap: 22px;
+      align-items: stretch;
+      background: rgba(255, 250, 240, 0.88);
+      border: 1px solid rgba(139, 94, 52, 0.18);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .hero-copy {
+      padding: 34px;
+    }
+
+    .eyebrow {
+      margin: 0 0 10px;
+      color: var(--earth);
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    h1,
+    h2,
+    h3 {
+      color: var(--green-dark);
+      line-height: 1.1;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(2.35rem, 8vw, 5.2rem);
+      letter-spacing: 0;
+    }
+
+    .subtitle {
+      max-width: 760px;
+      margin: 14px 0 0;
+      color: var(--muted);
+      font-size: clamp(1.05rem, 2.5vw, 1.35rem);
+    }
+
+    .hero-side {
+      display: grid;
+      gap: 12px;
+      align-content: center;
+      padding: 24px;
+      background:
+        linear-gradient(135deg, rgba(63, 95, 61, 0.96), rgba(109, 127, 66, 0.92)),
+        repeating-linear-gradient(45deg, rgba(255,255,255,0.08) 0 2px, transparent 2px 12px);
+      color: #fff8e9;
+    }
+
+    .quick-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .quick-item {
+      min-height: 86px;
+      padding: 15px;
+      border: 1px solid rgba(255, 248, 233, 0.25);
+      border-radius: 8px;
+      background: rgba(255, 248, 233, 0.1);
+    }
+
+    .quick-item strong {
+      display: block;
+      font-size: 1.45rem;
+      line-height: 1;
+    }
+
+    .quick-item span {
+      display: block;
+      margin-top: 8px;
+      font-size: 0.87rem;
+      color: rgba(255, 248, 233, 0.86);
+    }
+
+    .site-nav {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      margin: 0 auto 24px;
+      border-top: 1px solid rgba(139, 94, 52, 0.14);
+      border-bottom: 1px solid rgba(139, 94, 52, 0.18);
+      background: rgba(247, 240, 223, 0.94);
+      backdrop-filter: blur(12px);
+    }
+
+    .nav-inner {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      width: min(1180px, calc(100% - 24px));
+      margin: 0 auto;
+      padding: 10px 0;
+    }
+
+    .nav-inner a,
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 42px;
+      padding: 10px 13px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--paper);
+      color: var(--green-dark);
+      font: inherit;
+      font-weight: 750;
+      text-decoration: none;
+      cursor: pointer;
+      transition: transform 160ms ease, border-color 160ms ease, background 160ms ease;
+    }
+
+    .nav-inner a:hover,
+    .button:hover {
+      transform: translateY(-1px);
+      border-color: rgba(63, 95, 61, 0.55);
+      background: #fffdf7;
+    }
+
+    main {
+      padding-bottom: 54px;
+    }
+
+    section {
+      scroll-margin-top: 88px;
+      margin: 34px 0;
+    }
+
+    .section-head {
+      display: flex;
+      gap: 16px;
+      align-items: end;
+      justify-content: space-between;
+      margin-bottom: 16px;
+    }
+
+    h2 {
+      margin: 0;
+      font-size: clamp(1.7rem, 4vw, 2.45rem);
+    }
+
+    .section-note {
+      max-width: 720px;
+      margin: 8px 0 0;
+      color: var(--muted);
+    }
+
+    .day-filter {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 250, 240, 0.82);
+    }
+
+    .button.is-active {
+      border-color: var(--green);
+      background: var(--green);
+      color: #fff8e9;
+    }
+
+    .button.print {
+      border-color: rgba(139, 94, 52, 0.36);
+      background: #efe0c1;
+      color: #4d321c;
+    }
+
+    .days-grid {
+      display: grid;
+      gap: 18px;
+      margin-top: 18px;
+    }
+
+    .day-card {
+      border: 1px solid rgba(139, 94, 52, 0.18);
+      border-radius: 8px;
+      background: rgba(255, 250, 240, 0.9);
+      box-shadow: 0 10px 26px rgba(55, 43, 24, 0.08);
+      overflow: hidden;
+    }
+
+    .day-card.is-hidden {
+      display: none;
+    }
+
+    .day-title {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 20px;
+      background: linear-gradient(90deg, rgba(217, 226, 198, 0.88), rgba(255, 250, 240, 0.92));
+      border-bottom: 1px solid var(--line);
+    }
+
+    .day-title h3 {
+      margin: 0;
+      font-size: 1.35rem;
+    }
+
+    .day-title span {
+      color: var(--earth);
+      font-weight: 800;
+    }
+
+    .service-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      padding: 16px;
+    }
+
+    .service-card {
+      display: flex;
+      flex-direction: column;
+      min-height: 100%;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fffdf7;
+      overflow: hidden;
+    }
+
+    .service-card.empty {
+      background: #f5ead3;
+      color: var(--muted);
+    }
+
+    .service-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--line);
+      background: rgba(217, 226, 198, 0.45);
+    }
+
+    .service-head h4 {
+      margin: 0;
+      color: var(--green-dark);
+      font-size: 1rem;
+    }
+
+    .service-tag {
+      padding: 4px 8px;
+      border-radius: 999px;
+      background: #f1dfbd;
+      color: #61401f;
+      font-size: 0.78rem;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .service-body {
+      padding: 14px;
+    }
+
+    .dish {
+      margin: 0 0 12px;
+      font-weight: 800;
+      color: var(--green-dark);
+    }
+
+    .ingredients {
+      display: grid;
+      gap: 6px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .ingredients li {
+      display: flex;
+      gap: 8px;
+      align-items: baseline;
+      justify-content: space-between;
+      padding: 7px 0;
+      border-bottom: 1px dashed rgba(139, 94, 52, 0.22);
+    }
+
+    .ingredients li:last-child {
+      border-bottom: 0;
+    }
+
+    .ingredients b {
+      color: #3b3329;
+      font-weight: 760;
+    }
+
+    .ingredients span {
+      color: var(--muted);
+      text-align: right;
+    }
+
+    .note {
+      margin: 12px 0 0;
+      padding: 10px 12px;
+      border-left: 4px solid var(--clay);
+      border-radius: 4px;
+      background: #f6ead2;
+      color: #563822;
+      font-size: 0.94rem;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--paper);
+      box-shadow: 0 8px 22px rgba(55, 43, 24, 0.06);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 760px;
+      font-size: 0.96rem;
+    }
+
+    th,
+    td {
+      padding: 11px 12px;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      position: sticky;
+      top: 0;
+      z-index: 1;
+      background: var(--green);
+      color: #fff8e9;
+      font-size: 0.82rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    tbody tr:nth-child(even) {
+      background: #fbf3e3;
+    }
+
+    tbody tr:hover {
+      background: #f3e4c9;
+    }
+
+    .where {
+      display: inline-flex;
+      padding: 4px 8px;
+      border-radius: 999px;
+      background: var(--sage);
+      color: var(--green-dark);
+      font-size: 0.82rem;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .where.local {
+      background: #ead5b1;
+      color: #62411e;
+    }
+
+    .safety-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .safety-card,
+    .publish-card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 250, 240, 0.9);
+      box-shadow: 0 8px 22px rgba(55, 43, 24, 0.06);
+    }
+
+    .safety-card {
+      padding: 16px;
+    }
+
+    .safety-card h3,
+    .publish-card h3 {
+      margin: 0 0 10px;
+      font-size: 1.1rem;
+    }
+
+    .safety-card ul,
+    .publish-card ol {
+      margin: 0;
+      padding-left: 1.15rem;
+    }
+
+    .safety-card li,
+    .publish-card li {
+      margin: 7px 0;
+    }
+
+    .rule-card {
+      grid-column: 1 / -1;
+      border-color: rgba(141, 63, 50, 0.32);
+      background: #f6e3d8;
+    }
+
+    .publish-card {
+      padding: 18px;
+    }
+
+    .publish-card code {
+      display: inline-block;
+      padding: 2px 6px;
+      border-radius: 6px;
+      background: #efe1c8;
+      color: #4d321c;
+      font-size: 0.92em;
+    }
+
+    footer {
+      padding: 24px 0 36px;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    @media (max-width: 900px) {
+      .hero-panel,
+      .service-grid,
+      .safety-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-copy {
+        padding: 26px;
+      }
+
+      .section-head {
+        align-items: start;
+        flex-direction: column;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .page {
+        width: min(100% - 20px, 1180px);
+      }
+
+      .hero {
+        padding-top: 12px;
+      }
+
+      .hero-copy,
+      .hero-side {
+        padding: 20px;
+      }
+
+      .quick-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .nav-inner {
+        justify-content: start;
+        overflow-x: auto;
+        flex-wrap: nowrap;
+      }
+
+      .nav-inner a,
+      .button {
+        white-space: nowrap;
+      }
+
+      .day-filter {
+        overflow-x: auto;
+        flex-wrap: nowrap;
+      }
+
+      .day-title {
+        align-items: start;
+        flex-direction: column;
+      }
+
+      .ingredients li {
+        display: block;
+      }
+
+      .ingredients span {
+        display: block;
+        margin-top: 2px;
+        text-align: left;
+      }
+    }
+
+    @media print {
+      @page {
+        margin: 14mm;
+      }
+
+      body {
+        background: #fff;
+        color: #000;
+        font-size: 11pt;
+      }
+
+      .page {
+        width: 100%;
+      }
+
+      .site-nav,
+      .day-filter,
+      .button,
+      footer {
+        display: none !important;
+      }
+
+      .hero {
+        padding: 0 0 10mm;
+      }
+
+      .hero-panel,
+      .day-card,
+      .service-card,
+      .table-wrap,
+      .safety-card,
+      .publish-card {
+        border: 1px solid #bbb;
+        box-shadow: none;
+        break-inside: avoid;
+      }
+
+      .hero-panel,
+      .service-grid,
+      .safety-grid {
+        display: block;
+      }
+
+      .hero-side {
+        color: #000;
+        background: #fff;
+      }
+
+      .quick-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+      }
+
+      .day-card.is-hidden {
+        display: block !important;
+      }
+
+      .service-card {
+        margin: 0 0 6mm;
+      }
+
+      section {
+        margin: 8mm 0;
+        scroll-margin-top: 0;
+      }
+
+      table {
+        min-width: 0;
+        font-size: 9.5pt;
+      }
+
+      th {
+        position: static;
+        color: #000;
+        background: #e8e8e8;
+      }
+
+      a {
+        text-decoration: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="hero page">
+    <div class="hero-panel">
+      <div class="hero-copy">
+        <p class="eyebrow">Cocina de campamento</p>
+        <h1>Izaba Menua 2026</h1>
+        <p class="subtitle">Menú completo para 53 personas · Del 2 al 11 · Cocina de campamento</p>
+      </div>
+      <aside class="hero-side" aria-label="Resumen rápido">
+        <div class="quick-grid">
+          <div class="quick-item"><strong>53</strong><span>personas</span></div>
+          <div class="quick-item"><strong>2-11</strong><span>días de menú</span></div>
+          <div class="quick-item"><strong>Menús</strong><span>por día</span></div>
+          <div class="quick-item"><strong>Compra</strong><span>lista global</span></div>
+          <div class="quick-item"><strong>Aquí/allí</strong><span>compra separada</span></div>
+        </div>
+      </aside>
+    </div>
+  </header>
+
+  <nav class="site-nav" aria-label="Navegación principal">
+    <div class="nav-inner">
+      <a href="#menus">Menús por día</a>
+      <a href="#lista-total">Lista total de compra</a>
+      <a href="#comprar-aqui">Comprar aquí y llevar</a>
+      <a href="#comprar-alli">Comprar allí</a>
+      <a href="#dietas">Dietas y seguridad</a>
+      <a href="#github">Publicación en GitHub</a>
+    </div>
+  </nav>
+
+  <main class="page">
+    <section id="menus">
+      <div class="section-head">
+        <div>
+          <h2>Menús por día</h2>
+          <p class="section-note">Cada tarjeta recoge servicios, cantidades y notas de cocina para preparar primero lo delicado y no perder tiempo.</p>
+        </div>
+        <button class="button print" type="button" id="printButton">Imprimir</button>
+      </div>
+      <div class="day-filter" id="dayFilter" aria-label="Filtro por día"></div>
+      <div class="days-grid" id="daysGrid"></div>
+    </section>
+
+    <section id="lista-total">
+      <div class="section-head">
+        <div>
+          <h2>Lista total de compra</h2>
+          <p class="section-note">Vista completa para revisar cantidades, ubicación de compra y avisos de dietas.</p>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Categoría</th>
+              <th>Producto</th>
+              <th>Cantidad</th>
+              <th>Dónde comprar</th>
+              <th>Nota</th>
+            </tr>
+          </thead>
+          <tbody id="shoppingAll"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="comprar-aqui">
+      <div class="section-head">
+        <div>
+          <h2>Comprar aquí y llevar</h2>
+          <p class="section-note">Secos, productos especiales, certificados y recursos que conviene no improvisar.</p>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Categoría</th>
+              <th>Producto</th>
+              <th>Cantidad</th>
+              <th>Dónde comprar</th>
+              <th>Nota</th>
+            </tr>
+          </thead>
+          <tbody id="shoppingBring"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="comprar-alli">
+      <div class="section-head">
+        <div>
+          <h2>Comprar allí / por tandas</h2>
+          <p class="section-note">Frescos, frío, pan, fruta, verdura y carne para comprar cerca del campamento o por tandas.</p>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Categoría</th>
+              <th>Producto</th>
+              <th>Cantidad</th>
+              <th>Dónde comprar</th>
+              <th>Nota</th>
+            </tr>
+          </thead>
+          <tbody id="shoppingLocal"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="dietas">
+      <div class="section-head">
+        <div>
+          <h2>Dietas y seguridad</h2>
+          <p class="section-note">Reglas cortas para evitar contaminación cruzada y resolver menús especiales con comida real.</p>
+        </div>
+      </div>
+      <div class="safety-grid">
+        <article class="safety-card">
+          <h3>Sin gluten</h3>
+          <ul>
+            <li>Guardar productos sin gluten en caja cerrada.</li>
+            <li>Cocer pasta sin gluten antes de la pasta normal.</li>
+            <li>Servir primero a celíacos y alérgicos.</li>
+            <li>Revisar caldos, embutidos, salchichas, albóndigas, salsas, cacao, chocolate y postres.</li>
+          </ul>
+        </article>
+        <article class="safety-card">
+          <h3>Frutos secos</h3>
+          <ul>
+            <li>Preparar raciones especiales antes de sacar frutos secos.</li>
+            <li>Guardar frutos secos y cacahuetes lejos de panes y postres.</li>
+            <li>Vigilar trazas en chocolate y galletas.</li>
+          </ul>
+        </article>
+        <article class="safety-card">
+          <h3>Vegano</h3>
+          <ul>
+            <li>No basta con quitar carne: debe haber proteína real.</li>
+            <li>Tener hummus, paté vegetal, garbanzos extra y soja texturizada.</li>
+            <li>Separar queso y salsas lácteas cuando haga falta.</li>
+          </ul>
+        </article>
+        <article class="safety-card">
+          <h3>Utensilios</h3>
+          <ul>
+            <li>Usar utensilios limpios para dietas especiales.</li>
+            <li>Preparar primero lo sin gluten y lo sin frutos secos.</li>
+            <li>Etiquetar raciones especiales antes del servicio.</li>
+          </ul>
+        </article>
+        <article class="safety-card rule-card">
+          <h3>Regla de cocina</h3>
+          <p>Primero se preparan y se apartan las raciones especiales; después se abre el servicio general. Si hay duda de etiqueta, ese producto no entra en la ración especial.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="github">
+      <div class="section-head">
+        <div>
+          <h2>Publicación en GitHub</h2>
+          <p class="section-note">Sitio estático preparado para publicarse desde la raíz del repositorio.</p>
+        </div>
+      </div>
+      <article class="publish-card">
+        <h3>GitHub Pages</h3>
+        <ol>
+          <li>Subir el repositorio como <code>izaba-menua-2026</code>.</li>
+          <li>Entrar en <code>Settings</code>, después <code>Pages</code>.</li>
+          <li>Elegir <code>Deploy from a branch</code>.</li>
+          <li>Seleccionar rama <code>main</code> y carpeta <code>/root</code>.</li>
+        </ol>
+        <p>URL esperada: <a href="https://luken35.github.io/izaba-menua-2026/">https://luken35.github.io/izaba-menua-2026/</a></p>
+      </article>
+    </section>
+  </main>
+
+  <footer class="page">
+    Izaba Menua 2026 · Menú de campamento para cocina real
+  </footer>
+
+  <script>
+    const breakfast = {
+      dish: "Desayuno fijo",
+      ingredients: [
+        ["Pan", "común o sobrante del día anterior"],
+        ["Mantequilla", "compra total 5 kg aprox."],
+        ["Mermelada", "compra total 10 botes"],
+        ["Galletas tipo María", "10-12 paquetes grandes"],
+        ["Leche", "compra total 130 L"],
+        ["Bebida de avena/soja", "6-8 L"],
+        ["Cacao soluble", "4-5 kg"],
+        ["Sin gluten", "galletas 3-4 paquetes y pan 4-5 paquetes"]
+      ],
+      note: "Del 3 al 11. Guardar el material sin gluten separado y cerrado."
+    };
+
+    const menuDays = [
+      {
+        day: 2,
+        label: "Día 2",
+        services: {
+          breakfast: null,
+          lunch: {
+            dish: "Cada participante trae comida de casa.",
+            ingredients: [["Sin compra de cocina", "—"]],
+            note: "Evitar intercambio de comida si hay alergias."
+          },
+          snack: {
+            dish: "Sándwich de york y queso + fruta + frutos secos.",
+            ingredients: [
+              ["Pan de molde", "7 paquetes"],
+              ["Jamón york natural", "55 lonchas"],
+              ["Queso en lonchas", "55 lonchas"],
+              ["Fruta", "53 piezas"],
+              ["Frutos secos / cacahuetes", "1,1-1,3 kg"],
+              ["Pan sin gluten", "1 paquete"],
+              ["York sin gluten", "4-6 lonchas"],
+              ["Queso sin gluten", "4-6 lonchas"]
+            ],
+            note: "Preparar primero las raciones sin frutos secos y sin gluten."
+          },
+          dinner: {
+            dish: "Ensalada + pasta carbonara + yogur.",
+            ingredients: [
+              ["Lechuga", "13 unidades"],
+              ["Tomate", "6 kg"],
+              ["Cebolla", "2 kg"],
+              ["Aceitunas", "2 latas grandes"],
+              ["Pasta", "7 kg"],
+              ["Pasta sin gluten", "500-750 g"],
+              ["Bacon", "3-3,5 kg"],
+              ["Champiñones", "3 kg"],
+              ["Cebolla para salsa", "1,5 kg"],
+              ["Nata/leche evaporada o similar", "5-6 L"],
+              ["Queso rallado/en polvo", "1,5-2 kg"],
+              ["Yogures", "53 unidades"],
+              ["Pan", "15 barras"]
+            ],
+            note: "Cocer pasta sin gluten primero, con olla y escurridor limpios."
+          }
+        }
+      },
+      {
+        day: 3,
+        label: "Día 3",
+        services: {
+          breakfast,
+          lunch: {
+            dish: "Bocata de salchicha Frankfurt y queso + chocolate + fruta.",
+            ingredients: [
+              ["Pan", "25 barras"],
+              ["Pan sin gluten", "2-3 barras/paquetes"],
+              ["Salchichas Frankfurt", "115-120 unidades"],
+              ["Queso", "2 kg"],
+              ["Chocolate", "16 tabletas"],
+              ["Fruta", "53 piezas"]
+            ],
+            note: "Usar salchicha certificada para celíacos."
+          },
+          snack: {
+            dish: "Sándwich de pavo y queso + fruta + frutos secos.",
+            ingredients: [
+              ["Pan de molde", "7 paquetes"],
+              ["Pavo natural", "55 lonchas"],
+              ["Queso", "55 lonchas"],
+              ["Fruta", "53 piezas"],
+              ["Frutos secos / cacahuetes", "1,1-1,3 kg"],
+              ["Pan sin gluten", "1 paquete"],
+              ["Pavo sin gluten", "4-6 lonchas"]
+            ],
+            note: "Raciones especiales cerradas antes de sacar frutos secos."
+          },
+          dinner: {
+            dish: "Crema de calabacín + pechugas en tomate con patatas chips + natillas.",
+            ingredients: [
+              ["Calabacín", "11 kg"],
+              ["Patata para crema", "4 kg"],
+              ["Cebolla", "1,5 kg"],
+              ["Caldo de verduras", "5 L"],
+              ["Agua", "5 L"],
+              ["Pechuga de pollo", "10-11 kg"],
+              ["Tomate frito", "2,5-3 kg"],
+              ["Patatas chips", "10 bolsas grandes"],
+              ["Natillas", "53 unidades"],
+              ["Pan", "15 barras"]
+            ],
+            note: "Revisar caldo y tomate para sin gluten."
+          }
+        }
+      },
+      {
+        day: 4,
+        label: "Día 4",
+        services: {
+          breakfast,
+          lunch: {
+            dish: "Lentejas con verduras y chorizo + fruta.",
+            ingredients: [
+              ["Lentejas cocidas", "17-18 kg"],
+              ["Pimiento verde", "1,2 kg"],
+              ["Zanahoria", "1,5-2 kg"],
+              ["Sofrito tomate/cebolla/puerro", "2 kg aprox."],
+              ["Ajo", "2 cabezas"],
+              ["Chorizo", "75-80 trozos"],
+              ["Caldo de verduras", "2 L"],
+              ["Vino blanco", "1 botella"],
+              ["Fruta", "53 piezas"],
+              ["Pan", "15 barras"]
+            ],
+            note: "Mejor chorizo aparte: simplifica vegano y sin gluten."
+          },
+          snack: {
+            dish: "Sándwich de chocolate + fruta + frutos secos.",
+            ingredients: [
+              ["Pan de molde", "7 paquetes"],
+              ["Chocolate", "16 tabletas"],
+              ["Fruta", "53 piezas"],
+              ["Frutos secos / cacahuetes", "1,1-1,3 kg"],
+              ["Pan sin gluten", "1 paquete"],
+              ["Chocolate sin gluten", "2 tabletas"]
+            ],
+            note: "Vigilar trazas de frutos secos en chocolate."
+          },
+          dinner: {
+            dish: "Ensalada + albóndigas en salsa española con patatas + yogur.",
+            ingredients: [
+              ["Lechuga", "11 unidades"],
+              ["Tomate", "6 kg"],
+              ["Cebolla para ensalada", "3 kg"],
+              ["Atún", "8 latas medianas"],
+              ["Albóndigas", "260 unidades"],
+              ["Patata natural", "6-6,5 kg"],
+              ["Sofrito tomate/cebolla/puerro", "2 kg"],
+              ["Caldo de verduras", "2 L"],
+              ["Vino blanco", "1 botella"],
+              ["Maicena", "1 paquete"],
+              ["Zanahoria", "1,5 kg"],
+              ["Yogures", "53 unidades"],
+              ["Pan", "15 barras"]
+            ],
+            note: "Para celíacos: comprobar albóndigas o hacer proteína aparte."
+          }
+        }
+      },
+      {
+        day: 5,
+        label: "Día 5",
+        services: {
+          breakfast,
+          lunch: {
+            dish: "Garbanzos especiados con verduras + arroz + fruta.",
+            ingredients: [
+              ["Garbanzos cocidos", "17-18 kg"],
+              ["Arroz", "3,5 kg"],
+              ["Cebolla", "2 kg"],
+              ["Zanahoria", "1,5-2 kg"],
+              ["Ajo", "2 cabezas"],
+              ["Tomate concentrado", "500 g"],
+              ["Leche de coco", "4 L"],
+              ["Curry/comino/cúrcuma", "cantidad suficiente"],
+              ["Fruta", "53 piezas"],
+              ["Pan", "15 barras"]
+            ],
+            note: "Plato base muy bueno para todos."
+          },
+          snack: {
+            dish: "Sándwich de jamón/lomo y queso + fruta + frutos secos.",
+            ingredients: [
+              ["Pan de molde", "7 paquetes"],
+              ["Jamón curado/lomo natural", "55-60 lonchas"],
+              ["Queso", "55 lonchas"],
+              ["Fruta", "53 piezas"],
+              ["Frutos secos / cacahuetes", "1,1-1,3 kg"],
+              ["Pan sin gluten", "1 paquete"],
+              ["Embutido sin gluten", "4-6 lonchas"]
+            ],
+            note: "Preparar sin gluten con cuchillo limpio."
+          },
+          dinner: {
+            dish: "Ensalada de pasta + lomo en salsa de pimientos + yogur.",
+            ingredients: [
+              ["Pasta", "4-4,5 kg"],
+              ["Pasta sin gluten", "500 g"],
+              ["Atún", "8 latas medianas"],
+              ["Tomate", "2,5-3 kg"],
+              ["Maíz", "2,5 kg"],
+              ["Cebolla morada", "800 g-1 kg"],
+              ["Aceitunas", "2 latas grandes"],
+              ["Lomo", "150-160 filetes"],
+              ["Pimientos en lata", "2 kg"],
+              ["Sofrito", "2 kg"],
+              ["Yogures", "53 unidades"],
+              ["Pan", "15 barras"]
+            ],
+            note: "Separar pasta sin gluten antes de mezclar."
+          }
+        }
+      },
+      {
+        day: 6,
+        label: "Día 6",
+        services: {
+          breakfast,
+          lunch: {
+            dish: "Alubias blancas con verduras y chorizo + fruta.",
+            ingredients: [
+              ["Alubias blancas cocidas", "17-18 kg"],
+              ["Pimiento verde", "1,2 kg"],
+              ["Sofrito tomate/cebolla/puerro", "2 kg"],
+              ["Zanahoria", "1,5 kg"],
+              ["Calabacín", "1,5-2 kg"],
+              ["Patata", "4 kg"],
+              ["Chorizo", "75-80 trozos"],
+              ["Vino blanco", "1 botella"],
+              ["Fruta", "53 piezas"],
+              ["Pan", "15 barras"]
+            ],
+            note: "Chorizo aparte."
+          },
+          snack: {
+            dish: "Sándwich de chocolate + fruta + frutos secos.",
+            ingredients: [
+              ["Pan de molde", "7 paquetes"],
+              ["Chocolate", "16 tabletas"],
+              ["Fruta", "53 piezas"],
+              ["Frutos secos / cacahuetes", "1,1-1,3 kg"],
+              ["Pan sin gluten", "1 paquete"],
+              ["Chocolate sin gluten", "2 tabletas"]
+            ],
+            note: "Ración sin frutos secos cerrada antes."
+          },
+          dinner: {
+            dish: "Ensalada + pechugas en salsa de queso con patatas chips + natillas.",
+            ingredients: [
+              ["Lechuga", "13 unidades"],
+              ["Tomate", "6 kg"],
+              ["Cebolla", "3 kg"],
+              ["Pechuga de pollo", "10-11 kg"],
+              ["Queso fundido", "2 kg"],
+              ["Queso azul", "300-400 g"],
+              ["Leche de coco/nata", "3,5-4 L"],
+              ["Patatas chips", "10 bolsas grandes"],
+              ["Natillas", "53 unidades"],
+              ["Pan", "15 barras"]
+            ],
+            note: "Salsa de queso aparte si hay dietas especiales."
+          }
+        }
+      },
+      {
+        day: 7,
+        label: "Día 7",
+        services: {
+          breakfast,
+          lunch: {
+            dish: "Bocata de lomo y queso + chocolate + fruta.",
+            ingredients: [
+              ["Pan", "25 barras"],
+              ["Pan sin gluten", "2-3 barras/paquetes"],
+              ["Lomo natural", "105-110 filetes"],
+              ["Queso", "2,2 kg"],
+              ["Chocolate", "16 tabletas"],
+              ["Fruta", "53 piezas"]
+            ],
+            note: "Queso aparte para quien no tome lácteos."
+          },
+          snack: {
+            dish: "Sándwich de pavo y queso + fruta + frutos secos.",
+            ingredients: [
+              ["Pan de molde", "7 paquetes"],
+              ["Pavo natural", "55 lonchas"],
+              ["Queso", "55 lonchas"],
+              ["Fruta", "53 piezas"],
+              ["Frutos secos / cacahuetes", "1,1-1,3 kg"],
+              ["Pan sin gluten", "1 paquete"],
+              ["Pavo sin gluten", "4-6 lonchas"]
+            ],
+            note: "Preparar y cerrar la ración especial antes del servicio general."
+          },
+          dinner: {
+            dish: "Crema de verdura + salchichas con puré de patata + yogur.",
+            ingredients: [
+              ["Calabacín", "6,5-7 kg"],
+              ["Zanahoria", "1,5-2 kg"],
+              ["Sofrito", "2 kg"],
+              ["Caldo de verduras", "6 L"],
+              ["Patata para crema", "3,5-4 kg"],
+              ["Salchichas", "200-210 unidades"],
+              ["Puré de patata", "1,5-1,8 kg"],
+              ["Leche", "1,5-2 L"],
+              ["Agua para puré", "4-5 L"],
+              ["Mantequilla", "750 g-1 kg"],
+              ["Yogures", "53 unidades"],
+              ["Pan", "15 barras"]
+            ],
+            note: "Revisar puré y salchichas para celíacos."
+          }
+        }
+      },
+      {
+        day: 8,
+        label: "Día 8",
+        services: {
+          breakfast,
+          lunch: {
+            dish: "Garbanzos con verduras y chorizo + fruta.",
+            ingredients: [
+              ["Garbanzos cocidos", "17-18 kg"],
+              ["Pimiento verde", "1,2 kg"],
+              ["Sofrito tomate/cebolla/puerro", "2 kg"],
+              ["Zanahoria", "1,5 kg"],
+              ["Calabacín", "1,5-2 kg"],
+              ["Patata", "4 kg"],
+              ["Chorizo", "75-80 trozos"],
+              ["Vino blanco", "1 botella"],
+              ["Fruta", "53 piezas"],
+              ["Pan", "15 barras"]
+            ],
+            note: "Chorizo aparte."
+          },
+          snack: {
+            dish: "Sándwich de Philadelphia + fruta + frutos secos.",
+            ingredients: [
+              ["Pan de molde", "7 paquetes"],
+              ["Philadelphia/queso crema", "6-7 tarrinas de 250 g"],
+              ["Fruta", "53 piezas"],
+              ["Frutos secos / cacahuetes", "1,1-1,3 kg"],
+              ["Pan sin gluten", "1 paquete"],
+              ["Queso crema sin gluten", "1 tarrina"]
+            ],
+            note: "Evitar cuchillo común con migas."
+          },
+          dinner: {
+            dish: "Pollo al curry con arroz + yogur.",
+            ingredients: [
+              ["Arroz", "3,5 kg"],
+              ["Pechuga de pollo troceada", "10-11 kg"],
+              ["Leche de coco", "5,5-6 L"],
+              ["Sofrito tomate/cebolla/puerro", "2 kg"],
+              ["Pimiento rojo en lata", "1 bote grande"],
+              ["Curry suave", "cantidad suficiente"],
+              ["Cúrcuma/comino/jengibre", "cantidad suficiente"],
+              ["Yogures", "53 unidades"],
+              ["Pan", "12-15 barras"]
+            ],
+            note: "Curry suave, no heroicidades."
+          }
+        }
+      },
+      {
+        day: 9,
+        label: "Día 9",
+        services: {
+          breakfast,
+          lunch: {
+            dish: "Bocata de lomo y queso + chocolate + fruta.",
+            ingredients: [
+              ["Pan", "25 barras"],
+              ["Pan sin gluten", "2-3 barras/paquetes"],
+              ["Lomo natural", "105-110 filetes"],
+              ["Queso", "2,2 kg"],
+              ["Chocolate", "16 tabletas"],
+              ["Fruta", "53 piezas"]
+            ],
+            note: "Preparar alternativa sin gluten con pan certificado."
+          },
+          snack: {
+            dish: "Sándwich de pavo y queso + fruta + frutos secos.",
+            ingredients: [
+              ["Pan de molde", "7 paquetes"],
+              ["Pavo natural", "55 lonchas"],
+              ["Queso", "55 lonchas"],
+              ["Fruta", "53 piezas"],
+              ["Frutos secos / cacahuetes", "1,1-1,3 kg"],
+              ["Pan sin gluten", "1 paquete"],
+              ["Pavo sin gluten", "4-6 lonchas"]
+            ],
+            note: "Raciones especiales cerradas antes de sacar frutos secos."
+          },
+          dinner: {
+            dish: "Ensalada + albóndigas en salsa española con patatas + yogur.",
+            ingredients: [
+              ["Lechuga", "11 unidades"],
+              ["Tomate", "6 kg"],
+              ["Cebolla para ensalada", "3 kg"],
+              ["Atún", "8 latas medianas"],
+              ["Albóndigas", "260 unidades"],
+              ["Patata natural", "6-6,5 kg"],
+              ["Sofrito", "2 kg"],
+              ["Caldo de verduras", "2 L"],
+              ["Vino blanco", "1 botella"],
+              ["Maicena", "1 paquete"],
+              ["Zanahoria", "1,5 kg"],
+              ["Yogures", "53 unidades"],
+              ["Pan", "15 barras"]
+            ],
+            note: "Repite logística del día 4."
+          }
+        }
+      },
+      {
+        day: 10,
+        label: "Día 10",
+        services: {
+          breakfast,
+          lunch: {
+            dish: "Guisantes con patata + pechuga a la plancha con patatas chips + yogur.",
+            ingredients: [
+              ["Guisantes", "5 kg"],
+              ["Patata para guiso", "5 kg"],
+              ["Cebolla", "1,5-2 kg"],
+              ["Ajo", "1 cabeza"],
+              ["Caldo de verduras", "3-4 L"],
+              ["Pechuga de pollo", "8-9 kg"],
+              ["Patatas chips", "10 bolsas grandes"],
+              ["Yogures", "53 unidades"],
+              ["Pan", "15 barras"]
+            ],
+            note: "Añadir proteína vegana si procede."
+          },
+          snack: {
+            dish: "Bocadillo/sándwich de chorizo Pamplona + fruta + frutos secos.",
+            ingredients: [
+              ["Pan de molde o pan", "7 paquetes de molde o 15 barras"],
+              ["Chorizo Pamplona", "260 lonchas aprox."],
+              ["Fruta", "53 piezas"],
+              ["Frutos secos / cacahuetes", "1,1-1,3 kg"],
+              ["Pan sin gluten", "1 paquete"],
+              ["Alternativa sin gluten", "4-6 raciones"]
+            ],
+            note: "Embutido certificado para celíacos."
+          },
+          dinner: {
+            dish: "Pasta boloñesa + natillas.",
+            ingredients: [
+              ["Pasta", "7 kg"],
+              ["Pasta sin gluten", "500-750 g"],
+              ["Carne picada", "5,5-6 kg"],
+              ["Champiñones", "3 kg"],
+              ["Sofrito tomate/cebolla/puerro", "2 kg"],
+              ["Pimiento verde", "1,2 kg"],
+              ["Tomate frito/triturado", "4-5 kg"],
+              ["Queso rallado", "2,5 kg"],
+              ["Natillas", "53 unidades"],
+              ["Pan", "15 barras"]
+            ],
+            note: "Salsa base de tomate; queso aparte."
+          }
+        }
+      },
+      {
+        day: 11,
+        label: "Día 11",
+        services: {
+          breakfast,
+          lunch: {
+            dish: "Bocata de pavo y queso + chocolate + fruta.",
+            ingredients: [
+              ["Pan", "25 barras"],
+              ["Pan sin gluten", "2-3 barras/paquetes"],
+              ["Pavo natural", "55-60 lonchas"],
+              ["Queso", "2,2 kg"],
+              ["Chocolate", "16 tabletas"],
+              ["Fruta", "53 piezas"]
+            ],
+            note: "Último día: no complicar."
+          },
+          snack: {
+            dish: "Merienda opcional: fruta + frutos secos + galletas.",
+            ingredients: [
+              ["Fruta", "53 piezas"],
+              ["Frutos secos / cacahuetes", "1,1 kg"],
+              ["Galletas", "4-5 paquetes"]
+            ],
+            note: "Solo si la salida es tarde."
+          },
+          dinner: null
+        }
+      }
+    ];
+
+    const shopping = [
+      ["Desayuno", "Bebida vegetal", "6-8 L", "Comprar aquí / llevar", "Avena o soja para desayunos y dietas."],
+      ["Desayuno", "Cacao soluble", "4-5 kg", "Comprar aquí / llevar", "Revisar etiqueta para sin gluten."],
+      ["Desayuno", "Galletas tipo María", "10-12 paquetes grandes", "Comprar aquí / llevar", "Seco, fácil de transportar."],
+      ["Sin gluten", "Galletas sin gluten", "3-4 paquetes", "Comprar aquí / llevar", "Guardar en caja cerrada."],
+      ["Sin gluten", "Pan sin gluten desayuno", "4-5 paquetes", "Comprar aquí / llevar", "No mezclar con pan común."],
+      ["Desayuno", "Mermelada", "10 botes", "Comprar aquí / llevar", "Comprar variedad sencilla."],
+      ["Sin gluten", "Pan sin gluten comidas/meriendas", "15-18 paquetes/barras", "Comprar aquí / llevar", "Producto crítico, mejor no improvisar."],
+      ["Meriendas", "Frutos secos/cacahuetes", "10-12 kg", "Comprar aquí / llevar", "Separar de raciones especiales."],
+      ["Meriendas", "Chocolate", "80-90 tabletas", "Comprar aquí / llevar", "Vigilar trazas de frutos secos y gluten."],
+      ["Legumbre", "Lentejas cocidas", "17-18 kg", "Comprar aquí / llevar", "Base día 4."],
+      ["Legumbre", "Garbanzos cocidos", "36-38 kg", "Comprar aquí / llevar", "Base días 5 y 8; útil para vegano."],
+      ["Legumbre", "Alubias blancas cocidas", "17-18 kg", "Comprar aquí / llevar", "Base día 6."],
+      ["Pasta y arroz", "Pasta común", "25-26 kg", "Comprar aquí / llevar", "Carbonara, ensalada de pasta y boloñesa."],
+      ["Sin gluten", "Pasta sin gluten", "2,5-3 kg", "Comprar aquí / llevar", "Cocer siempre primero."],
+      ["Pasta y arroz", "Arroz", "7 kg", "Comprar aquí / llevar", "Días 5 y 8."],
+      ["Pasta y arroz", "Puré de patata", "1,5-1,8 kg", "Comprar aquí / llevar", "Revisar sin gluten."],
+      ["Conservas", "Aceitunas", "4 latas grandes", "Comprar aquí / llevar", "Ensaladas."],
+      ["Conservas", "Maíz", "2,5 kg", "Comprar aquí / llevar", "Ensalada de pasta."],
+      ["Conservas", "Atún", "24 latas medianas", "Comprar aquí / llevar", "Ensaladas."],
+      ["Salsas", "Sofrito tomate/cebolla/puerro", "20-22 kg aprox.", "Comprar aquí / llevar", "Base de guisos y salsas."],
+      ["Salsas", "Tomate frito/triturado/concentrado", "15-18 kg total", "Comprar aquí / llevar", "Revisar etiqueta."],
+      ["Caldos", "Caldo de verduras", "25-30 L", "Comprar aquí / llevar", "Certificar sin gluten."],
+      ["Salsas", "Leche de coco/nata", "18-20 L", "Comprar aquí / llevar", "Separar uso vegano/lácteo."],
+      ["Básicos", "Maicena", "2 paquetes", "Comprar aquí / llevar", "Para salsa española."],
+      ["Básicos", "Aceite", "10 L", "Comprar aquí / llevar", "Cocina general."],
+      ["Básicos", "Sal, vinagre, especias", "cantidad suficiente", "Comprar aquí / llevar", "Curry, comino, cúrcuma, jengibre."],
+      ["Vegano", "Hummus/paté vegetal", "8-10 tarrinas/botes", "Comprar aquí / llevar", "Recurso de seguridad con proteína."],
+      ["Vegano", "Soja texturizada", "2-3 kg", "Comprar aquí / llevar", "Proteína real para sustituciones."],
+      ["Desayuno", "Leche", "130 L", "Comprar allí / por tandas", "Producto de volumen y frío."],
+      ["Desayuno", "Mantequilla", "5 kg aprox.", "Comprar allí / por tandas", "Frío; comprar por tandas."],
+      ["Pan", "Pan barra común", "230-240 barras total aprox.", "Comprar allí / por tandas", "Comprar fresco; usar sobrante para desayunos."],
+      ["Fruta", "Fruta variada", "850-950 piezas/raciones", "Comprar allí / por tandas", "Meriendas y comidas."],
+      ["Verdura", "Guisantes", "5 kg", "Comprar allí / por tandas", "Día 10."],
+      ["Verdura", "Lechuga", "48-50 unidades", "Comprar allí / por tandas", "Ensaladas."],
+      ["Verdura", "Tomate", "32-35 kg", "Comprar allí / por tandas", "Ensaladas y pasta."],
+      ["Verdura", "Cebolla", "20-22 kg", "Comprar allí / por tandas", "Guisos, ensaladas y salsas."],
+      ["Verdura", "Calabacín", "32-35 kg", "Comprar allí / por tandas", "Cremas y guisos."],
+      ["Verdura", "Zanahoria", "10-12 kg", "Comprar allí / por tandas", "Cremas, guisos y salsa."],
+      ["Verdura", "Patata", "45-50 kg", "Comprar allí / por tandas", "Cremas, guisos, salsa y guarniciones."],
+      ["Verdura", "Pimiento verde", "4-5 kg", "Comprar allí / por tandas", "Legumbres y boloñesa."],
+      ["Verdura", "Champiñón", "6 kg", "Comprar allí / por tandas", "Carbonara y boloñesa."],
+      ["Carne", "Pechuga de pollo", "39-42 kg", "Comprar allí / por tandas", "Comprar en frío y por tandas."],
+      ["Carne", "Lomo natural", "360-380 filetes aprox.", "Comprar allí / por tandas", "Bocatas y cena día 5."],
+      ["Carne", "Salchichas Frankfurt", "115-120 unidades", "Comprar allí / por tandas", "Certificadas para celíacos."],
+      ["Carne", "Salchichas cena", "200-210 unidades", "Comprar allí / por tandas", "Revisar etiqueta."],
+      ["Carne", "Albóndigas", "520 unidades", "Comprar allí / por tandas", "Comprobar sin gluten o preparar proteína aparte."],
+      ["Carne", "Carne picada", "5,5-6 kg", "Comprar allí / por tandas", "Boloñesa."],
+      ["Carne", "Bacon", "3-3,5 kg", "Comprar allí / por tandas", "Carbonara."],
+      ["Embutido", "Pavo natural", "175-180 lonchas", "Comprar allí / por tandas", "Revisar etiqueta sin gluten."],
+      ["Embutido", "Jamón york", "55 lonchas", "Comprar allí / por tandas", "Día 2."],
+      ["Embutido", "Chorizo guisos", "225-240 trozos", "Comprar allí / por tandas", "Servir aparte si hay dietas."],
+      ["Embutido", "Chorizo Pamplona", "260 lonchas", "Comprar allí / por tandas", "Certificado para celíacos."],
+      ["Postres", "Yogures", "371 unidades aprox.", "Comprar allí / por tandas", "Frío; comprar por tandas."],
+      ["Postres", "Natillas", "159 unidades", "Comprar allí / por tandas", "Revisar sin gluten."],
+      ["Lácteos", "Queso lonchas/bocatas", "8-9 kg aprox.", "Comprar allí / por tandas", "Separar para quien no tome lácteos."],
+      ["Lácteos", "Queso rallado/en polvo", "6-7 kg aprox.", "Comprar allí / por tandas", "Servir aparte cuando convenga."],
+      ["Lácteos", "Queso crema", "6-7 tarrinas", "Comprar allí / por tandas", "Evitar cuchillo común con migas."],
+      ["Vegano", "Yogur de soja", "12-16 unidades", "Comprar allí / por tandas", "Postre alternativo."]
+    ];
+
+    const serviceLabels = {
+      breakfast: "Desayuno",
+      lunch: "Comida",
+      snack: "Merienda",
+      dinner: "Cena"
+    };
+
+    const emptyLabels = {
+      breakfast: "No hay desayuno de cocina previsto.",
+      lunch: "No hay comida de cocina prevista.",
+      snack: "No hay merienda prevista.",
+      dinner: "Sin cena prevista."
+    };
+
+    const daysGrid = document.getElementById("daysGrid");
+    const dayFilter = document.getElementById("dayFilter");
+
+    function createElement(tag, className, text) {
+      const element = document.createElement(tag);
+      if (className) element.className = className;
+      if (text) element.textContent = text;
+      return element;
+    }
+
+    function renderService(key, service) {
+      const card = createElement("article", `service-card${service ? "" : " empty"}`);
+      const head = createElement("div", "service-head");
+      head.appendChild(createElement("h4", "", serviceLabels[key]));
+      head.appendChild(createElement("span", "service-tag", service ? "Con compra" : "Sin servicio"));
+      card.appendChild(head);
+
+      const body = createElement("div", "service-body");
+      if (!service) {
+        body.appendChild(createElement("p", "dish", emptyLabels[key]));
+        card.appendChild(body);
+        return card;
+      }
+
+      body.appendChild(createElement("p", "dish", service.dish));
+      const list = createElement("ul", "ingredients");
+      service.ingredients.forEach(([name, amount]) => {
+        const item = document.createElement("li");
+        item.appendChild(createElement("b", "", name));
+        item.appendChild(createElement("span", "", amount));
+        list.appendChild(item);
+      });
+      body.appendChild(list);
+      if (service.note) body.appendChild(createElement("p", "note", service.note));
+      card.appendChild(body);
+      return card;
+    }
+
+    function renderDays() {
+      menuDays.forEach((day) => {
+        const card = createElement("article", "day-card");
+        card.dataset.day = String(day.day);
+
+        const title = createElement("div", "day-title");
+        title.appendChild(createElement("h3", "", day.label));
+        title.appendChild(createElement("span", "", "53 personas"));
+        card.appendChild(title);
+
+        const grid = createElement("div", "service-grid");
+        ["breakfast", "lunch", "snack", "dinner"].forEach((serviceKey) => {
+          grid.appendChild(renderService(serviceKey, day.services[serviceKey]));
+        });
+        card.appendChild(grid);
+        daysGrid.appendChild(card);
+      });
+    }
+
+    function renderFilter() {
+      const allButton = createElement("button", "button is-active", "Todos");
+      allButton.type = "button";
+      allButton.dataset.day = "all";
+      dayFilter.appendChild(allButton);
+
+      menuDays.forEach((day) => {
+        const button = createElement("button", "button", `Día ${day.day}`);
+        button.type = "button";
+        button.dataset.day = String(day.day);
+        dayFilter.appendChild(button);
+      });
+
+      dayFilter.addEventListener("click", (event) => {
+        const button = event.target.closest("button");
+        if (!button) return;
+        const selectedDay = button.dataset.day;
+        dayFilter.querySelectorAll("button").forEach((item) => {
+          item.classList.toggle("is-active", item === button);
+        });
+        daysGrid.querySelectorAll(".day-card").forEach((card) => {
+          card.classList.toggle("is-hidden", selectedDay !== "all" && card.dataset.day !== selectedDay);
+        });
+      });
+    }
+
+    function renderShopping(targetId, rows) {
+      const target = document.getElementById(targetId);
+      rows.forEach(([category, product, amount, place, note]) => {
+        const row = document.createElement("tr");
+        [category, product, amount].forEach((value) => row.appendChild(createElement("td", "", value)));
+
+        const placeCell = document.createElement("td");
+        const placeBadge = createElement("span", `where${place.includes("allí") ? " local" : ""}`, place);
+        placeCell.appendChild(placeBadge);
+        row.appendChild(placeCell);
+
+        row.appendChild(createElement("td", "", note));
+        target.appendChild(row);
+      });
+    }
+
+    renderDays();
+    renderFilter();
+    renderShopping("shoppingAll", shopping);
+    renderShopping("shoppingBring", shopping.filter((item) => item[3] === "Comprar aquí / llevar"));
+    renderShopping("shoppingLocal", shopping.filter((item) => item[3] === "Comprar allí / por tandas"));
+
+    document.getElementById("printButton").addEventListener("click", () => window.print());
+  </script>
+</body>
+</html>
