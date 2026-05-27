@@ -270,6 +270,44 @@
       font-weight: 800;
     }
 
+    .day-summary {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--line);
+      background: rgba(255, 253, 247, 0.84);
+    }
+
+    .summary-pill {
+      min-height: 72px;
+      padding: 10px 12px;
+      border: 1px solid rgba(139, 94, 52, 0.2);
+      border-radius: 8px;
+      background: #fffaf0;
+    }
+
+    .summary-pill.empty {
+      background: #f5ead3;
+    }
+
+    .summary-pill strong {
+      display: block;
+      margin-bottom: 5px;
+      color: var(--earth);
+      font-size: 0.72rem;
+      font-weight: 850;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .summary-pill span {
+      display: block;
+      color: var(--green-dark);
+      font-weight: 850;
+      line-height: 1.24;
+    }
+
     .service-grid {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -433,8 +471,7 @@
       gap: 14px;
     }
 
-    .safety-card,
-    .publish-card {
+    .safety-card {
       border: 1px solid var(--line);
       border-radius: 8px;
       background: rgba(255, 250, 240, 0.9);
@@ -445,20 +482,17 @@
       padding: 16px;
     }
 
-    .safety-card h3,
-    .publish-card h3 {
+    .safety-card h3 {
       margin: 0 0 10px;
       font-size: 1.1rem;
     }
 
-    .safety-card ul,
-    .publish-card ol {
+    .safety-card ul {
       margin: 0;
       padding-left: 1.15rem;
     }
 
-    .safety-card li,
-    .publish-card li {
+    .safety-card li {
       margin: 7px 0;
     }
 
@@ -466,19 +500,6 @@
       grid-column: 1 / -1;
       border-color: rgba(141, 63, 50, 0.32);
       background: #f6e3d8;
-    }
-
-    .publish-card {
-      padding: 18px;
-    }
-
-    .publish-card code {
-      display: inline-block;
-      padding: 2px 6px;
-      border-radius: 6px;
-      background: #efe1c8;
-      color: #4d321c;
-      font-size: 0.92em;
     }
 
     footer {
@@ -490,6 +511,7 @@
     @media (max-width: 900px) {
       .hero-panel,
       .service-grid,
+      .day-summary,
       .safety-grid {
         grid-template-columns: 1fr;
       }
@@ -543,6 +565,10 @@
         flex-direction: column;
       }
 
+      .day-summary {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
       .ingredients li {
         display: block;
       }
@@ -584,8 +610,7 @@
       .day-card,
       .service-card,
       .table-wrap,
-      .safety-card,
-      .publish-card {
+      .safety-card {
         border: 1px solid #bbb;
         box-shadow: none;
         break-inside: avoid;
@@ -593,6 +618,7 @@
 
       .hero-panel,
       .service-grid,
+      .day-summary,
       .safety-grid {
         display: block;
       }
@@ -613,6 +639,11 @@
 
       .service-card {
         margin: 0 0 6mm;
+      }
+
+      .summary-pill {
+        min-height: 0;
+        margin: 0 0 3mm;
       }
 
       section {
@@ -664,7 +695,6 @@
       <a href="#comprar-aqui">Comprar aquí y llevar</a>
       <a href="#comprar-alli">Comprar allí</a>
       <a href="#dietas">Dietas y seguridad</a>
-      <a href="#github">Publicación en GitHub</a>
     </div>
   </nav>
 
@@ -798,24 +828,6 @@
       </div>
     </section>
 
-    <section id="github">
-      <div class="section-head">
-        <div>
-          <h2>Publicación en GitHub</h2>
-          <p class="section-note">Sitio estático preparado para publicarse desde la raíz del repositorio.</p>
-        </div>
-      </div>
-      <article class="publish-card">
-        <h3>GitHub Pages</h3>
-        <ol>
-          <li>Subir el repositorio como <code>izaba-menua-2026</code>.</li>
-          <li>Entrar en <code>Settings</code>, después <code>Pages</code>.</li>
-          <li>Elegir <code>Deploy from a branch</code>.</li>
-          <li>Seleccionar rama <code>main</code> y carpeta <code>/root</code>.</li>
-        </ol>
-        <p>URL esperada: <a href="https://draug35.github.io/izaba-menua-2026/">https://draug35.github.io/izaba-menua-2026/</a></p>
-      </article>
-    </section>
   </main>
 
   <footer class="page">
@@ -1398,6 +1410,19 @@
       dinner: "Sin cena prevista."
     };
 
+    const daySummaries = {
+      2: { breakfast: "Sin desayuno", lunch: "Traen de casa", snack: "York + queso", dinner: "Ensalada + carbonara" },
+      3: { breakfast: "Fijo", lunch: "Frankfurt + queso", snack: "Pavo + queso", dinner: "Crema + pollo tomate" },
+      4: { breakfast: "Fijo", lunch: "Lentejas + chorizo", snack: "Chocolate", dinner: "Albóndigas + patata" },
+      5: { breakfast: "Fijo", lunch: "Garbanzos + arroz", snack: "Jamón/lomo + queso", dinner: "Pasta + lomo" },
+      6: { breakfast: "Fijo", lunch: "Alubias + chorizo", snack: "Chocolate", dinner: "Pollo queso + chips" },
+      7: { breakfast: "Fijo", lunch: "Lomo + queso", snack: "Pavo + queso", dinner: "Crema + salchichas" },
+      8: { breakfast: "Fijo", lunch: "Garbanzos + chorizo", snack: "Queso crema", dinner: "Pollo curry + arroz" },
+      9: { breakfast: "Fijo", lunch: "Lomo + queso", snack: "Pavo + queso", dinner: "Albóndigas + patata" },
+      10: { breakfast: "Fijo", lunch: "Guisantes + pollo", snack: "Chorizo Pamplona", dinner: "Pasta boloñesa" },
+      11: { breakfast: "Fijo", lunch: "Pavo + queso", snack: "Opcional fruta", dinner: "Sin cena" }
+    };
+
     const daysGrid = document.getElementById("daysGrid");
     const dayFilter = document.getElementById("dayFilter");
 
@@ -1436,6 +1461,18 @@
       return card;
     }
 
+    function renderDaySummary(day) {
+      const summary = daySummaries[day.day];
+      const wrapper = createElement("div", "day-summary");
+      ["breakfast", "lunch", "snack", "dinner"].forEach((serviceKey) => {
+        const pill = createElement("div", `summary-pill${day.services[serviceKey] ? "" : " empty"}`);
+        pill.appendChild(createElement("strong", "", serviceLabels[serviceKey]));
+        pill.appendChild(createElement("span", "", summary[serviceKey]));
+        wrapper.appendChild(pill);
+      });
+      return wrapper;
+    }
+
     function renderDays() {
       menuDays.forEach((day) => {
         const card = createElement("article", "day-card");
@@ -1445,6 +1482,7 @@
         title.appendChild(createElement("h3", "", day.label));
         title.appendChild(createElement("span", "", "53 personas"));
         card.appendChild(title);
+        card.appendChild(renderDaySummary(day));
 
         const grid = createElement("div", "service-grid");
         ["breakfast", "lunch", "snack", "dinner"].forEach((serviceKey) => {
