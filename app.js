@@ -716,6 +716,47 @@ function moveAssignment(fromDayId, fromService, toDayId, toService) {
   render();
 }
 
+function dropRecipeOnDay(targetDayId) {
+  if (!dragged) return;
+  const targetDay = state.days.find((day) => day.id === targetDayId);
+  const recipe = state.recipes[dragged.recipeId];
+  if (!targetDay || !recipe) return;
+
+  const candidateServices = serviceCandidatesForRecipe(recipe, dragged.service);
+  const emptyService = candidateServices.find((serviceKey) => !targetDay.slots[serviceKey]);
+
+  if (dragged.source === "library") {
+    if (!emptyService) {
+      setStatus("Egun horretan ez dago errezeta horrentzako leku librerik.");
+      return;
+    }
+    assignRecipe(targetDay.id, emptyService, recipe.id);
+    return;
+  }
+
+  if (targetDay.id === dragged.dayId) {
+    setStatus("Platera egun berean dago.");
+    return;
+  }
+
+  const targetService = emptyService || (SERVICE_KEYS.includes(dragged.service) ? dragged.service : candidateServices[0]);
+  if (!targetService) {
+    setStatus("Ezin izan da platera egun horretan kokatu.");
+    return;
+  }
+  moveAssignment(dragged.dayId, dragged.service, targetDay.id, targetService);
+}
+
+function serviceCandidatesForRecipe(recipe, preferredService) {
+  const candidates = [];
+  if (SERVICE_KEYS.includes(preferredService)) candidates.push(preferredService);
+  (recipe.mealTypes || []).forEach((serviceKey) => {
+    if (SERVICE_KEYS.includes(serviceKey) && !candidates.includes(serviceKey)) candidates.push(serviceKey);
+  });
+  if (!candidates.length) candidates.push(...SERVICE_KEYS);
+  return candidates;
+}
+
 function duplicateRecipe(recipeId) {
   const recipe = state.recipes[recipeId];
   if (!recipe) return;
@@ -1022,34 +1063,58 @@ document.addEventListener("dragstart", (event) => {
 
 document.addEventListener("dragover", (event) => {
   const slot = event.target.closest(".meal-slot");
-  if (!slot) return;
+  const dayCard = event.target.closest(".day-card");
+  if (!slot && !dayCard) return;
   event.preventDefault();
-  slot.classList.add("drag-over");
+  if (event.dataTransfer) event.dataTransfer.dropEffect = "move";
+  if (slot) {
+    slot.classList.add("drag-over");
+    dayCard?.classList.remove("day-drag-over");
+    return;
+  }
+  dayCard.classList.add("day-drag-over");
 });
 
 document.addEventListener("dragleave", (event) => {
   const slot = event.target.closest(".meal-slot");
-  if (slot) slot.classList.remove("drag-over");
+  const dayCard = event.target.closest(".day-card");
+  const nextTarget = event.relatedTarget;
+  if (slot && !slot.contains(nextTarget)) slot.classList.remove("drag-over");
+  if (dayCard && !dayCard.contains(nextTarget)) dayCard.classList.remove("day-drag-over");
 });
 
 document.addEventListener("drop", (event) => {
   const slot = event.target.closest(".meal-slot");
-  if (!slot || !dragged) return;
+  const dayCard = event.target.closest(".day-card");
+  if ((!slot && !dayCard) || !dragged) return;
   event.preventDefault();
-  slot.classList.remove("drag-over");
+  clearDragHighlights();
 
   if (dragged.source === "library") {
-    assignRecipe(slot.dataset.dayId, slot.dataset.service, dragged.recipeId);
+    if (slot) {
+      assignRecipe(slot.dataset.dayId, slot.dataset.service, dragged.recipeId);
+    } else {
+      dropRecipeOnDay(dayCard.dataset.dayId);
+    }
   } else {
-    moveAssignment(dragged.dayId, dragged.service, slot.dataset.dayId, slot.dataset.service);
+    if (slot) {
+      moveAssignment(dragged.dayId, dragged.service, slot.dataset.dayId, slot.dataset.service);
+    } else {
+      dropRecipeOnDay(dayCard.dataset.dayId);
+    }
   }
   dragged = null;
 });
 
 document.addEventListener("dragend", () => {
   dragged = null;
-  document.querySelectorAll(".drag-over").forEach((slot) => slot.classList.remove("drag-over"));
+  clearDragHighlights();
 });
+
+function clearDragHighlights() {
+  document.querySelectorAll(".drag-over").forEach((slot) => slot.classList.remove("drag-over"));
+  document.querySelectorAll(".day-drag-over").forEach((card) => card.classList.remove("day-drag-over"));
+}
 
 dom.recipeForm.addEventListener("submit", (event) => {
   event.preventDefault();

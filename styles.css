@@ -322,6 +322,14 @@ textarea {
   box-shadow: 0 0 0 3px rgba(36, 107, 75, 0.14);
 }
 
+.day-card.day-drag-over {
+  background: linear-gradient(180deg, #ffffff, var(--day-soft) 62%);
+  box-shadow:
+    0 0 0 3px rgba(36, 107, 75, 0.22),
+    0 18px 34px rgba(46, 58, 40, 0.16);
+  transform: translateY(-2px);
+}
+
 .day-card::before {
   position: absolute;
   inset: 0 0 auto 0;
