@@ -4,990 +4,81 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Izaba Menua 2026</title>
-  <style>
-    :root {
-      --cream: #f7f0df;
-      --paper: #fffaf0;
-      --green: #3f5f3d;
-      --green-dark: #273f2a;
-      --sage: #d9e2c6;
-      --moss: #6d7f42;
-      --earth: #8b5e34;
-      --clay: #b77149;
-      --ink: #2f2a22;
-      --muted: #6d665c;
-      --line: #dfd2bb;
-      --danger: #8d3f32;
-      --shadow: 0 16px 40px rgba(55, 43, 24, 0.12);
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      margin: 0;
-      color: var(--ink);
-      background:
-        radial-gradient(circle at top left, rgba(217, 226, 198, 0.65), transparent 32rem),
-        linear-gradient(180deg, var(--cream), #f4ead5 48%, #f9f2e4);
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      line-height: 1.5;
-    }
-
-    a {
-      color: inherit;
-    }
-
-    .page {
-      width: min(1180px, calc(100% - 32px));
-      margin: 0 auto;
-    }
-
-    .hero {
-      padding: 34px 0 18px;
-    }
-
-    .hero-panel {
-      display: grid;
-      grid-template-columns: minmax(0, 1.3fr) minmax(280px, 0.7fr);
-      gap: 22px;
-      align-items: stretch;
-      background: rgba(255, 250, 240, 0.88);
-      border: 1px solid rgba(139, 94, 52, 0.18);
-      border-radius: 8px;
-      box-shadow: var(--shadow);
-      overflow: hidden;
-    }
-
-    .hero-copy {
-      padding: 34px;
-    }
-
-    .eyebrow {
-      margin: 0 0 10px;
-      color: var(--earth);
-      font-size: 0.78rem;
-      font-weight: 800;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
-
-    h1,
-    h2,
-    h3 {
-      color: var(--green-dark);
-      line-height: 1.1;
-    }
-
-    h1 {
-      margin: 0;
-      font-size: clamp(2.35rem, 8vw, 5.2rem);
-      letter-spacing: 0;
-    }
-
-    .subtitle {
-      max-width: 760px;
-      margin: 14px 0 0;
-      color: var(--muted);
-      font-size: clamp(1.05rem, 2.5vw, 1.35rem);
-    }
-
-    .hero-side {
-      display: grid;
-      gap: 12px;
-      align-content: center;
-      padding: 24px;
-      background:
-        linear-gradient(135deg, rgba(63, 95, 61, 0.96), rgba(109, 127, 66, 0.92)),
-        repeating-linear-gradient(45deg, rgba(255,255,255,0.08) 0 2px, transparent 2px 12px);
-      color: #fff8e9;
-    }
-
-    .quick-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 10px;
-    }
-
-    .quick-item {
-      min-height: 86px;
-      padding: 15px;
-      border: 1px solid rgba(255, 248, 233, 0.25);
-      border-radius: 8px;
-      background: rgba(255, 248, 233, 0.1);
-    }
-
-    .quick-item strong {
-      display: block;
-      font-size: 1.45rem;
-      line-height: 1;
-    }
-
-    .quick-item span {
-      display: block;
-      margin-top: 8px;
-      font-size: 0.87rem;
-      color: rgba(255, 248, 233, 0.86);
-    }
-
-    .site-nav {
-      position: sticky;
-      top: 0;
-      z-index: 20;
-      margin: 0 auto 24px;
-      border-top: 1px solid rgba(139, 94, 52, 0.14);
-      border-bottom: 1px solid rgba(139, 94, 52, 0.18);
-      background: rgba(247, 240, 223, 0.94);
-      backdrop-filter: blur(12px);
-    }
-
-    .nav-inner {
-      display: flex;
-      gap: 8px;
-      align-items: center;
-      justify-content: center;
-      flex-wrap: wrap;
-      width: min(1180px, calc(100% - 24px));
-      margin: 0 auto;
-      padding: 10px 0;
-    }
-
-    .nav-inner a,
-    .button {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 42px;
-      padding: 10px 13px;
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      background: var(--paper);
-      color: var(--green-dark);
-      font: inherit;
-      font-weight: 750;
-      text-decoration: none;
-      cursor: pointer;
-      transition: transform 160ms ease, border-color 160ms ease, background 160ms ease;
-    }
-
-    .nav-inner a:hover,
-    .button:hover {
-      transform: translateY(-1px);
-      border-color: rgba(63, 95, 61, 0.55);
-      background: #fffdf7;
-    }
-
-    main {
-      padding-bottom: 54px;
-    }
-
-    section {
-      scroll-margin-top: 88px;
-      margin: 34px 0;
-    }
-
-    .section-head {
-      display: flex;
-      gap: 16px;
-      align-items: end;
-      justify-content: space-between;
-      margin-bottom: 16px;
-    }
-
-    h2 {
-      margin: 0;
-      font-size: clamp(1.7rem, 4vw, 2.45rem);
-    }
-
-    .section-note {
-      max-width: 720px;
-      margin: 8px 0 0;
-      color: var(--muted);
-    }
-
-    .day-filter {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-      padding: 12px;
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      background: rgba(255, 250, 240, 0.82);
-    }
-
-    .button.is-active {
-      border-color: var(--green);
-      background: var(--green);
-      color: #fff8e9;
-    }
-
-    .button.print {
-      border-color: rgba(139, 94, 52, 0.36);
-      background: #efe0c1;
-      color: #4d321c;
-    }
-
-    .kitchen-board {
-      display: grid;
-      grid-template-columns: 1.15fr repeat(2, minmax(0, 0.9fr));
-      gap: 12px;
-      margin: 14px 0 18px;
-      padding: 14px;
-      border: 1px solid rgba(63, 95, 61, 0.24);
-      border-radius: 8px;
-      background: linear-gradient(135deg, rgba(63, 95, 61, 0.96), rgba(109, 127, 66, 0.93));
-      box-shadow: 0 12px 28px rgba(55, 43, 24, 0.12);
-      color: #fff8e9;
-    }
-
-    .kitchen-panel {
-      padding: 14px;
-      border: 1px solid rgba(255, 248, 233, 0.22);
-      border-radius: 8px;
-      background: rgba(255, 248, 233, 0.1);
-    }
-
-    .kitchen-panel.wide {
-      grid-column: 1 / -1;
-    }
-
-    .kitchen-label {
-      display: block;
-      margin-bottom: 7px;
-      color: rgba(255, 248, 233, 0.75);
-      font-size: 0.73rem;
-      font-weight: 850;
-      letter-spacing: 0.07em;
-      text-transform: uppercase;
-    }
-
-    .kitchen-main {
-      display: grid;
-      gap: 8px;
-      margin: 0;
-      font-size: clamp(1.2rem, 3vw, 1.75rem);
-      font-weight: 900;
-      line-height: 1.15;
-    }
-
-    .kitchen-line {
-      display: block;
-    }
-
-    .kitchen-panel p {
-      margin: 0;
-      font-weight: 750;
-      line-height: 1.35;
-    }
-
-    .kitchen-chips,
-    .service-alerts {
-      display: flex;
-      gap: 7px;
-      flex-wrap: wrap;
-      margin-top: 10px;
-    }
-
-    .kitchen-chip,
-    .service-alert {
-      display: inline-flex;
-      align-items: center;
-      min-height: 28px;
-      padding: 5px 8px;
-      border-radius: 999px;
-      font-size: 0.78rem;
-      font-weight: 850;
-      line-height: 1;
-      white-space: nowrap;
-    }
-
-    .kitchen-chip {
-      border: 1px solid rgba(255, 248, 233, 0.22);
-      background: rgba(255, 248, 233, 0.16);
-      color: #fff8e9;
-    }
-
-    .days-grid {
-      display: grid;
-      gap: 18px;
-      margin-top: 18px;
-    }
-
-    .day-card {
-      border: 1px solid rgba(139, 94, 52, 0.18);
-      border-radius: 8px;
-      background: rgba(255, 250, 240, 0.9);
-      box-shadow: 0 10px 26px rgba(55, 43, 24, 0.08);
-      overflow: hidden;
-    }
-
-    .day-card.is-hidden {
-      display: none;
-    }
-
-    .day-title {
-      display: flex;
-      gap: 12px;
-      align-items: center;
-      justify-content: space-between;
-      padding: 18px 20px;
-      background: linear-gradient(90deg, rgba(217, 226, 198, 0.88), rgba(255, 250, 240, 0.92));
-      border-bottom: 1px solid var(--line);
-    }
-
-    .day-title h3 {
-      margin: 0;
-      font-size: 1.35rem;
-    }
-
-    .day-title span {
-      color: var(--earth);
-      font-weight: 800;
-    }
-
-    .day-summary {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 10px;
-      padding: 12px 16px;
-      border-bottom: 1px solid var(--line);
-      background: rgba(255, 253, 247, 0.84);
-    }
-
-    .summary-pill {
-      min-height: 72px;
-      padding: 10px 12px;
-      border: 1px solid rgba(139, 94, 52, 0.2);
-      border-radius: 8px;
-      background: #fffaf0;
-    }
-
-    .summary-pill.empty {
-      background: #f5ead3;
-    }
-
-    .summary-pill strong {
-      display: block;
-      margin-bottom: 5px;
-      color: var(--earth);
-      font-size: 0.72rem;
-      font-weight: 850;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-    }
-
-    .summary-pill span {
-      display: block;
-      color: var(--green-dark);
-      font-weight: 850;
-      line-height: 1.24;
-    }
-
-    .service-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 14px;
-      padding: 16px;
-    }
-
-    .service-card {
-      display: flex;
-      flex-direction: column;
-      min-height: 100%;
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      background: #fffdf7;
-      overflow: hidden;
-    }
-
-    .service-card.empty {
-      background: #f5ead3;
-      color: var(--muted);
-    }
-
-    .service-head {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 8px;
-      padding: 12px 14px;
-      border-bottom: 1px solid var(--line);
-      background: rgba(217, 226, 198, 0.45);
-    }
-
-    .service-head h4 {
-      margin: 0;
-      color: var(--green-dark);
-      font-size: 1rem;
-    }
-
-    .service-tag {
-      padding: 4px 8px;
-      border-radius: 999px;
-      background: #f1dfbd;
-      color: #61401f;
-      font-size: 0.78rem;
-      font-weight: 800;
-      white-space: nowrap;
-    }
-
-    .service-body {
-      padding: 14px;
-    }
-
-    .dish {
-      margin: 0 0 12px;
-      font-weight: 800;
-      color: var(--green-dark);
-    }
-
-    .service-alert {
-      background: #efe1c8;
-      color: #5a3a1f;
-    }
-
-    .service-detail {
-      margin-top: 12px;
-      border-top: 1px solid var(--line);
-    }
-
-    .service-detail summary {
-      min-height: 42px;
-      padding: 11px 0 0;
-      color: var(--earth);
-      font-weight: 850;
-      cursor: pointer;
-    }
-
-    .service-detail[open] summary {
-      margin-bottom: 8px;
-    }
-
-    .ingredients {
-      display: grid;
-      gap: 6px;
-      margin: 0;
-      padding: 0;
-      list-style: none;
-    }
-
-    .ingredients li {
-      display: flex;
-      gap: 8px;
-      align-items: baseline;
-      justify-content: space-between;
-      padding: 7px 0;
-      border-bottom: 1px dashed rgba(139, 94, 52, 0.22);
-    }
-
-    .ingredients li:last-child {
-      border-bottom: 0;
-    }
-
-    .ingredients b {
-      color: #3b3329;
-      font-weight: 760;
-    }
-
-    .ingredients span {
-      color: var(--muted);
-      text-align: right;
-    }
-
-    .note {
-      margin: 12px 0 0;
-      padding: 10px 12px;
-      border-left: 4px solid var(--clay);
-      border-radius: 4px;
-      background: #f6ead2;
-      color: #563822;
-      font-size: 0.94rem;
-    }
-
-    .shopping-explainer {
-      display: grid;
-      grid-template-columns: 0.9fr 1.1fr;
-      gap: 12px;
-      margin-bottom: 14px;
-    }
-
-    .shopping-explainer article,
-    .shopping-card,
-    .shopping-detail {
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      background: rgba(255, 250, 240, 0.92);
-      box-shadow: 0 8px 22px rgba(55, 43, 24, 0.06);
-    }
-
-    .shopping-explainer article {
-      padding: 15px;
-    }
-
-    .shopping-explainer strong,
-    .shopping-card strong {
-      display: block;
-      margin-bottom: 6px;
-      color: var(--earth);
-      font-size: 0.75rem;
-      font-weight: 900;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-    }
-
-    .shopping-explainer p,
-    .shopping-card p {
-      margin: 0;
-      color: var(--green-dark);
-      font-weight: 760;
-      line-height: 1.35;
-    }
-
-    .shopping-map {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 14px;
-      margin-bottom: 16px;
-    }
-
-    .shopping-card {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      padding: 16px;
-    }
-
-    .shopping-card h3 {
-      margin: 0;
-      color: var(--green-dark);
-      font-size: 1.18rem;
-    }
-
-    .shopping-card ul {
-      display: grid;
-      gap: 7px;
-      margin: 0;
-      padding: 0;
-      list-style: none;
-    }
-
-    .shopping-card li {
-      padding-left: 14px;
-      position: relative;
-    }
-
-    .shopping-card li::before {
-      content: "";
-      position: absolute;
-      top: 0.63em;
-      left: 0;
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: var(--clay);
-    }
-
-    .shopping-card .where {
-      align-self: start;
-    }
-
-    .shopping-detail {
-      margin-top: 8px;
-      overflow: hidden;
-    }
-
-    .shopping-detail summary {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      min-height: 52px;
-      padding: 14px 16px;
-      color: var(--green-dark);
-      font-weight: 900;
-      cursor: pointer;
-    }
-
-    .shopping-detail summary span {
-      color: var(--muted);
-      font-size: 0.9rem;
-      font-weight: 700;
-    }
-
-    .shopping-detail .table-wrap {
-      border-right: 0;
-      border-bottom: 0;
-      border-left: 0;
-      border-radius: 0;
-      box-shadow: none;
-    }
-
-    .table-wrap {
-      overflow-x: auto;
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      background: var(--paper);
-      box-shadow: 0 8px 22px rgba(55, 43, 24, 0.06);
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      min-width: 760px;
-      font-size: 0.96rem;
-    }
-
-    th,
-    td {
-      padding: 11px 12px;
-      border-bottom: 1px solid var(--line);
-      text-align: left;
-      vertical-align: top;
-    }
-
-    th {
-      position: sticky;
-      top: 0;
-      z-index: 1;
-      background: var(--green);
-      color: #fff8e9;
-      font-size: 0.82rem;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-    }
-
-    tbody tr:nth-child(even) {
-      background: #fbf3e3;
-    }
-
-    tbody tr:hover {
-      background: #f3e4c9;
-    }
-
-    .where {
-      display: inline-flex;
-      padding: 4px 8px;
-      border-radius: 999px;
-      background: var(--sage);
-      color: var(--green-dark);
-      font-size: 0.82rem;
-      font-weight: 800;
-      white-space: nowrap;
-    }
-
-    .where.local {
-      background: #ead5b1;
-      color: #62411e;
-    }
-
-    .safety-grid {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 14px;
-    }
-
-    .safety-card {
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      background: rgba(255, 250, 240, 0.9);
-      box-shadow: 0 8px 22px rgba(55, 43, 24, 0.06);
-    }
-
-    .safety-card {
-      padding: 16px;
-    }
-
-    .safety-card h3 {
-      margin: 0 0 10px;
-      font-size: 1.1rem;
-    }
-
-    .safety-card ul {
-      margin: 0;
-      padding-left: 1.15rem;
-    }
-
-    .safety-card li {
-      margin: 7px 0;
-    }
-
-    .rule-card {
-      grid-column: 1 / -1;
-      border-color: rgba(141, 63, 50, 0.32);
-      background: #f6e3d8;
-    }
-
-    footer {
-      padding: 24px 0 36px;
-      color: var(--muted);
-      text-align: center;
-    }
-
-    @media (max-width: 900px) {
-      .hero-panel,
-      .kitchen-board,
-      .service-grid,
-      .day-summary,
-      .shopping-explainer,
-      .shopping-map,
-      .safety-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .hero-copy {
-        padding: 26px;
-      }
-
-      .section-head {
-        align-items: start;
-        flex-direction: column;
-      }
-    }
-
-    @media (max-width: 640px) {
-      .page {
-        width: min(100% - 20px, 1180px);
-      }
-
-      .hero {
-        padding-top: 12px;
-      }
-
-      .hero-copy,
-      .hero-side {
-        padding: 20px;
-      }
-
-      .quick-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .nav-inner {
-        justify-content: start;
-        overflow-x: auto;
-        flex-wrap: nowrap;
-      }
-
-      .nav-inner a,
-      .button {
-        white-space: nowrap;
-      }
-
-      .day-filter {
-        overflow-x: auto;
-        flex-wrap: nowrap;
-      }
-
-      .kitchen-board {
-        margin-top: 12px;
-        padding: 10px;
-      }
-
-      .day-title {
-        align-items: start;
-        flex-direction: column;
-      }
-
-      .day-summary {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-
-      .ingredients li {
-        display: block;
-      }
-
-      .ingredients span {
-        display: block;
-        margin-top: 2px;
-        text-align: left;
-      }
-    }
-
-    @media print {
-      @page {
-        margin: 14mm;
-      }
-
-      body {
-        background: #fff;
-        color: #000;
-        font-size: 11pt;
-      }
-
-      .page {
-        width: 100%;
-      }
-
-      .site-nav,
-      .day-filter,
-      .button,
-      footer {
-        display: none !important;
-      }
-
-      .hero {
-        padding: 0 0 10mm;
-      }
-
-      .hero-panel,
-      .day-card,
-      .service-card,
-      .shopping-card,
-      .shopping-detail,
-      .table-wrap,
-      .safety-card {
-        border: 1px solid #bbb;
-        box-shadow: none;
-        break-inside: avoid;
-      }
-
-      .hero-panel,
-      .kitchen-board,
-      .service-grid,
-      .day-summary,
-      .safety-grid {
-        display: block;
-      }
-
-      .kitchen-board {
-        color: #000;
-        background: #fff;
-        box-shadow: none;
-      }
-
-      .kitchen-panel {
-        margin: 0 0 3mm;
-        border: 1px solid #bbb;
-        background: #fff;
-      }
-
-      .kitchen-label,
-      .kitchen-chip {
-        color: #000;
-      }
-
-      .hero-side {
-        color: #000;
-        background: #fff;
-      }
-
-      .quick-grid {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-      }
-
-      .service-card {
-        margin: 0 0 6mm;
-      }
-
-      .summary-pill {
-        min-height: 0;
-        margin: 0 0 3mm;
-      }
-
-      section {
-        margin: 8mm 0;
-        scroll-margin-top: 0;
-      }
-
-      table {
-        min-width: 0;
-        font-size: 9.5pt;
-      }
-
-      th {
-        position: static;
-        color: #000;
-        background: #e8e8e8;
-      }
-
-      a {
-        text-decoration: none;
-      }
-
-      .service-detail {
-        border-top: 0;
-      }
-
-      .service-detail summary {
-        display: none;
-      }
-
-      .shopping-detail summary {
-        display: none;
-      }
-    }
-  </style>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <header class="hero page">
-    <div class="hero-panel">
-      <div class="hero-copy">
-        <p class="eyebrow">Udalekuko sukaldea</p>
+  <header class="app-header">
+    <div class="page header-grid">
+      <div>
+        <p class="eyebrow">Udalekuko menu-planifikatzailea</p>
         <h1>Izaba Menua 2026</h1>
-        <p class="subtitle">53 lagunentzako menu osoa · 2tik 11ra · Udalekuko sukaldea</p>
+        <p class="subtitle">Egunak antolatu, errezetak mugitu eta kantitateak automatikoki kalkulatu.</p>
       </div>
-      <aside class="hero-side" aria-label="Laburpen azkarra">
-        <div class="quick-grid">
-          <div class="quick-item"><strong>53</strong><span>lagun</span></div>
-          <div class="quick-item"><strong>2-11</strong><span>menu egunak</span></div>
-          <div class="quick-item"><strong>Menuak</strong><span>egunez egun</span></div>
-          <div class="quick-item"><strong>Erosketa</strong><span>zerrenda orokorra</span></div>
-          <div class="quick-item"><strong>Hemen/han</strong><span>erosketa bereizia</span></div>
-        </div>
-      </aside>
+      <div class="header-actions" aria-label="Datuen ekintzak">
+        <button class="button primary" type="button" id="saveButton">Gorde</button>
+        <button class="button" type="button" id="exportButton">JSON esportatu</button>
+        <button class="button" type="button" id="importButton">JSON inportatu</button>
+        <button class="button danger" type="button" id="resetButton">Berrezarri</button>
+        <input class="visually-hidden" type="file" id="importFile" accept="application/json,.json">
+      </div>
     </div>
   </header>
 
-  <nav class="site-nav" aria-label="Nabigazio nagusia">
-    <div class="nav-inner">
-      <a href="#menus">Eguneko menuak</a>
-      <a href="#lista-total">Erosketa blokeka</a>
-      <a href="#comprar-aqui">Hemen erosi eta eraman</a>
-      <a href="#comprar-alli">Han erosi</a>
-      <a href="#dietas">Dietak eta segurtasuna</a>
+  <nav class="top-nav" aria-label="Nabigazio nagusia">
+    <div class="page nav-inner">
+      <a href="#egutegia">Egutegia</a>
+      <a href="#eguneko-beharrak">Eguneko beharrak</a>
+      <a href="#guztira">Guztira</a>
+      <a href="#errezetak">Errezetak</a>
     </div>
   </nav>
 
-  <main class="page">
-    <section id="menus">
-      <div class="section-head">
-        <div>
-          <h2>Eguneko menuak</h2>
-          <p class="section-note">Aukeratu eguna eta erabili sukaldeko partea azkar kokatzeko; ireki kantitateak prestatzeko edo erosteko unean bakarrik.</p>
-        </div>
-        <button class="button print" type="button" id="printButton">Inprimatu ikuspegia</button>
-      </div>
-      <div class="day-filter" id="dayFilter" aria-label="Egunaren araberako iragazkia"></div>
-      <div class="kitchen-board" id="kitchenBoard" aria-live="polite"></div>
-      <div class="days-grid" id="daysGrid"></div>
+  <main class="page app-layout">
+    <section class="control-panel" aria-label="Planaren kontrolak">
+      <label>
+        Hasiera
+        <input type="date" id="startDateInput">
+      </label>
+      <label>
+        Amaiera
+        <input type="date" id="endDateInput">
+      </label>
+      <label>
+        Lagun kopurua
+        <input type="number" id="peopleInput" min="1" step="1">
+      </label>
+      <div class="status-box" id="statusBox" role="status" aria-live="polite">Prest.</div>
     </section>
 
-    <section id="lista-total">
+    <section class="workspace" id="egutegia">
       <div class="section-head">
         <div>
-          <h2>Erosketa blokeka</h2>
-          <p class="section-note">Erosketa osoa antolatzeko dago pentsatuta, ez kolpe batean irakurtzeko.</p>
+          <h2>Egutegia</h2>
+          <p>Arrastatu errezetak egun eta zerbitzu artean. Mugikorrean, erabili txartel bakoitzeko “Mugitu” kontrola.</p>
         </div>
+        <button class="button print-button" type="button" id="printButton">Inprimatu</button>
       </div>
-      <div class="shopping-explainer">
-        <article>
-          <strong>Zer esan nahi du</strong>
-          <p>Kantitate hauek udaleku osorako dira, 2tik 11ra. Ez dira egun bakarreko kantitateak.</p>
-        </article>
-        <article>
-          <strong>Nola erabili</strong>
-          <p>Gaur sukaldatzeko, erabili eguneko partea. Erosketa antolatzeko, hasi bloke hauetatik eta ireki taula produktuz produktu berrikusteko bakarrik.</p>
-        </article>
-      </div>
-      <div class="shopping-map" id="shoppingMap"></div>
-      <details class="shopping-detail">
-        <summary>Ikusi zerrenda nagusi osoa <span id="shoppingTotalCount">udaleku osoko guztira</span></summary>
+      <div class="calendar-grid" id="calendarGrid" aria-live="polite"></div>
+    </section>
+
+    <aside class="side-panel">
+      <section class="panel-card" id="selectedDayPanel">
+        <div class="section-head compact">
+          <div>
+            <h2 id="selectedDayTitle">Eguna</h2>
+            <p id="selectedDayMeta">Aukeratu egutegiko egun bat.</p>
+          </div>
+        </div>
+        <div id="selectedDayMeals"></div>
+      </section>
+
+      <section class="panel-card" id="eguneko-beharrak">
+        <div class="section-head compact">
+          <div>
+            <h2>Eguneko beharrak</h2>
+            <p id="dayNeedsMeta">Aukeratutako egunaren arabera.</p>
+          </div>
+        </div>
         <div class="table-wrap">
           <table>
             <thead>
@@ -995,21 +86,20 @@
                 <th>Kategoria</th>
                 <th>Produktua</th>
                 <th>Kantitatea</th>
-                <th>Non erosi</th>
-                <th>Oharra</th>
+                <th>Non</th>
               </tr>
             </thead>
-            <tbody id="shoppingAll"></tbody>
+            <tbody id="dayNeedsBody"></tbody>
           </table>
         </div>
-      </details>
-    </section>
+      </section>
+    </aside>
 
-    <section id="comprar-aqui">
+    <section class="wide-section" id="guztira">
       <div class="section-head">
         <div>
-          <h2>Hemen erosi eta eraman</h2>
-          <p class="section-note">Lehorrak, produktu bereziak, ziurtatuak eta inprobisatzea komeni ez den baliabideak.</p>
+          <h2>Guztizko beharrak</h2>
+          <p>Datak eta lagun kopurua kontuan hartuta kalkulatutako erosketa osoa.</p>
         </div>
       </div>
       <div class="table-wrap">
@@ -1019,1000 +109,133 @@
               <th>Kategoria</th>
               <th>Produktua</th>
               <th>Kantitatea</th>
-              <th>Non erosi</th>
+              <th>Non</th>
               <th>Oharra</th>
             </tr>
           </thead>
-          <tbody id="shoppingBring"></tbody>
+          <tbody id="totalNeedsBody"></tbody>
         </table>
       </div>
     </section>
 
-    <section id="comprar-alli">
+    <section class="wide-section recipe-section" id="errezetak">
       <div class="section-head">
         <div>
-          <h2>Han erosi / txandaka</h2>
-          <p class="section-note">Freskoak, hotzekoak, ogia, fruta, barazkiak eta haragia. Udaleku osoko guztirakoak dira: erosi txandaka, ez dena lehen egunean.</p>
+          <h2>Errezeta-liburutegia</h2>
+          <p>Bilatu, sortu, bikoiztu edo editatu platerak. Liburutegiko errezetak egutegira arrasta daitezke.</p>
         </div>
+        <button class="button primary" type="button" id="newRecipeButton">Errezeta berria</button>
       </div>
-      <div class="table-wrap">
-        <table>
-          <thead>
-            <tr>
-              <th>Kategoria</th>
-              <th>Produktua</th>
-              <th>Kantitatea</th>
-              <th>Non erosi</th>
-              <th>Oharra</th>
-            </tr>
-          </thead>
-          <tbody id="shoppingLocal"></tbody>
-        </table>
+      <div class="recipe-tools">
+        <label>
+          Bilatu
+          <input type="search" id="recipeSearchInput" placeholder="Pasta, fruitu lehorrak, beganoa...">
+        </label>
       </div>
+      <div class="recipe-grid" id="recipeGrid"></div>
     </section>
-
-    <section id="dietas">
-      <div class="section-head">
-        <div>
-          <h2>Dietak eta segurtasuna</h2>
-          <p class="section-note">Kutsadura gurutzatua saihesteko eta menu bereziak benetako janariarekin konpontzeko arau laburrak.</p>
-        </div>
-      </div>
-      <div class="safety-grid">
-        <article class="safety-card">
-          <h3>Glutenik gabe</h3>
-          <ul>
-            <li>Gorde glutenik gabeko produktuak kutxa itxi batean.</li>
-            <li>Egosi glutenik gabeko pasta pasta arrunta baino lehen.</li>
-            <li>Zerbitzatu lehenik zeliakoei eta alergikoei.</li>
-            <li>Berrikusi saldak, hestebeteak, saltxitxak, albondigak, saltsak, kakaoa, txokolatea eta postreak.</li>
-          </ul>
-        </article>
-        <article class="safety-card">
-          <h3>Fruitu lehorrak</h3>
-          <ul>
-            <li>Prestatu anoa bereziak fruitu lehorrak atera aurretik.</li>
-            <li>Gorde fruitu lehorrak eta kakahueteak ogietatik eta postreetatik urrun.</li>
-            <li>Begiratu txokolatean eta gailetetan arrastoak egon daitezkeen.</li>
-          </ul>
-        </article>
-        <article class="safety-card">
-          <h3>Beganoa</h3>
-          <ul>
-            <li>Ez da nahikoa haragia kentzea: benetako proteina egon behar da.</li>
-            <li>Izan hummusa, pate begetala, garbantzu gehigarriak eta soja testurizatua.</li>
-            <li>Bereizi gazta eta esneki-saltsak behar denean.</li>
-          </ul>
-        </article>
-        <article class="safety-card">
-          <h3>Tresnak</h3>
-          <ul>
-            <li>Erabili tresna garbiak dieta berezietarako.</li>
-            <li>Prestatu lehenik glutenik gabekoa eta fruitu lehorrik gabekoa.</li>
-            <li>Etiketatu anoa bereziak zerbitzatu aurretik.</li>
-          </ul>
-        </article>
-        <article class="safety-card rule-card">
-          <h3>Sukaldeko araua</h3>
-          <p>Lehenik anoa bereziak prestatu eta aparte gordetzen dira; gero irekitzen da zerbitzu orokorra. Etiketarekin zalantza badago, produktu hori ez da anoa berezian sartzen.</p>
-        </article>
-      </div>
-    </section>
-
   </main>
 
-  <footer class="page">
-    Izaba Menua 2026 · Benetako sukalderako udaleku-menua
-  </footer>
+  <dialog class="recipe-dialog" id="recipeDialog">
+    <form method="dialog" class="dialog-content" id="recipeForm">
+      <div class="dialog-head">
+        <div>
+          <p class="eyebrow">Errezeta editorea</p>
+          <h2 id="dialogTitle">Errezeta</h2>
+        </div>
+        <button class="icon-button" type="button" id="closeDialogButton" aria-label="Itxi">×</button>
+      </div>
 
-  <script>
-    const breakfast = {
-      dish: "Gosari finkoa",
-      ingredients: [
-        ["Ogia", "arrunta edo aurreko eguneko soberakina"],
-        ["Gurina", "guztira 5 kg gutxi gorabehera"],
-        ["Marmelada", "guztira 10 pote"],
-        ["Maria motako gailetak", "10-12 pakete handi"],
-        ["Esnea", "guztira 130 L"],
-        ["Olo/soja edaria", "6-8 L"],
-        ["Kakao disolbagarria", "4-5 kg"],
-        ["Glutenik gabe", "3-4 gaileta-pakete eta 4-5 ogi-pakete"]
-      ],
-      note: "3tik 11ra. Gorde glutenik gabeko materiala bereizita eta itxita."
-    };
+      <input type="hidden" id="recipeIdInput">
+      <div class="form-grid">
+        <label>
+          Izena
+          <input type="text" id="recipeTitleInput" required>
+        </label>
+        <label>
+          Oinarri-lagunak
+          <input type="number" id="recipeBasePeopleInput" min="1" step="1" required>
+        </label>
+        <label class="wide">
+          Etiketak
+          <input type="text" id="recipeTagsInput" placeholder="beganoa, glutenik gabe, hotzekoa">
+        </label>
+      </div>
 
-    const menuDays = [
-      {
-        day: 2,
-        label: "2. eguna",
-        services: {
-          breakfast: null,
-          lunch: {
-            dish: "Parte-hartzaile bakoitzak etxeko bazkaria dakar.",
-            ingredients: [["Sukaldeko erosketarik ez", "—"]],
-            note: "Alergiak badaude, saihestu janaria trukatzea."
-          },
-          snack: {
-            dish: "York urdaiazpiko eta gazta sandwicha + fruta + fruitu lehorrak.",
-            ingredients: [
-              ["Moldeko ogia", "7 pakete"],
-              ["York urdaiazpiko naturala", "55 xerra"],
-              ["Gazta xerratan", "55 xerra"],
-              ["Fruta", "53 pieza"],
-              ["Fruitu lehorrak / kakahueteak", "1,1-1,3 kg"],
-              ["Glutenik gabeko ogia", "pakete 1"],
-              ["Glutenik gabeko yorka", "4-6 xerra"],
-              ["Glutenik gabeko gazta", "4-6 xerra"]
-            ],
-            note: "Prestatu lehenik fruitu lehorrik gabeko eta glutenik gabeko anoak."
-          },
-          dinner: {
-            dish: "Entsalada + pasta karbonara + jogurta.",
-            ingredients: [
-              ["Letxuga", "13 unitate"],
-              ["Tomate", "6 kg"],
-              ["Tipula", "2 kg"],
-              ["Olibak", "2 lata handi"],
-              ["Pasta", "7 kg"],
-              ["Glutenik gabeko pasta", "500-750 g"],
-              ["Bacon", "3-3,5 kg"],
-              ["Txanpinoiak", "3 kg"],
-              ["Saltsarako tipula", "1,5 kg"],
-              ["Esnegaina/esne lurrundua edo antzekoa", "5-6 L"],
-              ["Gazta birrindua/hautsean", "1,5-2 kg"],
-              ["Jogurtak", "53 unitate"],
-              ["Ogia", "15 barra"]
-            ],
-            note: "Egosi glutenik gabeko pasta lehenik, lapiko eta iragazki garbiekin."
-          }
-        }
-      },
-      {
-        day: 3,
-        label: "3. eguna",
-        services: {
-          breakfast,
-          lunch: {
-            dish: "Frankfurt saltxitxa eta gazta bokata + txokolatea + fruta.",
-            ingredients: [
-              ["Ogia", "25 barra"],
-              ["Glutenik gabeko ogia", "2-3 barra/pakete"],
-              ["Frankfurt saltxitxak", "115-120 unitate"],
-              ["Gazta", "2 kg"],
-              ["Txokolatea", "16 tableta"],
-              ["Fruta", "53 pieza"]
-            ],
-            note: "Erabili zeliakoentzat ziurtatutako saltxitxa."
-          },
-          snack: {
-            dish: "Indioilar eta gazta sandwicha + fruta + fruitu lehorrak.",
-            ingredients: [
-              ["Moldeko ogia", "7 pakete"],
-              ["Indioilar naturala", "55 xerra"],
-              ["Gazta", "55 xerra"],
-              ["Fruta", "53 pieza"],
-              ["Fruitu lehorrak / kakahueteak", "1,1-1,3 kg"],
-              ["Glutenik gabeko ogia", "pakete 1"],
-              ["Glutenik gabeko indioilarra", "4-6 xerra"]
-            ],
-            note: "Anoa bereziak itxita utzi fruitu lehorrak atera aurretik."
-          },
-          dinner: {
-            dish: "Kalabazin-krema + oilasko-bularkiak tomatean patata frijituekin + natillak.",
-            ingredients: [
-              ["Kalabazina", "11 kg"],
-              ["Kremarako patata", "4 kg"],
-              ["Tipula", "1,5 kg"],
-              ["Barazki-salda", "5 L"],
-              ["Ura", "5 L"],
-              ["Oilasko-bularkia", "10-11 kg"],
-              ["Tomate frijitua", "2,5-3 kg"],
-              ["Patata frijituak", "10 poltsa handi"],
-              ["Natillak", "53 unitate"],
-              ["Ogia", "15 barra"]
-            ],
-            note: "Berrikusi salda eta tomatea glutenik gabekoentzat."
-          }
-        }
-      },
-      {
-        day: 4,
-        label: "4. eguna",
-        services: {
-          breakfast,
-          lunch: {
-            dish: "Dilistak barazkiekin eta txorizoarekin + fruta.",
-            ingredients: [
-              ["Dilistak egosita", "17-18 kg"],
-              ["Piper berdea", "1,2 kg"],
-              ["Azenarioa", "1,5-2 kg"],
-              ["Tomate/tipula/porru sofritoa", "2 kg gutxi gorabehera"],
-              ["Baratxuria", "2 buru"],
-              ["Txorizoa", "75-80 zati"],
-              ["Barazki-salda", "2 L"],
-              ["Ardo zuria", "botila 1"],
-              ["Fruta", "53 pieza"],
-              ["Ogia", "15 barra"]
-            ],
-            note: "Hobe txorizoa aparte: beganoa eta glutenik gabekoa errazten ditu."
-          },
-          snack: {
-            dish: "Txokolate sandwicha + fruta + fruitu lehorrak.",
-            ingredients: [
-              ["Moldeko ogia", "7 pakete"],
-              ["Txokolatea", "16 tableta"],
-              ["Fruta", "53 pieza"],
-              ["Fruitu lehorrak / kakahueteak", "1,1-1,3 kg"],
-              ["Glutenik gabeko ogia", "pakete 1"],
-              ["Glutenik gabeko txokolatea", "2 tableta"]
-            ],
-            note: "Begiratu txokolatean fruitu lehorren arrastoak egon daitezkeen."
-          },
-          dinner: {
-            dish: "Entsalada + albondigak saltsa espainiarrean patatekin + jogurta.",
-            ingredients: [
-              ["Letxuga", "11 unitate"],
-              ["Tomate", "6 kg"],
-              ["Entsaladarako tipula", "3 kg"],
-              ["Atuna", "8 lata ertain"],
-              ["Albondigak", "260 unitate"],
-              ["Patata naturala", "6-6,5 kg"],
-              ["Tomate/tipula/porru sofritoa", "2 kg"],
-              ["Barazki-salda", "2 L"],
-              ["Ardo zuria", "botila 1"],
-              ["Maizena", "pakete 1"],
-              ["Azenarioa", "1,5 kg"],
-              ["Jogurtak", "53 unitate"],
-              ["Ogia", "15 barra"]
-            ],
-            note: "Zeliakoentzat: egiaztatu albondigak edo prestatu proteina aparte."
-          }
-        }
-      },
-      {
-        day: 5,
-        label: "5. eguna",
-        services: {
-          breakfast,
-          lunch: {
-            dish: "Garbantzu espeziatuak barazkiekin + arroza + fruta.",
-            ingredients: [
-              ["Garbantzuak egosita", "17-18 kg"],
-              ["Arroza", "3,5 kg"],
-              ["Tipula", "2 kg"],
-              ["Azenarioa", "1,5-2 kg"],
-              ["Baratxuria", "2 buru"],
-              ["Tomate kontzentratua", "500 g"],
-              ["Koko-esnea", "4 L"],
-              ["Curry/kuminoa/kurkuma", "behar adina"],
-              ["Fruta", "53 pieza"],
-              ["Ogia", "15 barra"]
-            ],
-            note: "Oinarrizko plater oso egokia denentzat."
-          },
-          snack: {
-            dish: "Urdaiazpiko/solomo eta gazta sandwicha + fruta + fruitu lehorrak.",
-            ingredients: [
-              ["Moldeko ogia", "7 pakete"],
-              ["Urdaiazpiko ondua/solomo naturala", "55-60 xerra"],
-              ["Gazta", "55 xerra"],
-              ["Fruta", "53 pieza"],
-              ["Fruitu lehorrak / kakahueteak", "1,1-1,3 kg"],
-              ["Glutenik gabeko ogia", "pakete 1"],
-              ["Glutenik gabeko hestebetea", "4-6 xerra"]
-            ],
-            note: "Prestatu glutenik gabekoa labana garbiarekin."
-          },
-          dinner: {
-            dish: "Pasta-entsalada + solomoa piper-saltsan + jogurta.",
-            ingredients: [
-              ["Pasta", "4-4,5 kg"],
-              ["Glutenik gabeko pasta", "500 g"],
-              ["Atuna", "8 lata ertain"],
-              ["Tomate", "2,5-3 kg"],
-              ["Artoa", "2,5 kg"],
-              ["Tipula morea", "800 g-1 kg"],
-              ["Olibak", "2 lata handi"],
-              ["Solomoa", "150-160 xerra"],
-              ["Piperrak latan", "2 kg"],
-              ["Sofrito", "2 kg"],
-              ["Jogurtak", "53 unitate"],
-              ["Ogia", "15 barra"]
-            ],
-            note: "Bereizi glutenik gabeko pasta nahasi aurretik."
-          }
-        }
-      },
-      {
-        day: 6,
-        label: "6. eguna",
-        services: {
-          breakfast,
-          lunch: {
-            dish: "Babarrun zuriak barazkiekin eta txorizoarekin + fruta.",
-            ingredients: [
-              ["Babarrun zuriak egosita", "17-18 kg"],
-              ["Piper berdea", "1,2 kg"],
-              ["Tomate/tipula/porru sofritoa", "2 kg"],
-              ["Azenarioa", "1,5 kg"],
-              ["Kalabazina", "1,5-2 kg"],
-              ["Patata", "4 kg"],
-              ["Txorizoa", "75-80 zati"],
-              ["Ardo zuria", "botila 1"],
-              ["Fruta", "53 pieza"],
-              ["Ogia", "15 barra"]
-            ],
-            note: "Txorizoa aparte."
-          },
-          snack: {
-            dish: "Txokolate sandwicha + fruta + fruitu lehorrak.",
-            ingredients: [
-              ["Moldeko ogia", "7 pakete"],
-              ["Txokolatea", "16 tableta"],
-              ["Fruta", "53 pieza"],
-              ["Fruitu lehorrak / kakahueteak", "1,1-1,3 kg"],
-              ["Glutenik gabeko ogia", "pakete 1"],
-              ["Glutenik gabeko txokolatea", "2 tableta"]
-            ],
-            note: "Fruitu lehorrik gabeko anoa aurretik itxita."
-          },
-          dinner: {
-            dish: "Entsalada + bularkiak gazta-saltsan patata frijituekin + natillak.",
-            ingredients: [
-              ["Letxuga", "13 unitate"],
-              ["Tomate", "6 kg"],
-              ["Tipula", "3 kg"],
-              ["Oilasko-bularkia", "10-11 kg"],
-              ["Gazta urtua", "2 kg"],
-              ["Gazta urdina", "300-400 g"],
-              ["Koko-esnea/esnegaina", "3,5-4 L"],
-              ["Patata frijituak", "10 poltsa handi"],
-              ["Natillak", "53 unitate"],
-              ["Ogia", "15 barra"]
-            ],
-            note: "Gazta-saltsa aparte, dieta berezirik badago."
-          }
-        }
-      },
-      {
-        day: 7,
-        label: "7. eguna",
-        services: {
-          breakfast,
-          lunch: {
-            dish: "Solomo eta gazta bokata + txokolatea + fruta.",
-            ingredients: [
-              ["Ogia", "25 barra"],
-              ["Glutenik gabeko ogia", "2-3 barra/pakete"],
-              ["Solomo naturala", "105-110 xerra"],
-              ["Gazta", "2,2 kg"],
-              ["Txokolatea", "16 tableta"],
-              ["Fruta", "53 pieza"]
-            ],
-            note: "Gazta aparte esnekirik hartzen ez duenarentzat."
-          },
-          snack: {
-            dish: "Indioilar eta gazta sandwicha + fruta + fruitu lehorrak.",
-            ingredients: [
-              ["Moldeko ogia", "7 pakete"],
-              ["Indioilar naturala", "55 xerra"],
-              ["Gazta", "55 xerra"],
-              ["Fruta", "53 pieza"],
-              ["Fruitu lehorrak / kakahueteak", "1,1-1,3 kg"],
-              ["Glutenik gabeko ogia", "pakete 1"],
-              ["Glutenik gabeko indioilarra", "4-6 xerra"]
-            ],
-            note: "Prestatu eta itxi anoa berezia zerbitzu orokorra hasi aurretik."
-          },
-          dinner: {
-            dish: "Barazki-krema + saltxitxak patata-purearekin + jogurta.",
-            ingredients: [
-              ["Kalabazina", "6,5-7 kg"],
-              ["Azenarioa", "1,5-2 kg"],
-              ["Sofrito", "2 kg"],
-              ["Barazki-salda", "6 L"],
-              ["Kremarako patata", "3,5-4 kg"],
-              ["Saltxitxak", "200-210 unitate"],
-              ["Patata-purea", "1,5-1,8 kg"],
-              ["Esnea", "1,5-2 L"],
-              ["Purearako ura", "4-5 L"],
-              ["Gurina", "750 g-1 kg"],
-              ["Jogurtak", "53 unitate"],
-              ["Ogia", "15 barra"]
-            ],
-            note: "Berrikusi purea eta saltxitxak zeliakoentzat."
-          }
-        }
-      },
-      {
-        day: 8,
-        label: "8. eguna",
-        services: {
-          breakfast,
-          lunch: {
-            dish: "Garbantzuak barazkiekin eta txorizoarekin + fruta.",
-            ingredients: [
-              ["Garbantzuak egosita", "17-18 kg"],
-              ["Piper berdea", "1,2 kg"],
-              ["Tomate/tipula/porru sofritoa", "2 kg"],
-              ["Azenarioa", "1,5 kg"],
-              ["Kalabazina", "1,5-2 kg"],
-              ["Patata", "4 kg"],
-              ["Txorizoa", "75-80 zati"],
-              ["Ardo zuria", "botila 1"],
-              ["Fruta", "53 pieza"],
-              ["Ogia", "15 barra"]
-            ],
-            note: "Txorizoa aparte."
-          },
-          snack: {
-            dish: "Philadelphia/gazta krema sandwicha + fruta + fruitu lehorrak.",
-            ingredients: [
-              ["Moldeko ogia", "7 pakete"],
-              ["Philadelphia/gazta krema", "250 g-ko 6-7 ontzi"],
-              ["Fruta", "53 pieza"],
-              ["Fruitu lehorrak / kakahueteak", "1,1-1,3 kg"],
-              ["Glutenik gabeko ogia", "pakete 1"],
-              ["Glutenik gabeko gazta krema", "ontzi 1"]
-            ],
-            note: "Saihestu ogi-apurrak dituen labana arrunta."
-          },
-          dinner: {
-            dish: "Oilaskoa curryan arrozarekin + jogurta.",
-            ingredients: [
-              ["Arroza", "3,5 kg"],
-              ["Oilasko-bularkia zatituta", "10-11 kg"],
-              ["Koko-esnea", "5,5-6 L"],
-              ["Tomate/tipula/porru sofritoa", "2 kg"],
-              ["Piper gorria latan", "pote handi 1"],
-              ["Curry leuna", "behar adina"],
-              ["Kurkuma/kuminoa/jengibrea", "behar adina"],
-              ["Jogurtak", "53 unitate"],
-              ["Ogia", "12-15 barra"]
-            ],
-            note: "Curry leuna, heroikeriarik gabe."
-          }
-        }
-      },
-      {
-        day: 9,
-        label: "9. eguna",
-        services: {
-          breakfast,
-          lunch: {
-            dish: "Solomo eta gazta bokata + txokolatea + fruta.",
-            ingredients: [
-              ["Ogia", "25 barra"],
-              ["Glutenik gabeko ogia", "2-3 barra/pakete"],
-              ["Solomo naturala", "105-110 xerra"],
-              ["Gazta", "2,2 kg"],
-              ["Txokolatea", "16 tableta"],
-              ["Fruta", "53 pieza"]
-            ],
-            note: "Prestatu glutenik gabeko aukera ziurtatutako ogiarekin."
-          },
-          snack: {
-            dish: "Indioilar eta gazta sandwicha + fruta + fruitu lehorrak.",
-            ingredients: [
-              ["Moldeko ogia", "7 pakete"],
-              ["Indioilar naturala", "55 xerra"],
-              ["Gazta", "55 xerra"],
-              ["Fruta", "53 pieza"],
-              ["Fruitu lehorrak / kakahueteak", "1,1-1,3 kg"],
-              ["Glutenik gabeko ogia", "pakete 1"],
-              ["Glutenik gabeko indioilarra", "4-6 xerra"]
-            ],
-            note: "Anoa bereziak itxita utzi fruitu lehorrak atera aurretik."
-          },
-          dinner: {
-            dish: "Entsalada + albondigak saltsa espainiarrean patatekin + jogurta.",
-            ingredients: [
-              ["Letxuga", "11 unitate"],
-              ["Tomate", "6 kg"],
-              ["Entsaladarako tipula", "3 kg"],
-              ["Atuna", "8 lata ertain"],
-              ["Albondigak", "260 unitate"],
-              ["Patata naturala", "6-6,5 kg"],
-              ["Sofrito", "2 kg"],
-              ["Barazki-salda", "2 L"],
-              ["Ardo zuria", "botila 1"],
-              ["Maizena", "pakete 1"],
-              ["Azenarioa", "1,5 kg"],
-              ["Jogurtak", "53 unitate"],
-              ["Ogia", "15 barra"]
-            ],
-            note: "4. eguneko logistika bera errepikatu."
-          }
-        }
-      },
-      {
-        day: 10,
-        label: "10. eguna",
-        services: {
-          breakfast,
-          lunch: {
-            dish: "Ilarrak patatarekin + plantxako bularkia patata frijituekin + jogurta.",
-            ingredients: [
-              ["Ilarrak", "5 kg"],
-              ["Gisaturako patata", "5 kg"],
-              ["Tipula", "1,5-2 kg"],
-              ["Baratxuria", "buru 1"],
-              ["Barazki-salda", "3-4 L"],
-              ["Oilasko-bularkia", "8-9 kg"],
-              ["Patata frijituak", "10 poltsa handi"],
-              ["Jogurtak", "53 unitate"],
-              ["Ogia", "15 barra"]
-            ],
-            note: "Gehitu proteina beganoa behar bada."
-          },
-          snack: {
-            dish: "Iruñeko txorizo bokata/sandwicha + fruta + fruitu lehorrak.",
-            ingredients: [
-              ["Moldeko ogia edo ogia", "7 moldeko pakete edo 15 barra"],
-              ["Iruñeko txorizoa", "260 xerra gutxi gorabehera"],
-              ["Fruta", "53 pieza"],
-              ["Fruitu lehorrak / kakahueteak", "1,1-1,3 kg"],
-              ["Glutenik gabeko ogia", "pakete 1"],
-              ["Glutenik gabeko alternatiba", "4-6 anoa"]
-            ],
-            note: "Zeliakoentzat ziurtatutako hestebetea."
-          },
-          dinner: {
-            dish: "Pasta boloniarra + natillak.",
-            ingredients: [
-              ["Pasta", "7 kg"],
-              ["Glutenik gabeko pasta", "500-750 g"],
-              ["Haragi xehatua", "5,5-6 kg"],
-              ["Txanpinoiak", "3 kg"],
-              ["Tomate/tipula/porru sofritoa", "2 kg"],
-              ["Piper berdea", "1,2 kg"],
-              ["Tomate frijitua/birrindua", "4-5 kg"],
-              ["Gazta birrindua", "2,5 kg"],
-              ["Natillak", "53 unitate"],
-              ["Ogia", "15 barra"]
-            ],
-            note: "Tomatezko oinarrizko saltsa; gazta aparte."
-          }
-        }
-      },
-      {
-        day: 11,
-        label: "11. eguna",
-        services: {
-          breakfast,
-          lunch: {
-            dish: "Indioilar eta gazta bokata + txokolatea + fruta.",
-            ingredients: [
-              ["Ogia", "25 barra"],
-              ["Glutenik gabeko ogia", "2-3 barra/pakete"],
-              ["Indioilar naturala", "55-60 xerra"],
-              ["Gazta", "2,2 kg"],
-              ["Txokolatea", "16 tableta"],
-              ["Fruta", "53 pieza"]
-            ],
-            note: "Azken eguna: ez konplikatu."
-          },
-          snack: {
-            dish: "Aukerako askaria: fruta + fruitu lehorrak + gailetak.",
-            ingredients: [
-              ["Fruta", "53 pieza"],
-              ["Fruitu lehorrak / kakahueteak", "1,1 kg"],
-              ["Gailetak", "4-5 pakete"]
-            ],
-            note: "Irteera berandu bada bakarrik."
-          },
-          dinner: null
-        }
-      }
-    ];
+      <fieldset class="meal-type-box">
+        <legend>Zerbitzu motak</legend>
+        <label><input type="checkbox" name="mealType" value="breakfast"> Gosaria</label>
+        <label><input type="checkbox" name="mealType" value="lunch"> Bazkaria</label>
+        <label><input type="checkbox" name="mealType" value="snack"> Askaria</label>
+        <label><input type="checkbox" name="mealType" value="dinner"> Afaria</label>
+      </fieldset>
 
-    const shopping = [
-      ["Gosaria", "Edari begetala", "6-8 L", "Hemen erosi / eraman", "Oloa edo soja gosarietarako eta dietetarako."],
-      ["Gosaria", "Kakao disolbagarria", "4-5 kg", "Hemen erosi / eraman", "Berrikusi etiketa glutenik gabekoentzat."],
-      ["Gosaria", "Maria motako gailetak", "10-12 pakete handi", "Hemen erosi / eraman", "Lehorra, garraiatzeko erraza."],
-      ["Glutenik gabe", "Glutenik gabeko gailetak", "3-4 pakete", "Hemen erosi / eraman", "Gorde kutxa itxi batean."],
-      ["Glutenik gabe", "Gosarirako glutenik gabeko ogia", "4-5 pakete", "Hemen erosi / eraman", "Ez nahasi ogi arruntarekin."],
-      ["Gosaria", "Marmelada", "10 pote", "Hemen erosi / eraman", "Aukera sinpleak erosi."],
-      ["Glutenik gabe", "Bazkari/askarietarako glutenik gabeko ogia", "15-18 pakete/barra", "Hemen erosi / eraman", "Produktu kritikoa; hobe ez inprobisatzea."],
-      ["Askariak", "Fruitu lehorrak/kakahueteak", "10-12 kg", "Hemen erosi / eraman", "Bereizi anoa berezietatik."],
-      ["Askariak", "Txokolatea", "80-90 tableta", "Hemen erosi / eraman", "Begiratu fruitu lehorren eta glutenaren arrastoak."],
-      ["Lekaleak", "Dilistak egosita", "17-18 kg", "Hemen erosi / eraman", "4. eguneko oinarria."],
-      ["Lekaleak", "Garbantzuak egosita", "36-38 kg", "Hemen erosi / eraman", "5. eta 8. egunetako oinarria; beganoentzat erabilgarria."],
-      ["Lekaleak", "Babarrun zuriak egosita", "17-18 kg", "Hemen erosi / eraman", "6. eguneko oinarria."],
-      ["Pasta eta arroza", "Pasta arrunta", "25-26 kg", "Hemen erosi / eraman", "Karbonara, pasta-entsalada eta boloniarra."],
-      ["Glutenik gabe", "Glutenik gabeko pasta", "2,5-3 kg", "Hemen erosi / eraman", "Beti lehenik egosi."],
-      ["Pasta eta arroza", "Arroza", "7 kg", "Hemen erosi / eraman", "5. eta 8. egunak."],
-      ["Pasta eta arroza", "Patata-purea", "1,5-1,8 kg", "Hemen erosi / eraman", "Berrikusi glutenik gabea dela."],
-      ["Kontserbak", "Olibak", "4 lata handi", "Hemen erosi / eraman", "Entsaladak."],
-      ["Kontserbak", "Artoa", "2,5 kg", "Hemen erosi / eraman", "Pasta-entsalada."],
-      ["Kontserbak", "Atuna", "24 lata ertain", "Hemen erosi / eraman", "Entsaladak."],
-      ["Saltsak", "Tomate/tipula/porru sofritoa", "20-22 kg gutxi gorabehera", "Hemen erosi / eraman", "Gisatuen eta saltsen oinarria."],
-      ["Saltsak", "Tomate frijitua/birrindua/kontzentratua", "15-18 kg guztira", "Hemen erosi / eraman", "Berrikusi etiketa."],
-      ["Saldak", "Barazki-salda", "25-30 L", "Hemen erosi / eraman", "Ziurtatu glutenik gabea dela."],
-      ["Saltsak", "Koko-esnea/esnegaina", "18-20 L", "Hemen erosi / eraman", "Bereizi erabilera beganoa eta esnekiduna."],
-      ["Oinarrizkoak", "Maizena", "2 pakete", "Hemen erosi / eraman", "Saltsa espainiarrerako."],
-      ["Oinarrizkoak", "Olioa", "10 L", "Hemen erosi / eraman", "Sukalde orokorrerako."],
-      ["Oinarrizkoak", "Gatza, ozpina, espeziak", "behar adina", "Hemen erosi / eraman", "Curry, kuminoa, kurkuma, jengibrea."],
-      ["Beganoa", "Hummusa/pate begetala", "8-10 ontzi/pote", "Hemen erosi / eraman", "Proteinadun segurtasun-baliabidea."],
-      ["Beganoa", "Soja testurizatua", "2-3 kg", "Hemen erosi / eraman", "Ordezkapenetarako benetako proteina."],
-      ["Gosaria", "Esnea", "130 L", "Han erosi / txandaka", "Bolumen eta hotzeko produktua."],
-      ["Gosaria", "Gurina", "5 kg gutxi gorabehera", "Han erosi / txandaka", "Hotzekoa; txandaka erosi."],
-      ["Ogia", "Ogi barra arrunta", "230-240 barra guztira gutxi gorabehera", "Han erosi / txandaka", "Fresko erosi; soberakina gosarietarako erabili."],
-      ["Fruta", "Fruta askotarikoa", "850-950 pieza/anoa", "Han erosi / txandaka", "Askariak eta bazkariak."],
-      ["Barazkiak", "Ilarrak", "5 kg", "Han erosi / txandaka", "10. eguna."],
-      ["Barazkiak", "Letxuga", "48-50 unitate", "Han erosi / txandaka", "Entsaladak."],
-      ["Barazkiak", "Tomatea", "32-35 kg", "Han erosi / txandaka", "Entsaladak eta pasta."],
-      ["Barazkiak", "Tipula", "20-22 kg", "Han erosi / txandaka", "Gisatuak, entsaladak eta saltsak."],
-      ["Barazkiak", "Kalabazina", "32-35 kg", "Han erosi / txandaka", "Kremak eta gisatuak."],
-      ["Barazkiak", "Azenarioa", "10-12 kg", "Han erosi / txandaka", "Kremak, gisatuak eta saltsa."],
-      ["Barazkiak", "Patata", "45-50 kg", "Han erosi / txandaka", "Kremak, gisatuak, saltsa eta hornigaiak."],
-      ["Barazkiak", "Piper berdea", "4-5 kg", "Han erosi / txandaka", "Lekaleak eta boloniarra."],
-      ["Barazkiak", "Txanpinoia", "6 kg", "Han erosi / txandaka", "Karbonara eta boloniarra."],
-      ["Haragia", "Oilasko-bularkia", "39-42 kg", "Han erosi / txandaka", "Hotzean eta txandaka erosi."],
-      ["Haragia", "Solomo naturala", "360-380 xerra gutxi gorabehera", "Han erosi / txandaka", "Bokatak eta 5. eguneko afaria."],
-      ["Haragia", "Frankfurt saltxitxak", "115-120 unitate", "Han erosi / txandaka", "Zeliakoentzat ziurtatuak."],
-      ["Haragia", "Afarirako saltxitxak", "200-210 unitate", "Han erosi / txandaka", "Berrikusi etiketa."],
-      ["Haragia", "Albondigak", "520 unitate", "Han erosi / txandaka", "Egiaztatu glutenik gabeak direla edo prestatu proteina aparte."],
-      ["Haragia", "Haragi xehatua", "5,5-6 kg", "Han erosi / txandaka", "Boloniarra."],
-      ["Haragia", "Bacon", "3-3,5 kg", "Han erosi / txandaka", "Karbonara."],
-      ["Hestebeteak", "Indioilar naturala", "175-180 xerra", "Han erosi / txandaka", "Berrikusi glutenik gabeko etiketa."],
-      ["Hestebeteak", "York urdaiazpikoa", "55 xerra", "Han erosi / txandaka", "2. eguna."],
-      ["Hestebeteak", "Gisatuetarako txorizoa", "225-240 zati", "Han erosi / txandaka", "Aparte zerbitzatu dietak badaude."],
-      ["Hestebeteak", "Iruñeko txorizoa", "260 xerra", "Han erosi / txandaka", "Zeliakoentzat ziurtatua."],
-      ["Postreak", "Jogurtak", "371 unitate gutxi gorabehera", "Han erosi / txandaka", "Hotzekoa; txandaka erosi."],
-      ["Postreak", "Natillak", "159 unitate", "Han erosi / txandaka", "Berrikusi glutenik gabea dela."],
-      ["Esnekiak", "Gazta xerratan/bokatetarako", "8-9 kg gutxi gorabehera", "Han erosi / txandaka", "Bereizi esnekirik hartzen ez duenarentzat."],
-      ["Esnekiak", "Gazta birrindua/hautsean", "6-7 kg gutxi gorabehera", "Han erosi / txandaka", "Aparte zerbitzatu komeni denean."],
-      ["Esnekiak", "Gazta krema", "6-7 ontzi", "Han erosi / txandaka", "Saihestu ogi-apurrak dituen labana arrunta."],
-      ["Beganoa", "Soja-jogurta", "12-16 unitate", "Han erosi / txandaka", "Postre alternatiboa."]
-    ];
+      <label>
+        Oharrak
+        <textarea id="recipeNotesInput" rows="3"></textarea>
+      </label>
 
-    const shoppingBlocks = [
-      {
-        title: "1. Aurretik erosi eta eraman",
-        label: "Ez inprobisatu",
-        place: "Hemen erosi / eraman",
-        note: "Lehorrak, ziurtatuak, dieta bereziak eta despentsako oinarriak.",
-        items: [
-          "Glutenik gabe: ogia, pasta eta gailetak.",
-          "Despentsa: lekaleak, pasta, arroza, kontserbak, saltsak eta saldak.",
-          "Segurtasun beganoa: hummusa/pate begetala eta soja testurizatua."
-        ],
-        count: (row) => row[3] === "Hemen erosi / eraman"
-      },
-      {
-        title: "2. Han erosi",
-        label: "Freskoa eta hotzekoa",
-        place: "Han erosi / txandaka",
-        note: "Handia edo delikatua den produktua, inguruan erostea komeni dena.",
-        items: [
-          "Ogia, fruta, esnea, gurina, jogurtak eta natillak.",
-          "Barazki handiak: letxuga, tomatea, kalabazina, patata eta azenarioa.",
-          "Haragia eta hestebeteak: oilaskoa, solomoa, saltxitxak, indioilarra eta txorizoa."
-        ],
-        count: (row) => row[3] === "Han erosi / txandaka"
-      },
-      {
-        title: "3. Txandaka erosi",
-        label: "Aurreko eguna",
-        place: "Han erosi / txandaka",
-        note: "Ez erosi dena hasieran: hondatu, lekua hartu eta nahastu egiten da.",
-        items: [
-          "Ogia eta fruta: hobe txanda laburretan.",
-          "Hotzekoa: esnekiak, postreak, oilaskoa, haragia eta hestebeteak.",
-          "Bolumena: esnea, patata, letxuga, tomatea eta kalabazina."
-        ],
-        count: (row) => ["Ogia", "Fruta", "Gosaria", "Haragia", "Hestebeteak", "Postreak", "Esnekiak", "Barazkiak"].includes(row[0]) && row[3] === "Han erosi / txandaka"
-      }
-    ];
+      <div class="ingredients-editor">
+        <div class="section-head compact">
+          <div>
+            <h3>Osagaiak</h3>
+            <p>Kantitateak errezetaren oinarri-lagun kopururako dira.</p>
+          </div>
+          <button class="button" type="button" id="addIngredientButton">Osagaia gehitu</button>
+        </div>
+        <div id="ingredientRows"></div>
+      </div>
 
-    const serviceLabels = {
-      breakfast: "Gosaria",
-      lunch: "Bazkaria",
-      snack: "Askaria",
-      dinner: "Afaria"
-    };
+      <div class="dialog-actions">
+        <button class="button" type="button" id="cancelRecipeButton">Utzi</button>
+        <button class="button primary" type="submit">Errezeta gorde</button>
+      </div>
+    </form>
+  </dialog>
 
-    const emptyLabels = {
-      breakfast: "Ez dago sukaldeko gosaririk aurreikusita.",
-      lunch: "Ez dago sukaldeko bazkaririk aurreikusita.",
-      snack: "Ez dago askaririk aurreikusita.",
-      dinner: "Ez dago afaririk aurreikusita."
-    };
+  <template id="ingredientRowTemplate">
+    <div class="ingredient-row">
+      <label>
+        Produktua
+        <input type="text" data-field="name" required>
+      </label>
+      <label>
+        Kategoria
+        <input type="text" data-field="category">
+      </label>
+      <label>
+        Unitatea
+        <input type="text" data-field="unit" placeholder="kg, L, unitate...">
+      </label>
+      <label>
+        Min.
+        <input type="number" data-field="amountMin" step="0.01">
+      </label>
+      <label>
+        Max.
+        <input type="number" data-field="amountMax" step="0.01">
+      </label>
+      <label>
+        Non
+        <select data-field="purchaseType">
+          <option value="Hemen erosi / eraman">Hemen erosi / eraman</option>
+          <option value="Han erosi / txandaka">Han erosi / txandaka</option>
+          <option value="Sukaldea">Sukaldea</option>
+        </select>
+      </label>
+      <label class="check-label">
+        <input type="checkbox" data-field="scalable" checked>
+        Eskalatu
+      </label>
+      <label class="wide">
+        Oharra
+        <input type="text" data-field="note" placeholder="behar adina, etiketa berrikusi...">
+      </label>
+      <button class="icon-button remove-ingredient" type="button" aria-label="Osagaia kendu">×</button>
+    </div>
+  </template>
 
-    const daySummaries = {
-      2: { breakfast: "Gosaririk ez", lunch: "Etxetik dakarte", snack: "York + gazta", dinner: "Entsalada + karbonara" },
-      3: { breakfast: "Finkoa", lunch: "Frankfurt + gazta", snack: "Indioilarra + gazta", dinner: "Krema + oilaskoa tomatean" },
-      4: { breakfast: "Finkoa", lunch: "Dilistak + txorizoa", snack: "Txokolatea", dinner: "Albondigak + patata" },
-      5: { breakfast: "Finkoa", lunch: "Garbantzuak + arroza", snack: "Urdaiazpikoa/solomoa + gazta", dinner: "Pasta + solomoa" },
-      6: { breakfast: "Finkoa", lunch: "Babarrunak + txorizoa", snack: "Txokolatea", dinner: "Oilaskoa gaztan + patatak" },
-      7: { breakfast: "Finkoa", lunch: "Solomoa + gazta", snack: "Indioilarra + gazta", dinner: "Krema + saltxitxak" },
-      8: { breakfast: "Finkoa", lunch: "Garbantzuak + txorizoa", snack: "Gazta krema", dinner: "Oilaskoa curryan + arroza" },
-      9: { breakfast: "Finkoa", lunch: "Solomoa + gazta", snack: "Indioilarra + gazta", dinner: "Albondigak + patata" },
-      10: { breakfast: "Finkoa", lunch: "Ilarrak + oilaskoa", snack: "Iruñeko txorizoa", dinner: "Pasta boloniarra" },
-      11: { breakfast: "Finkoa", lunch: "Indioilarra + gazta", snack: "Aukerakoa: fruta", dinner: "Afaririk ez" }
-    };
-
-    const kitchenNotes = {
-      2: {
-        prep: "Bereizi glutenik gabekoa eta fruitu lehorrik gabekoa askariak muntatu aurretik. Glutenik gabeko pasta lehenik.",
-        fresh: "Fruta, letxuga, tomatea, jogurtak, bacon eta afarirako ogia.",
-        alerts: ["Etxeko bazkaria", "Fruitu lehorrak aparte", "Glutenik gabeko pasta"]
-      },
-      3: {
-        prep: "Berretsi saltxitxa ziurtatua dela. Utzi indioilarra/glutenik gabeko ogia itxita askaria baino lehen.",
-        fresh: "Ogia, fruta, saltxitxak, oilaskoa, kalabazina, natillak eta patata frijituak.",
-        alerts: ["Saltxitxa ziurtatua", "Glutenik gabekoa lehenik", "Salda berrikusita"]
-      },
-      4: {
-        prep: "Egosi edo berotu txorizoa aparte. Albondigak egokiak badira bakarrik; bestela, proteina bereizia.",
-        fresh: "Fruta, letxuga, tomatea, patata, azenarioa, jogurtak eta ogia.",
-        alerts: ["Txorizoa aparte", "Albondiga egokiak", "Fruitu lehorrak berandu"]
-      },
-      5: {
-        prep: "Denentzat egokia den oinarrizko platera. Glutenik gabeko pasta bereizi entsalada nahasi aurretik.",
-        fresh: "Fruta, tomatea, solomoa, jogurtak, ogia eta tipula morea.",
-        alerts: ["Oinarri begano erabilgarria", "Labana garbia", "Pasta bereizita"]
-      },
-      6: {
-        prep: "Txorizoa aparte eguerdian. Afarian gazta-saltsa bereizita dietengatik.",
-        fresh: "Fruta, letxuga, tomatea, oilaskoa, natillak, patata frijituak eta ogia.",
-        alerts: ["Txorizoa aparte", "Saltsa aparte", "Esnekiak"]
-      },
-      7: {
-        prep: "Gazta aparte bokatetan. Berrikusi purea eta saltxitxak zeliakoei zerbitzatu aurretik.",
-        fresh: "Ogia, fruta, solomoa, indioilarra, kremarako barazkiak, saltxitxak eta jogurtak.",
-        alerts: ["Gazta aparte", "Purea berrikusita", "Saltxitxa egokiak"]
-      },
-      8: {
-        prep: "Txorizoa aparte. Saihestu ogi-apurrak dituen labana gazta kreman. Curry leuna.",
-        fresh: "Fruta, gazta krema, oilasko zatitua, jogurtak, ogia eta barazkiak.",
-        alerts: ["Labana garbia", "Txorizoa aparte", "Curry leuna"]
-      },
-      9: {
-        prep: "Errepikatu 4. eguneko logistika: albondiga egokiak edo proteina aparte.",
-        fresh: "Ogia, fruta, indioilarra, letxuga, tomatea, patata, jogurtak eta solomoa.",
-        alerts: ["Albondiga egokiak", "Glutenik gabekoa lehenik", "Fruitu lehorrak berandu"]
-      },
-      10: {
-        prep: "Gehitu proteina beganoa behar bada. Egosi glutenik gabeko pasta lehenik eta gazta aparte.",
-        fresh: "Ilarrak, patata, oilaskoa, Iruñeko txorizoa, haragi xehatua, natillak eta ogia.",
-        alerts: ["Proteina beganoa", "Glutenik gabeko pasta", "Gazta aparte"]
-      },
-      11: {
-        prep: "Azken eguna: bokata sinpleak eta askaria irteera atzeratzen bada bakarrik.",
-        fresh: "Ogia, fruta, indioilarra, gazta, txokolatea eta gailetak askaria badago.",
-        alerts: ["Ez konplikatu", "Aukerako askaria", "Soberakinak itxi"]
-      }
-    };
-
-    const daysGrid = document.getElementById("daysGrid");
-    const dayFilter = document.getElementById("dayFilter");
-    const kitchenBoard = document.getElementById("kitchenBoard");
-
-    function createElement(tag, className, text) {
-      const element = document.createElement(tag);
-      if (className) element.className = className;
-      if (text) element.textContent = text;
-      return element;
-    }
-
-    function getServiceAlerts(service) {
-      if (!service) return [];
-      const ingredientText = service.ingredients.map(([name, amount]) => `${name} ${amount}`).join(" ");
-      const fullText = `${service.dish} ${service.note || ""} ${ingredientText}`.toLowerCase();
-      const noteText = `${service.note || ""}`.toLowerCase();
-      const alerts = [];
-
-      if (/gluten|cel[ií]ac|zeliak|zeliako/.test(fullText)) alerts.push("Glutenik gabe");
-      if (/frutos secos|fruitu lehor|cacahuete|cacahuetes|kakahuete|trazas|arrasto/.test(fullText)) alerts.push("Fruitu lehorrak");
-      if (/vegano|vegana|begano|dieta berezi|lácteos|lacteos|esneki|queso aparte|gazta aparte|salsa .*aparte|saltsa .*aparte/.test(noteText)) alerts.push("Dietak");
-
-      return alerts;
-    }
-
-    function renderService(key, service) {
-      const card = createElement("article", `service-card${service ? "" : " empty"}`);
-      const head = createElement("div", "service-head");
-      head.appendChild(createElement("h4", "", serviceLabels[key]));
-      head.appendChild(createElement("span", "service-tag", service ? "Erosketarekin" : "Zerbitzurik ez"));
-      card.appendChild(head);
-
-      const body = createElement("div", "service-body");
-      if (!service) {
-        body.appendChild(createElement("p", "dish", emptyLabels[key]));
-        card.appendChild(body);
-        return card;
-      }
-
-      body.appendChild(createElement("p", "dish", service.dish));
-      const alerts = getServiceAlerts(service);
-      if (alerts.length) {
-        const alertWrap = createElement("div", "service-alerts");
-        alerts.forEach((alert) => alertWrap.appendChild(createElement("span", "service-alert", alert)));
-        body.appendChild(alertWrap);
-      }
-
-      const detail = createElement("details", "service-detail");
-      detail.appendChild(createElement("summary", "", "Ikusi kantitateak eta oharra"));
-      const list = createElement("ul", "ingredients");
-      service.ingredients.forEach(([name, amount]) => {
-        const item = document.createElement("li");
-        item.appendChild(createElement("b", "", name));
-        item.appendChild(createElement("span", "", amount));
-        list.appendChild(item);
-      });
-      detail.appendChild(list);
-      if (service.note) detail.appendChild(createElement("p", "note", service.note));
-      body.appendChild(detail);
-      card.appendChild(body);
-      return card;
-    }
-
-    function renderDaySummary(day) {
-      const summary = daySummaries[day.day];
-      const wrapper = createElement("div", "day-summary");
-      ["breakfast", "lunch", "snack", "dinner"].forEach((serviceKey) => {
-        const pill = createElement("div", `summary-pill${day.services[serviceKey] ? "" : " empty"}`);
-        pill.appendChild(createElement("strong", "", serviceLabels[serviceKey]));
-        pill.appendChild(createElement("span", "", summary[serviceKey]));
-        wrapper.appendChild(pill);
-      });
-      return wrapper;
-    }
-
-    function renderKitchenBoard(selectedDay) {
-      kitchenBoard.textContent = "";
-
-      if (selectedDay === "all") {
-        const intro = createElement("div", "kitchen-panel wide");
-        intro.appendChild(createElement("span", "kitchen-label", "Sukaldeko partea"));
-        intro.appendChild(createElement("p", "", "Aukeratu eguna ezinbestekoa bakarrik ikusteko: zer dagoen, zer prestatu aurretik eta zer erosi fresko."));
-        kitchenBoard.appendChild(intro);
-        return;
-      }
-
-      const day = menuDays.find((item) => String(item.day) === selectedDay);
-      const summary = daySummaries[day.day];
-      const notes = kitchenNotes[day.day];
-
-      const main = createElement("div", "kitchen-panel");
-      main.appendChild(createElement("span", "kitchen-label", `${day.label} · 53 lagun`));
-      const mainText = createElement("p", "kitchen-main");
-      mainText.appendChild(createElement("span", "kitchen-line", `Bazkaria: ${summary.lunch}`));
-      mainText.appendChild(createElement("span", "kitchen-line", `Afaria: ${summary.dinner}`));
-      main.appendChild(mainText);
-
-      const prep = createElement("div", "kitchen-panel");
-      prep.appendChild(createElement("span", "kitchen-label", "Aurretik prestatu"));
-      prep.appendChild(createElement("p", "", notes.prep));
-
-      const fresh = createElement("div", "kitchen-panel");
-      fresh.appendChild(createElement("span", "kitchen-label", "Erosketa freskoa"));
-      fresh.appendChild(createElement("p", "", notes.fresh));
-
-      const alerts = createElement("div", "kitchen-panel wide");
-      alerts.appendChild(createElement("span", "kitchen-label", "Arreta azkarra"));
-      const chipWrap = createElement("div", "kitchen-chips");
-      notes.alerts.forEach((alert) => chipWrap.appendChild(createElement("span", "kitchen-chip", alert)));
-      alerts.appendChild(chipWrap);
-
-      kitchenBoard.append(main, prep, fresh, alerts);
-    }
-
-    function renderDays() {
-      menuDays.forEach((day) => {
-        const card = createElement("article", "day-card");
-        card.dataset.day = String(day.day);
-
-        const title = createElement("div", "day-title");
-        title.appendChild(createElement("h3", "", day.label));
-        title.appendChild(createElement("span", "", "53 lagun"));
-        card.appendChild(title);
-        card.appendChild(renderDaySummary(day));
-
-        const grid = createElement("div", "service-grid");
-        ["breakfast", "lunch", "snack", "dinner"].forEach((serviceKey) => {
-          grid.appendChild(renderService(serviceKey, day.services[serviceKey]));
-        });
-        card.appendChild(grid);
-        daysGrid.appendChild(card);
-      });
-    }
-
-    function setSelectedDay(selectedDay) {
-      dayFilter.querySelectorAll("button").forEach((item) => {
-        item.classList.toggle("is-active", item.dataset.day === selectedDay);
-      });
-      daysGrid.querySelectorAll(".day-card").forEach((card) => {
-        card.classList.toggle("is-hidden", selectedDay !== "all" && card.dataset.day !== selectedDay);
-      });
-      renderKitchenBoard(selectedDay);
-      document.getElementById("printButton").textContent = selectedDay === "all" ? "Inprimatu dena" : `Inprimatu ${selectedDay}. eguna`;
-    }
-
-    function renderFilter() {
-      const allButton = createElement("button", "button is-active", "Denak");
-      allButton.type = "button";
-      allButton.dataset.day = "all";
-      dayFilter.appendChild(allButton);
-
-      menuDays.forEach((day) => {
-        const button = createElement("button", "button", `${day.day}. eguna`);
-        button.type = "button";
-        button.dataset.day = String(day.day);
-        dayFilter.appendChild(button);
-      });
-
-      dayFilter.addEventListener("click", (event) => {
-        const button = event.target.closest("button");
-        if (!button) return;
-        setSelectedDay(button.dataset.day);
-      });
-    }
-
-    function renderShopping(targetId, rows) {
-      const target = document.getElementById(targetId);
-      rows.forEach(([category, product, amount, place, note]) => {
-        const row = document.createElement("tr");
-        [category, product, amount].forEach((value) => row.appendChild(createElement("td", "", value)));
-
-        const placeCell = document.createElement("td");
-        const placeBadge = createElement("span", `where${place.includes("Han") ? " local" : ""}`, place);
-        placeCell.appendChild(placeBadge);
-        row.appendChild(placeCell);
-
-        row.appendChild(createElement("td", "", note));
-        target.appendChild(row);
-      });
-    }
-
-    function renderShoppingMap() {
-      const target = document.getElementById("shoppingMap");
-      target.textContent = "";
-
-      shoppingBlocks.forEach((block) => {
-        const card = createElement("article", "shopping-card");
-        card.appendChild(createElement("strong", "", block.label));
-        card.appendChild(createElement("h3", "", block.title));
-        card.appendChild(createElement("p", "", block.note));
-
-        const list = document.createElement("ul");
-        block.items.forEach((item) => list.appendChild(createElement("li", "", item)));
-        card.appendChild(list);
-
-        const count = shopping.filter(block.count).length;
-        card.appendChild(createElement("span", `where${block.place.includes("Han") ? " local" : ""}`, `${count} produktu`));
-        target.appendChild(card);
-      });
-
-      document.getElementById("shoppingTotalCount").textContent = `${shopping.length} produktu · udaleku osoko guztira`;
-    }
-
-    renderDays();
-    renderFilter();
-    setSelectedDay("all");
-    renderShoppingMap();
-    renderShopping("shoppingAll", shopping);
-    renderShopping("shoppingBring", shopping.filter((item) => item[3] === "Hemen erosi / eraman"));
-    renderShopping("shoppingLocal", shopping.filter((item) => item[3] === "Han erosi / txandaka"));
-
-    let detailsClosedBeforePrint = [];
-    window.addEventListener("beforeprint", () => {
-      detailsClosedBeforePrint = [...document.querySelectorAll(".service-detail:not([open]), .shopping-detail:not([open])")];
-      document.querySelectorAll(".service-detail, .shopping-detail").forEach((detail) => {
-        detail.open = true;
-      });
-    });
-
-    window.addEventListener("afterprint", () => {
-      detailsClosedBeforePrint.forEach((detail) => {
-        detail.open = false;
-      });
-      detailsClosedBeforePrint = [];
-    });
-
-    document.getElementById("printButton").addEventListener("click", () => window.print());
-  </script>
+  <script src="data.js"></script>
+  <script src="app.js"></script>
 </body>
 </html>
