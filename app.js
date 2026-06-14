@@ -6,6 +6,40 @@ const SERVICE_LABELS = {
   snack: "Askaria",
   dinner: "Afaria"
 };
+const ALLERGENS = [
+  {
+    key: "gluten",
+    label: "Zeliakoak / glutena",
+    short: "Glutena",
+    className: "allergen-gluten",
+    note: "Ogia, pasta, gailetak, saltxitxak, albondigak, saldak eta saltsak bereizi eta etiketa berrikusi.",
+    terms: ["gluten", "zeliako", "ogi", "moldeko", "pasta", "gaileta", "frankfurt", "albondiga", "iragazki"]
+  },
+  {
+    key: "nuts",
+    label: "Fruitu lehorrak",
+    short: "Fruitu lehorrak",
+    className: "allergen-nuts",
+    note: "Fruitu lehorrak edo kakahueteak atera aurretik anoa bereziak itxi eta aparte utzi.",
+    terms: ["fruitu lehor", "kakahuete", "intxaur", "almendra", "hur", "pistatxo", "arrasto"]
+  },
+  {
+    key: "crustacean",
+    label: "Krustazeoak",
+    short: "Krustazeoak",
+    className: "allergen-crustacean",
+    note: "Itsaski edo krustazeorik sartuz gero, erabili tresna eta gainazal bereiziak.",
+    terms: ["krustazeo", "ganba", "langostino", "otarrain", "karramarro", "zigala", "itsaski", "marisko"]
+  },
+  {
+    key: "dairy",
+    label: "Esnekiak",
+    short: "Esnekiak",
+    className: "allergen-dairy",
+    note: "Gazta, esnea, gurina, esnegaina, jogurta eta natillak bereizi laktosarik edo esnekirik hartu ezin dutenentzat.",
+    terms: ["esne", "gazta", "gurin", "esnegain", "jogurt", "natilla", "philadelphia", "lakt"]
+  }
+];
 
 /**
  * @typedef {Object} Ingredient
@@ -53,6 +87,7 @@ const dom = {
   endDateInput: document.getElementById("endDateInput"),
   peopleInput: document.getElementById("peopleInput"),
   statusBox: document.getElementById("statusBox"),
+  allergenGuide: document.getElementById("allergenGuide"),
   calendarGrid: document.getElementById("calendarGrid"),
   selectedDayTitle: document.getElementById("selectedDayTitle"),
   selectedDayMeta: document.getElementById("selectedDayMeta"),
@@ -179,6 +214,7 @@ function setStatus(message) {
 function render() {
   ensureSelectedDay();
   syncControls();
+  renderAllergenGuide();
   renderCalendar();
   renderSelectedDay();
   renderNeeds();
@@ -194,8 +230,9 @@ function syncControls() {
 function renderCalendar() {
   dom.calendarGrid.textContent = "";
 
-  state.days.forEach((day) => {
-    const card = el("article", `day-card${day.id === selectedDayId ? " is-selected" : ""}`);
+  state.days.forEach((day, index) => {
+    const toneClass = `day-tone-${index % 10}`;
+    const card = el("article", `day-card ${toneClass}${day.id === selectedDayId ? " is-selected" : ""}`);
     card.dataset.dayId = day.id;
 
     const head = el("div", "day-head");
@@ -208,6 +245,11 @@ function renderCalendar() {
     head.append(titleWrap, selectButton);
     card.appendChild(head);
 
+    const dayAllergens = allergensForDay(day);
+    if (dayAllergens.length) {
+      card.appendChild(renderAllergenBadges(dayAllergens, "day-allergens"));
+    }
+
     SERVICE_KEYS.forEach((serviceKey) => {
       card.appendChild(renderSlot(day, serviceKey));
     });
@@ -217,7 +259,7 @@ function renderCalendar() {
 }
 
 function renderSlot(day, serviceKey) {
-  const slot = el("section", "meal-slot");
+  const slot = el("section", `meal-slot service-${serviceKey}`);
   slot.dataset.dayId = day.id;
   slot.dataset.service = serviceKey;
 
@@ -248,6 +290,7 @@ function renderAssignedRecipeCard(day, serviceKey, recipe) {
   card.appendChild(el("div", "recipe-title", recipe.title));
   card.appendChild(el("div", "recipe-meta", `${recipe.basePeople} laguneko oinarria · ${recipe.ingredients.length} osagai`));
   card.appendChild(renderTags(recipe.tags));
+  card.appendChild(renderAllergenBadges(recipeAllergens(recipe)));
 
   const actions = el("div", "card-actions");
   actions.appendChild(actionButton("Editatu", "edit-recipe", { recipeId: recipe.id }));
@@ -293,16 +336,22 @@ function renderSelectedDay() {
   dom.selectedDayMeta.textContent = `${formatDate(day.date)} · ${state.people} lagun`;
   dom.selectedDayMeals.textContent = "";
 
+  const dayAllergens = allergensForDay(day);
+  if (dayAllergens.length) {
+    dom.selectedDayMeals.appendChild(renderAllergenBadges(dayAllergens, "selected-day-alerts"));
+  }
+
   const list = el("div", "selected-meal-list");
   SERVICE_KEYS.forEach((serviceKey) => {
     const recipe = state.recipes[day.slots[serviceKey]];
-    const item = el("article", "selected-meal");
+    const item = el("article", `selected-meal service-${serviceKey}`);
     item.appendChild(el("h3", "", SERVICE_LABELS[serviceKey]));
     if (!recipe) {
       item.appendChild(el("p", "", "Zerbitzu hau hutsik dago."));
     } else {
       item.appendChild(el("div", "recipe-title", recipe.title));
       item.appendChild(renderTags(recipe.tags));
+      item.appendChild(renderAllergenBadges(recipeAllergens(recipe)));
       if (recipe.notes) item.appendChild(el("p", "", recipe.notes));
       const actions = el("div", "card-actions");
       actions.appendChild(actionButton("Editatu", "edit-recipe", { recipeId: recipe.id }, "small"));
@@ -374,6 +423,7 @@ function renderRecipeLibraryCard(recipe) {
   card.appendChild(el("div", "recipe-title", recipe.title));
   card.appendChild(el("div", "recipe-meta", `${recipe.mealTypes.map((key) => SERVICE_LABELS[key]).join(", ")} · ${recipe.basePeople} lagun · ${recipe.ingredients.length} osagai`));
   card.appendChild(renderTags(recipe.tags));
+  card.appendChild(renderAllergenBadges(recipeAllergens(recipe)));
   if (recipe.notes) card.appendChild(el("p", "muted", recipe.notes));
 
   const assign = el("div", "recipe-card-actions");
@@ -396,6 +446,60 @@ function renderRecipeLibraryCard(recipe) {
 function renderTags(tags) {
   const wrap = el("div", "tags");
   (tags || []).slice(0, 5).forEach((tag) => wrap.appendChild(el("span", "tag", tag)));
+  return wrap;
+}
+
+function renderAllergenGuide() {
+  if (!dom.allergenGuide || dom.allergenGuide.children.length) return;
+  ALLERGENS.forEach((allergen) => {
+    const card = el("article", `allergen-guide-card ${allergen.className}`);
+    card.append(
+      el("strong", "", allergen.label),
+      el("p", "", allergen.note)
+    );
+    dom.allergenGuide.appendChild(card);
+  });
+}
+
+function allergensForDay(day) {
+  const found = new Map();
+  SERVICE_KEYS.forEach((serviceKey) => {
+    const recipe = state.recipes[day.slots[serviceKey]];
+    if (!recipe) return;
+    recipeAllergens(recipe).forEach((allergen) => found.set(allergen.key, allergen));
+  });
+  return [...found.values()];
+}
+
+function recipeAllergens(recipe) {
+  const haystack = normalizeSearchText([
+    recipe.title,
+    recipe.notes,
+    ...(recipe.tags || []),
+    ...recipe.ingredients.map((ingredient) => `${ingredient.name} ${ingredient.category} ${ingredient.note}`)
+  ].join(" "));
+  return ALLERGENS.filter((allergen) => allergen.terms.some((term) => containsAllergenTerm(haystack, term)));
+}
+
+function containsAllergenTerm(haystack, term) {
+  const normalizedTerm = normalizeSearchText(term);
+  if (!normalizedTerm) return false;
+  if (normalizedTerm.includes(" ")) return haystack.includes(normalizedTerm);
+  const pattern = new RegExp(`(^|[^a-z0-9])${escapeRegExp(normalizedTerm)}[a-z0-9]*`);
+  return pattern.test(haystack);
+}
+
+function escapeRegExp(text) {
+  return text.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
+function renderAllergenBadges(allergens, className = "") {
+  const wrap = el("div", `allergen-row ${className}`.trim());
+  (allergens || []).forEach((allergen) => {
+    const badge = el("span", `allergen-badge ${allergen.className}`, allergen.short);
+    badge.title = allergen.note;
+    wrap.appendChild(badge);
+  });
   return wrap;
 }
 
@@ -498,8 +602,16 @@ function recipeMatches(recipe, query) {
     recipe.notes,
     ...(recipe.tags || []),
     ...recipe.ingredients.map((ingredient) => `${ingredient.name} ${ingredient.category} ${ingredient.note}`)
-  ].join(" ").toLowerCase();
-  return haystack.includes(query);
+  ].join(" ");
+  return normalizeSearchText(haystack).includes(normalizeSearchText(query));
+}
+
+function normalizeSearchText(text) {
+  return (text || "")
+    .toString()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase();
 }
 
 function recipesForService(serviceKey) {

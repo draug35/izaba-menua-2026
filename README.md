@@ -12,6 +12,8 @@ Ez du backendik, instalaziorik, menpekotasunik edo konpilazio-pausorik behar. Gi
 - Mugikorrean platerak mugitu botoien bidez.
 - Errezetak sortu, editatu, bikoiztu eta ezabatu.
 - Eguneko osagai-beharrak eta plan osoko guztizko beharrak ikusi.
+- Egunak eta zerbitzuak kolorez bereizi, egutegia azkar irakurtzeko.
+- Alergeno gida bizkorra ikusi: glutena/zeliakoak, fruitu lehorrak, krustazeoak eta esnekiak.
 - Plana `localStorage` bidez gorde.
 - Plan osoa JSON gisa esportatu eta inportatu.
 - Inprimatzeko ikuspegi garbia erabili.

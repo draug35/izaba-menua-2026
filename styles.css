@@ -1,18 +1,23 @@
 :root {
-  --cream: #f6efdf;
-  --paper: #fffaf0;
-  --green: #3f5f3d;
-  --green-dark: #273f2a;
-  --sage: #d9e2c6;
-  --moss: #6d7f42;
-  --earth: #8b5e34;
-  --clay: #b77149;
-  --ink: #2f2a22;
-  --muted: #6d665c;
-  --line: #dfd2bb;
-  --danger: #8d3f32;
-  --success: #3f6f46;
-  --shadow: 0 14px 34px rgba(55, 43, 24, 0.12);
+  --cream: #f4f1e8;
+  --paper: #fffdf8;
+  --surface: #ffffff;
+  --green: #246b4b;
+  --green-dark: #163a2c;
+  --sage: #dce8d2;
+  --moss: #617a40;
+  --earth: #765536;
+  --clay: #bd6443;
+  --ink: #1f2721;
+  --muted: #626d64;
+  --line: #d8d8c8;
+  --danger: #b33c32;
+  --success: #287a50;
+  --day-accent: var(--green);
+  --day-soft: #f2f8ef;
+  --meal-accent: var(--green);
+  --meal-soft: #f5f8ef;
+  --shadow: 0 18px 38px rgba(46, 58, 40, 0.12);
 }
 
 * {
@@ -27,8 +32,9 @@ body {
   margin: 0;
   color: var(--ink);
   background:
-    radial-gradient(circle at top left, rgba(217, 226, 198, 0.65), transparent 32rem),
-    linear-gradient(180deg, var(--cream), #f4ead5 48%, #f9f2e4);
+    linear-gradient(135deg, rgba(36, 107, 75, 0.11), transparent 34rem),
+    linear-gradient(225deg, rgba(189, 100, 67, 0.10), transparent 28rem),
+    var(--cream);
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   line-height: 1.45;
 }
@@ -127,7 +133,7 @@ h4 {
   min-height: 42px;
   border: 1px solid var(--line);
   border-radius: 8px;
-  background: var(--paper);
+  background: var(--surface);
   color: var(--green-dark);
   font-weight: 800;
   text-decoration: none;
@@ -147,19 +153,19 @@ h4 {
 
 .button:hover,
 .icon-button:hover {
-  border-color: rgba(63, 95, 61, 0.55);
-  background: #fffdf7;
+  border-color: rgba(36, 107, 75, 0.48);
+  background: #f7fbf4;
   transform: translateY(-1px);
 }
 
 .button.primary {
-  border-color: rgba(63, 95, 61, 0.55);
+  border-color: rgba(36, 107, 75, 0.72);
   background: var(--green);
-  color: #fff8e9;
+  color: #fffdf5;
 }
 
 .button.danger {
-  border-color: rgba(141, 63, 50, 0.32);
+  border-color: rgba(179, 60, 50, 0.34);
   color: var(--danger);
 }
 
@@ -167,9 +173,9 @@ h4 {
   position: sticky;
   top: 0;
   z-index: 20;
-  border-top: 1px solid rgba(139, 94, 52, 0.14);
-  border-bottom: 1px solid rgba(139, 94, 52, 0.18);
-  background: rgba(247, 240, 223, 0.94);
+  border-top: 1px solid rgba(118, 85, 54, 0.14);
+  border-bottom: 1px solid rgba(118, 85, 54, 0.18);
+  background: rgba(244, 241, 232, 0.94);
   backdrop-filter: blur(12px);
 }
 
@@ -183,7 +189,7 @@ h4 {
   padding: 8px 11px;
   border: 1px solid var(--line);
   border-radius: 8px;
-  background: var(--paper);
+  background: rgba(255, 255, 255, 0.82);
   color: var(--green-dark);
   font-weight: 800;
   text-decoration: none;
@@ -199,10 +205,12 @@ h4 {
 .control-panel,
 .workspace,
 .panel-card,
-.wide-section {
-  border: 1px solid rgba(139, 94, 52, 0.18);
+.wide-section,
+.allergen-guide {
+  min-width: 0;
+  border: 1px solid rgba(118, 85, 54, 0.18);
   border-radius: 8px;
-  background: rgba(255, 250, 240, 0.9);
+  background: rgba(255, 253, 248, 0.92);
   box-shadow: var(--shadow);
 }
 
@@ -230,7 +238,7 @@ textarea {
   min-height: 42px;
   border: 1px solid var(--line);
   border-radius: 8px;
-  background: #fffdf7;
+  background: var(--surface);
   color: var(--ink);
   padding: 9px 10px;
 }
@@ -242,16 +250,17 @@ textarea {
 .status-box {
   min-height: 42px;
   padding: 10px 12px;
-  border: 1px solid rgba(63, 95, 61, 0.24);
+  border: 1px solid rgba(36, 107, 75, 0.24);
   border-radius: 8px;
-  background: #edf3e0;
+  background: #eef7ed;
   color: var(--green-dark);
   font-size: 0.92rem;
   font-weight: 760;
 }
 
 .workspace,
-.wide-section {
+.wide-section,
+.allergen-guide {
   padding: 16px;
 }
 
@@ -265,7 +274,8 @@ textarea {
   padding: 14px;
 }
 
-.wide-section {
+.wide-section,
+.allergen-guide {
   grid-column: 1 / -1;
 }
 
@@ -294,17 +304,80 @@ textarea {
 }
 
 .day-card {
+  --day-accent: #246b4b;
+  --day-soft: #f2f8ef;
+  position: relative;
   display: grid;
   gap: 10px;
   padding: 12px;
-  border: 1px solid var(--line);
+  border: 1px solid rgba(31, 39, 33, 0.12);
+  border-left: 6px solid var(--day-accent);
   border-radius: 8px;
-  background: rgba(255, 253, 247, 0.86);
+  background: linear-gradient(180deg, var(--day-soft), var(--paper) 46%);
+  overflow: hidden;
 }
 
 .day-card.is-selected {
-  border-color: rgba(63, 95, 61, 0.72);
-  box-shadow: 0 0 0 3px rgba(63, 95, 61, 0.12);
+  border-color: var(--day-accent);
+  box-shadow: 0 0 0 3px rgba(36, 107, 75, 0.14);
+}
+
+.day-card::before {
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 4px;
+  background: var(--day-accent);
+  content: "";
+}
+
+.day-tone-0 {
+  --day-accent: #246b4b;
+  --day-soft: #edf7ef;
+}
+
+.day-tone-1 {
+  --day-accent: #a7622f;
+  --day-soft: #fff1e3;
+}
+
+.day-tone-2 {
+  --day-accent: #2d7580;
+  --day-soft: #eaf7f7;
+}
+
+.day-tone-3 {
+  --day-accent: #9a5146;
+  --day-soft: #fff0ed;
+}
+
+.day-tone-4 {
+  --day-accent: #6d7d34;
+  --day-soft: #f1f7df;
+}
+
+.day-tone-5 {
+  --day-accent: #a0445b;
+  --day-soft: #fff0f4;
+}
+
+.day-tone-6 {
+  --day-accent: #536fa4;
+  --day-soft: #eef2fb;
+}
+
+.day-tone-7 {
+  --day-accent: #8a6a28;
+  --day-soft: #fff5d9;
+}
+
+.day-tone-8 {
+  --day-accent: #3d7f68;
+  --day-soft: #eaf7f1;
+}
+
+.day-tone-9 {
+  --day-accent: #6f5aa1;
+  --day-soft: #f3effc;
 }
 
 .day-head {
@@ -312,6 +385,11 @@ textarea {
   gap: 10px;
   align-items: start;
   justify-content: space-between;
+}
+
+.day-head h3 {
+  color: var(--day-accent);
+  font-size: 1.12rem;
 }
 
 .day-head button {
@@ -323,23 +401,52 @@ textarea {
 .date-label {
   display: block;
   margin-top: 3px;
-  color: var(--muted);
+  color: #4f5c51;
   font-size: 0.85rem;
+  font-weight: 760;
 }
 
 .meal-slot {
+  --meal-accent: #246b4b;
+  --meal-soft: #f5f8ef;
   display: grid;
   gap: 8px;
   min-height: 122px;
   padding: 10px;
-  border: 1px dashed rgba(109, 127, 66, 0.42);
+  border: 1px solid rgba(31, 39, 33, 0.11);
+  border-left: 4px solid var(--meal-accent);
   border-radius: 8px;
-  background: #fbf6e8;
+  background: var(--meal-soft);
+}
+
+.meal-slot.service-breakfast,
+.selected-meal.service-breakfast {
+  --meal-accent: #d18b27;
+  --meal-soft: #fff6df;
+}
+
+.meal-slot.service-lunch,
+.selected-meal.service-lunch {
+  --meal-accent: #24734f;
+  --meal-soft: #edf8ef;
+}
+
+.meal-slot.service-snack,
+.selected-meal.service-snack {
+  --meal-accent: #bd6443;
+  --meal-soft: #fff0e7;
+}
+
+.meal-slot.service-dinner,
+.selected-meal.service-dinner {
+  --meal-accent: #506fa6;
+  --meal-soft: #eef3fb;
 }
 
 .meal-slot.drag-over {
-  border-color: var(--green);
-  background: #eef4df;
+  border-color: var(--meal-accent);
+  background: #ffffff;
+  box-shadow: inset 0 0 0 2px rgba(36, 107, 75, 0.14);
 }
 
 .slot-head {
@@ -350,7 +457,18 @@ textarea {
 }
 
 .slot-head strong {
-  color: var(--green-dark);
+  display: inline-flex;
+  gap: 7px;
+  align-items: center;
+  color: #27322b;
+}
+
+.slot-head strong::before {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--meal-accent);
+  content: "";
 }
 
 .recipe-card,
@@ -360,11 +478,12 @@ textarea {
   padding: 10px;
   border: 1px solid var(--line);
   border-radius: 8px;
-  background: var(--paper);
-  box-shadow: 0 6px 18px rgba(55, 43, 24, 0.07);
+  background: var(--surface);
+  box-shadow: 0 8px 18px rgba(46, 58, 40, 0.08);
 }
 
 .meal-card {
+  border-left: 3px solid var(--meal-accent);
   cursor: grab;
 }
 
@@ -407,6 +526,84 @@ textarea {
   color: #68421f;
 }
 
+.allergen-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(210px, 100%), 1fr));
+  gap: 10px;
+}
+
+.allergen-guide-card {
+  --allergen: #246b4b;
+  --allergen-bg: #eef7ed;
+  display: grid;
+  gap: 5px;
+  padding: 11px;
+  border: 1px solid rgba(31, 39, 33, 0.11);
+  border-left: 5px solid var(--allergen);
+  border-radius: 8px;
+  background: var(--allergen-bg);
+}
+
+.allergen-guide-card strong {
+  color: #1f2721;
+}
+
+.allergen-guide-card p {
+  margin: 0;
+  color: #526056;
+  font-size: 0.88rem;
+}
+
+.allergen-row {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.allergen-row:empty {
+  display: none;
+}
+
+.day-allergens {
+  padding-bottom: 2px;
+}
+
+.allergen-badge {
+  --allergen: #246b4b;
+  --allergen-bg: #eef7ed;
+  display: inline-flex;
+  align-items: center;
+  min-height: 25px;
+  padding: 4px 8px;
+  border: 1px solid var(--allergen);
+  border-radius: 999px;
+  background: var(--allergen-bg);
+  color: #1d2821;
+  font-size: 0.75rem;
+  font-weight: 900;
+}
+
+.allergen-gluten {
+  --allergen: #b33c32;
+  --allergen-bg: #fff0ed;
+}
+
+.allergen-nuts {
+  --allergen: #8b5e1f;
+  --allergen-bg: #fff4d9;
+}
+
+.allergen-crustacean {
+  --allergen: #207684;
+  --allergen-bg: #e7f7f8;
+}
+
+.allergen-dairy {
+  --allergen: #5c66a8;
+  --allergen-bg: #f0f2ff;
+}
+
 .card-actions,
 .move-control,
 .empty-actions,
@@ -441,11 +638,20 @@ textarea {
   gap: 10px;
 }
 
+.selected-day-alerts {
+  margin-bottom: 10px;
+  padding: 8px;
+  border: 1px solid rgba(31, 39, 33, 0.10);
+  border-radius: 8px;
+  background: #fffdf8;
+}
+
 .selected-meal {
   padding: 10px;
   border: 1px solid var(--line);
+  border-left: 4px solid var(--meal-accent);
   border-radius: 8px;
-  background: #fffdf7;
+  background: var(--meal-soft);
 }
 
 .selected-meal h3 {
@@ -462,7 +668,7 @@ textarea {
   overflow-x: auto;
   border: 1px solid var(--line);
   border-radius: 8px;
-  background: var(--paper);
+  background: var(--surface);
 }
 
 table {
@@ -483,7 +689,7 @@ th {
   position: sticky;
   top: 0;
   z-index: 1;
-  background: #efe5cf;
+  background: #edf2e7;
   color: var(--green-dark);
   font-size: 0.78rem;
   letter-spacing: 0;
@@ -651,6 +857,14 @@ tbody tr:last-child td {
 @media (max-width: 760px) {
   .page {
     width: min(100% - 20px, 1440px);
+  }
+
+  h1 {
+    font-size: 2.7rem;
+  }
+
+  h2 {
+    font-size: 1.55rem;
   }
 
   .header-grid,
