@@ -264,8 +264,14 @@ textarea {
   padding: 16px;
 }
 
+.workspace {
+  grid-column: 1 / -1;
+}
+
 .side-panel {
   display: grid;
+  grid-column: 1 / -1;
+  grid-template-columns: minmax(0, 0.88fr) minmax(0, 1.12fr);
   gap: 18px;
   align-content: start;
 }
@@ -298,9 +304,54 @@ textarea {
 }
 
 .calendar-grid {
+  display: block;
+  overflow-x: auto;
+  padding-bottom: 8px;
+  scrollbar-color: rgba(36, 107, 75, 0.5) rgba(216, 216, 200, 0.45);
+}
+
+.calendar-board {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
-  gap: 12px;
+  grid-template-columns: minmax(104px, 0.38fr) repeat(var(--day-count), minmax(238px, 1fr));
+  gap: 8px;
+  min-width: max(100%, var(--calendar-min-width));
+  align-items: stretch;
+}
+
+.board-corner,
+.meal-row-label {
+  position: sticky;
+  left: 0;
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  min-height: 82px;
+  padding: 10px;
+  border: 1px solid rgba(31, 39, 33, 0.12);
+  border-radius: 8px;
+  background: #f8f4ea;
+  color: var(--green-dark);
+  font-size: 0.84rem;
+  font-weight: 950;
+}
+
+.board-corner {
+  min-height: 156px;
+  align-items: start;
+  background: var(--green-dark);
+  color: #fffdf5;
+}
+
+.meal-row-label {
+  border-left: 5px solid var(--meal-accent);
+  background: var(--meal-soft);
+}
+
+.meal-row-label strong {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  line-height: 1;
+  text-transform: uppercase;
 }
 
 .day-card {
@@ -317,9 +368,57 @@ textarea {
   overflow: hidden;
 }
 
+.board-day-header {
+  min-height: 156px;
+  border: 0;
+  border-left: 0;
+  background: var(--day-accent);
+  color: #fffdf5;
+}
+
+.board-day-header .day-head h3,
+.board-day-header .date-label {
+  color: #fffdf5;
+}
+
+.board-day-header .day-head button {
+  border-color: rgba(255, 253, 245, 0.58);
+  background: rgba(255, 253, 245, 0.96);
+  color: #173a2c;
+}
+
+.board-day-header .allergen-badge {
+  border-color: rgba(255, 253, 245, 0.64);
+  background: rgba(255, 253, 245, 0.92);
+}
+
+.day-menu-strip {
+  display: grid;
+  gap: 5px;
+  padding: 8px;
+  border-radius: 8px;
+  background: rgba(255, 253, 245, 0.16);
+  color: #fffdf5;
+  font-size: 0.78rem;
+  font-weight: 760;
+}
+
+.day-menu-strip span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 .day-card.is-selected {
   border-color: var(--day-accent);
   box-shadow: 0 0 0 3px rgba(36, 107, 75, 0.14);
+}
+
+.board-day-header.is-selected {
+  border-color: transparent;
+  box-shadow:
+    inset 0 0 0 3px rgba(255, 253, 245, 0.72),
+    0 0 0 3px rgba(36, 107, 75, 0.20);
 }
 
 .day-card.day-drag-over {
@@ -427,26 +526,37 @@ textarea {
   background: var(--meal-soft);
 }
 
+.board-slot {
+  min-height: 242px;
+  border-top: 7px solid var(--day-accent);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.72);
+}
+
 .meal-slot.service-breakfast,
-.selected-meal.service-breakfast {
+.selected-meal.service-breakfast,
+.meal-row-label.service-breakfast,
+.breakfast-summary.service-breakfast {
   --meal-accent: #d18b27;
   --meal-soft: #fff6df;
 }
 
 .meal-slot.service-lunch,
-.selected-meal.service-lunch {
+.selected-meal.service-lunch,
+.meal-row-label.service-lunch {
   --meal-accent: #24734f;
   --meal-soft: #edf8ef;
 }
 
 .meal-slot.service-snack,
-.selected-meal.service-snack {
+.selected-meal.service-snack,
+.meal-row-label.service-snack {
   --meal-accent: #bd6443;
   --meal-soft: #fff0e7;
 }
 
 .meal-slot.service-dinner,
-.selected-meal.service-dinner {
+.selected-meal.service-dinner,
+.meal-row-label.service-dinner {
   --meal-accent: #506fa6;
   --meal-soft: #eef3fb;
 }
@@ -477,6 +587,28 @@ textarea {
   border-radius: 50%;
   background: var(--meal-accent);
   content: "";
+}
+
+.breakfast-summary {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+  padding: 10px 12px;
+  border: 1px solid rgba(31, 39, 33, 0.12);
+  border-left: 6px solid var(--meal-accent);
+  border-radius: 8px;
+  background: var(--meal-soft);
+}
+
+.breakfast-summary strong {
+  color: #2f3628;
+}
+
+.breakfast-summary span {
+  color: var(--muted);
+  font-weight: 760;
 }
 
 .recipe-card,
@@ -652,6 +784,18 @@ textarea {
   border: 1px solid rgba(31, 39, 33, 0.10);
   border-radius: 8px;
   background: #fffdf8;
+}
+
+.fixed-breakfast-note {
+  margin: 0 0 10px;
+  padding: 9px 10px;
+  border: 1px solid rgba(209, 139, 39, 0.26);
+  border-left: 4px solid #d18b27;
+  border-radius: 8px;
+  background: #fff6df;
+  color: #5b513e;
+  font-size: 0.9rem;
+  font-weight: 760;
 }
 
 .selected-meal {

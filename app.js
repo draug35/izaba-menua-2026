@@ -1,5 +1,6 @@
 const STORAGE_KEY = "izaba-menua-planner-v1";
 const SERVICE_KEYS = ["breakfast", "lunch", "snack", "dinner"];
+const CALENDAR_SERVICE_KEYS = ["lunch", "snack", "dinner"];
 const SERVICE_LABELS = {
   breakfast: "Gosaria",
   lunch: "Bazkaria",
@@ -229,33 +230,76 @@ function syncControls() {
 
 function renderCalendar() {
   dom.calendarGrid.textContent = "";
+  dom.calendarGrid.style.setProperty("--day-count", state.days.length);
+
+  dom.calendarGrid.appendChild(renderBreakfastSummary());
+
+  const board = el("div", "calendar-board");
+  board.style.setProperty("--day-count", state.days.length);
+  board.style.setProperty("--calendar-min-width", `${112 + state.days.length * 238}px`);
+  board.appendChild(el("div", "board-corner", "Zerbitzua"));
 
   state.days.forEach((day, index) => {
-    const toneClass = `day-tone-${index % 10}`;
-    const card = el("article", `day-card ${toneClass}${day.id === selectedDayId ? " is-selected" : ""}`);
-    card.dataset.dayId = day.id;
-
-    const head = el("div", "day-head");
-    const titleWrap = el("div");
-    titleWrap.append(el("h3", "", day.label), el("span", "date-label", formatDate(day.date)));
-    const selectButton = el("button", "button small-button", "Aukeratu");
-    selectButton.type = "button";
-    selectButton.dataset.action = "select-day";
-    selectButton.dataset.dayId = day.id;
-    head.append(titleWrap, selectButton);
-    card.appendChild(head);
-
-    const dayAllergens = allergensForDay(day);
-    if (dayAllergens.length) {
-      card.appendChild(renderAllergenBadges(dayAllergens, "day-allergens"));
-    }
-
-    SERVICE_KEYS.forEach((serviceKey) => {
-      card.appendChild(renderSlot(day, serviceKey));
-    });
-
-    dom.calendarGrid.appendChild(card);
+    board.appendChild(renderDayHeader(day, index));
   });
+
+  CALENDAR_SERVICE_KEYS.forEach((serviceKey) => {
+    const label = el("div", `meal-row-label service-${serviceKey}`);
+    label.appendChild(el("strong", "", SERVICE_LABELS[serviceKey]));
+    board.appendChild(label);
+
+    state.days.forEach((day, index) => {
+      const slot = renderSlot(day, serviceKey);
+      slot.classList.add("board-slot", `day-tone-${index % 10}`);
+      board.appendChild(slot);
+    });
+  });
+
+  dom.calendarGrid.appendChild(board);
+}
+
+function renderBreakfastSummary() {
+  const recipe = state.recipes["gosari-finkoa"];
+  const summary = el("section", "breakfast-summary service-breakfast");
+  summary.appendChild(el("strong", "", "Gosari finkoa"));
+  summary.appendChild(el("span", "", recipe ? `${recipe.title} · 3tik 11ra · kalkuluetan sartuta` : "Gosaria kalkuluetan sartuta"));
+  if (recipe) summary.appendChild(renderAllergenBadges(recipeAllergens(recipe)));
+  return summary;
+}
+
+function renderDayHeader(day, index) {
+  const toneClass = `day-tone-${index % 10}`;
+  const card = el("article", `day-card board-day-header ${toneClass}${day.id === selectedDayId ? " is-selected" : ""}`);
+  card.dataset.dayId = day.id;
+
+  const head = el("div", "day-head");
+  const titleWrap = el("div");
+  titleWrap.append(el("h3", "", day.label), el("span", "date-label", formatDate(day.date)));
+  const selectButton = el("button", "button small-button", "Aukeratu");
+  selectButton.type = "button";
+  selectButton.dataset.action = "select-day";
+  selectButton.dataset.dayId = day.id;
+  head.append(titleWrap, selectButton);
+  card.appendChild(head);
+
+  const quickList = el("div", "day-menu-strip");
+  CALENDAR_SERVICE_KEYS.forEach((serviceKey) => {
+    const recipe = state.recipes[day.slots[serviceKey]];
+    const line = el("span", "");
+    line.append(
+      el("b", "", `${SERVICE_LABELS[serviceKey]}: `),
+      document.createTextNode(recipe?.title || "Hutsik")
+    );
+    quickList.appendChild(line);
+  });
+  card.appendChild(quickList);
+
+  const dayAllergens = allergensForDay(day, CALENDAR_SERVICE_KEYS);
+  if (dayAllergens.length) {
+    card.appendChild(renderAllergenBadges(dayAllergens, "day-allergens"));
+  }
+
+  return card;
 }
 
 function renderSlot(day, serviceKey) {
@@ -342,7 +386,13 @@ function renderSelectedDay() {
   }
 
   const list = el("div", "selected-meal-list");
-  SERVICE_KEYS.forEach((serviceKey) => {
+  const breakfastRecipe = state.recipes[day.slots.breakfast];
+  if (breakfastRecipe) {
+    const breakfastNote = el("p", "fixed-breakfast-note", `${SERVICE_LABELS.breakfast}: ${breakfastRecipe.title}. Ez da egutegian errepikatzen, baina eguneko kalkuluetan sartzen da.`);
+    dom.selectedDayMeals.appendChild(breakfastNote);
+  }
+
+  CALENDAR_SERVICE_KEYS.forEach((serviceKey) => {
     const recipe = state.recipes[day.slots[serviceKey]];
     const item = el("article", `selected-meal service-${serviceKey}`);
     item.appendChild(el("h3", "", SERVICE_LABELS[serviceKey]));
@@ -461,9 +511,9 @@ function renderAllergenGuide() {
   });
 }
 
-function allergensForDay(day) {
+function allergensForDay(day, serviceKeys = SERVICE_KEYS) {
   const found = new Map();
-  SERVICE_KEYS.forEach((serviceKey) => {
+  serviceKeys.forEach((serviceKey) => {
     const recipe = state.recipes[day.slots[serviceKey]];
     if (!recipe) return;
     recipeAllergens(recipe).forEach((allergen) => found.set(allergen.key, allergen));
