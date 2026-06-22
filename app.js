@@ -7,6 +7,10 @@ const SERVICE_LABELS = {
   snack: "Askaria",
   dinner: "Afaria"
 };
+const KIND_LABELS = {
+  kanpamendua: "🏕️ Kanpamendua",
+  txangoa: "🚶 Txangoa"
+};
 const ALLERGENS = [
   {
     key: "gluten",
@@ -169,6 +173,7 @@ function normalizeState(candidate, fallback) {
     id: day.id || day.date || `day-${index + 1}`,
     date: day.date || normalized.dateRange.start,
     label: day.label || `${index + 1}. eguna`,
+    kind: day.kind === "txangoa" ? "txangoa" : "kanpamendua",
     slots: normalizeSlots(day.slots)
   }));
 
@@ -243,6 +248,7 @@ function renderCalendar() {
   dom.calendarGrid.textContent = "";
   dom.calendarGrid.style.setProperty("--day-count", state.days.length);
 
+  dom.calendarGrid.appendChild(renderKindLegend());
   dom.calendarGrid.appendChild(renderBreakfastSummary());
 
   const board = el("div", "calendar-board");
@@ -261,12 +267,22 @@ function renderCalendar() {
 
     state.days.forEach((day, index) => {
       const slot = renderSlot(day, serviceKey);
-      slot.classList.add("board-slot", `day-tone-${index % 10}`);
+      slot.classList.add("board-slot", `day-tone-${index % 10}`, `day-kind-${dayKind(day)}`);
       board.appendChild(slot);
     });
   });
 
   dom.calendarGrid.appendChild(board);
+}
+
+function renderKindLegend() {
+  const legend = el("div", "calendar-legend");
+  ["kanpamendua", "txangoa"].forEach((kind) => {
+    const item = el("span", `legend-item day-kind-${kind}`);
+    item.append(el("span", "legend-swatch"), document.createTextNode(KIND_LABELS[kind]));
+    legend.appendChild(item);
+  });
+  return legend;
 }
 
 function renderBreakfastSummary() {
@@ -280,7 +296,8 @@ function renderBreakfastSummary() {
 
 function renderDayHeader(day, index) {
   const toneClass = `day-tone-${index % 10}`;
-  const card = el("article", `day-card board-day-header ${toneClass}${day.id === selectedDayId ? " is-selected" : ""}`);
+  const kind = dayKind(day);
+  const card = el("article", `day-card board-day-header ${toneClass} day-kind-${kind}${day.id === selectedDayId ? " is-selected" : ""}`);
   card.dataset.dayId = day.id;
 
   const head = el("div", "day-head");
@@ -292,6 +309,13 @@ function renderDayHeader(day, index) {
   selectButton.dataset.dayId = day.id;
   head.append(titleWrap, selectButton);
   card.appendChild(head);
+
+  const kindButton = el("button", "button small-button day-kind-toggle", KIND_LABELS[kind]);
+  kindButton.type = "button";
+  kindButton.dataset.action = "toggle-kind";
+  kindButton.dataset.dayId = day.id;
+  kindButton.title = "Aldatu Kanpamendua / Txangoa";
+  card.appendChild(kindButton);
 
   const quickList = el("div", "day-menu-strip");
   CALENDAR_SERVICE_KEYS.forEach((serviceKey) => {
@@ -388,7 +412,7 @@ function renderSelectedDay() {
   }
 
   dom.selectedDayTitle.textContent = day.label;
-  dom.selectedDayMeta.textContent = `${formatDate(day.date)} · ${state.people} lagun`;
+  dom.selectedDayMeta.textContent = `${formatDate(day.date)} · ${state.people} lagun · ${dayKind(day) === "txangoa" ? "🚶 Txangoa" : "🏕️ Kanpamendua"}`;
   dom.selectedDayMeals.textContent = "";
 
   const dayAllergens = allergensForDay(day);
@@ -850,6 +874,18 @@ function ensureSelectedDay() {
   }
 }
 
+function dayKind(day) {
+  return day && day.kind === "txangoa" ? "txangoa" : "kanpamendua";
+}
+
+function toggleDayKind(dayId) {
+  const day = state.days.find((item) => item.id === dayId);
+  if (!day) return;
+  day.kind = dayKind(day) === "txangoa" ? "kanpamendua" : "txangoa";
+  persist(`${day.label}: ${day.kind === "txangoa" ? "Txangoa" : "Kanpamendua"}.`);
+  render();
+}
+
 function updateDateRange() {
   const start = dom.startDateInput.value;
   let end = dom.endDateInput.value;
@@ -878,6 +914,7 @@ function rebuildDays(start, end) {
         id: date,
         date,
         label: existing.label || defaults[index]?.label || `${index + 1}. eguna`,
+        kind: dayKind(existing),
         slots: clone(existing.slots)
       };
     }
@@ -886,6 +923,7 @@ function rebuildDays(start, end) {
       id: date,
       date,
       label: defaultDay?.label || `${index + 1}. eguna`,
+      kind: "kanpamendua",
       slots: defaultDay ? clone(defaultDay.slots) : emptySlots()
     };
   });
@@ -1550,6 +1588,10 @@ dom.calendarGrid.addEventListener("click", (event) => {
   if (action === "select-day") {
     selectedDayId = button.dataset.dayId;
     render();
+  }
+
+  if (action === "toggle-kind") {
+    toggleDayKind(button.dataset.dayId);
   }
 
   if (action === "clear-slot") {
