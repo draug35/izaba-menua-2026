@@ -88,6 +88,10 @@ const dom = {
   endDateInput: document.getElementById("endDateInput"),
   peopleInput: document.getElementById("peopleInput"),
   statusBox: document.getElementById("statusBox"),
+  statusCards: document.getElementById("statusCards"),
+  storageNote: document.getElementById("storageNote"),
+  validationReport: document.getElementById("validationReport"),
+  checkButton: document.getElementById("checkButton"),
   allergenGuide: document.getElementById("allergenGuide"),
   calendarGrid: document.getElementById("calendarGrid"),
   selectedDayTitle: document.getElementById("selectedDayTitle"),
@@ -104,6 +108,8 @@ const dom = {
   importFile: document.getElementById("importFile"),
   resetButton: document.getElementById("resetButton"),
   printButton: document.getElementById("printButton"),
+  printShoppingButton: document.getElementById("printShoppingButton"),
+  printKitchenButton: document.getElementById("printKitchenButton"),
   newRecipeButton: document.getElementById("newRecipeButton"),
   recipeDialog: document.getElementById("recipeDialog"),
   recipeForm: document.getElementById("recipeForm"),
@@ -153,7 +159,10 @@ function normalizeState(candidate, fallback) {
     },
     services: fallback.services,
     recipes: candidate.recipes && typeof candidate.recipes === "object" ? candidate.recipes : fallback.recipes,
-    days: Array.isArray(candidate.days) && candidate.days.length ? candidate.days : fallback.days
+    days: Array.isArray(candidate.days) && candidate.days.length ? candidate.days : fallback.days,
+    updatedAt: candidate.updatedAt || null,
+    lastExportAt: candidate.lastExportAt || null,
+    purchased: candidate.purchased && typeof candidate.purchased === "object" ? candidate.purchased : {}
   };
 
   normalized.days = normalized.days.map((day, index) => ({
@@ -204,7 +213,8 @@ function numberOrNull(value) {
 }
 
 function persist(message) {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify({ ...state, updatedAt: new Date().toISOString() }));
+  state.updatedAt = new Date().toISOString();
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
   setStatus(message || "Gordeta.");
 }
 
@@ -215,6 +225,7 @@ function setStatus(message) {
 function render() {
   ensureSelectedDay();
   syncControls();
+  renderStatusPanel();
   renderAllergenGuide();
   renderCalendar();
   renderSelectedDay();
@@ -403,6 +414,10 @@ function renderSelectedDay() {
       item.appendChild(renderTags(recipe.tags));
       item.appendChild(renderAllergenBadges(recipeAllergens(recipe)));
       if (recipe.notes) item.appendChild(el("p", "", recipe.notes));
+      if (recipe.ingredients.length) {
+        item.appendChild(el("p", "readout-caption", `Osagaiak · ${state.people} lagunentzat`));
+        item.appendChild(renderRecipeIngredients(recipe));
+      }
       const actions = el("div", "card-actions");
       actions.appendChild(actionButton("Editatu", "edit-recipe", { recipeId: recipe.id }, "small"));
       actions.appendChild(actionButton("Kendu", "clear-slot", { dayId: day.id, service: serviceKey }, "small"));
@@ -421,7 +436,90 @@ function renderNeeds() {
   renderNeedsRows(dom.dayNeedsBody, dayNeeds, false);
 
   const totalNeeds = calculateNeeds(state.days);
-  renderNeedsRows(dom.totalNeedsBody, totalNeeds, true);
+  renderShoppingTotals(totalNeeds);
+}
+
+const SHOP_GROUP_ORDER = [
+  "Hemen erosi / eraman",
+  "Han erosi / txandaka",
+  "Sukaldea",
+  "Zalantzazkoak / besteak"
+];
+
+function shopGroupLabel(purchaseType) {
+  const text = purchaseType || "";
+  if (text.includes("Hemen")) return "Hemen erosi / eraman";
+  if (text.includes("Han")) return "Han erosi / txandaka";
+  if (text.includes("Sukald")) return "Sukaldea";
+  return "Zalantzazkoak / besteak";
+}
+
+function purchasedKey(item) {
+  return [item.category, item.name, item.unit, item.purchaseType].join("|").toLowerCase();
+}
+
+function renderShoppingTotals(rows) {
+  state.purchased = state.purchased || {};
+  const target = dom.totalNeedsBody;
+  target.textContent = "";
+  if (!rows.length) {
+    const row = document.createElement("tr");
+    const cell = document.createElement("td");
+    cell.colSpan = 6;
+    cell.textContent = "Ez dago kalkulatzeko osagairik.";
+    row.appendChild(cell);
+    target.appendChild(row);
+    return;
+  }
+
+  const groups = new Map();
+  rows.forEach((item) => {
+    const label = shopGroupLabel(item.purchaseType);
+    if (!groups.has(label)) groups.set(label, []);
+    groups.get(label).push(item);
+  });
+
+  SHOP_GROUP_ORDER.forEach((label) => {
+    const items = groups.get(label);
+    if (!items || !items.length) return;
+    const done = items.filter((item) => state.purchased[purchasedKey(item)]).length;
+
+    const headRow = document.createElement("tr");
+    headRow.className = "group-row";
+    const headCell = document.createElement("td");
+    headCell.colSpan = 6;
+    headCell.textContent = `${label} · ${items.length} produktu (${done}/${items.length} markatuta)`;
+    headRow.appendChild(headCell);
+    target.appendChild(headRow);
+
+    items.forEach((item) => target.appendChild(shoppingRow(item)));
+  });
+}
+
+function shoppingRow(item) {
+  const key = purchasedKey(item);
+  const done = !!state.purchased[key];
+  const row = document.createElement("tr");
+  row.className = `shop-row${done ? " is-purchased" : ""}`;
+
+  const checkCell = document.createElement("td");
+  checkCell.className = "check-cell";
+  const checkbox = document.createElement("input");
+  checkbox.type = "checkbox";
+  checkbox.dataset.key = key;
+  checkbox.checked = done;
+  checkbox.setAttribute("aria-label", `Markatu: ${item.name}`);
+  checkCell.appendChild(checkbox);
+
+  row.append(
+    checkCell,
+    el("td", "", item.name),
+    el("td", "", item.category),
+    el("td", "", item.amountText),
+    el("td", "day-cell", item.daysText || ""),
+    el("td", "", item.note || "")
+  );
+  return row;
 }
 
 function renderNeedsRows(target, rows, includeNote) {
@@ -429,7 +527,7 @@ function renderNeedsRows(target, rows, includeNote) {
   if (!rows.length) {
     const row = document.createElement("tr");
     const cell = document.createElement("td");
-    cell.colSpan = includeNote ? 5 : 4;
+    cell.colSpan = includeNote ? 6 : 4;
     cell.textContent = "Ez dago kalkulatzeko osagairik.";
     row.appendChild(cell);
     target.appendChild(row);
@@ -441,9 +539,10 @@ function renderNeedsRows(target, rows, includeNote) {
     row.append(
       el("td", "", item.category),
       el("td", "", item.name),
-      el("td", "", item.amountText),
-      cellWithPurchase(item.purchaseType)
+      el("td", "", item.amountText)
     );
+    if (includeNote) row.appendChild(el("td", "day-cell", item.daysText || ""));
+    row.appendChild(cellWithPurchase(item.purchaseType));
     if (includeNote) row.appendChild(el("td", "", item.note));
     target.appendChild(row);
   });
@@ -483,6 +582,13 @@ function renderRecipeLibraryCard(recipe) {
   const assignButton = actionButton("Aukeratutako egunean jarri", "assign-library", { recipeId: recipe.id }, "small");
   assign.append(serviceSelect, assignButton);
   card.appendChild(assign);
+
+  if (recipe.ingredients.length) {
+    const disclosure = el("details", "ingredient-disclosure");
+    disclosure.appendChild(el("summary", "", `Osagaiak eta kantitateak · ${state.people} lagun`));
+    disclosure.appendChild(renderRecipeIngredients(recipe));
+    card.appendChild(disclosure);
+  }
 
   const actions = el("div", "card-actions");
   actions.appendChild(actionButton("Editatu", "edit-recipe", { recipeId: recipe.id }, "small"));
@@ -553,14 +659,54 @@ function renderAllergenBadges(allergens, className = "") {
   return wrap;
 }
 
+function recipeRatio(recipe) {
+  return state.people / Math.max(1, Number(recipe.basePeople) || state.people);
+}
+
+function dayNumber(day) {
+  const match = (day.label || "").match(/\d+/);
+  return match ? Number(match[0]) : day.date;
+}
+
+function scaledAmountText(ingredient, ratio) {
+  const item = normalizeIngredient(ingredient);
+  if (item.amountMin === null) return item.note || "behar adina";
+  const factor = item.scalable ? ratio : 1;
+  const min = roundAmount(item.amountMin * factor, item.unit);
+  const hasRange = item.amountMax !== null && item.amountMax !== item.amountMin;
+  const max = roundAmount((item.amountMax ?? item.amountMin) * factor, item.unit);
+  const text = hasRange && max !== min
+    ? `${formatNumber(min)}-${formatNumber(max)} ${item.unit}`.trim()
+    : `${formatNumber(min)} ${item.unit}`.trim();
+  return item.scalable ? text : `${text} (finkoa)`;
+}
+
+function renderRecipeIngredients(recipe) {
+  const ratio = recipeRatio(recipe);
+  const wrap = el("div", "ingredient-readout");
+  if (!recipe.ingredients.length) {
+    wrap.appendChild(el("p", "muted", "Osagairik gabe (logistika)."));
+    return wrap;
+  }
+  recipe.ingredients.forEach((ingredient) => {
+    const row = el("div", "ingredient-readout-row");
+    row.append(
+      el("span", "ir-name", ingredient.name),
+      el("span", "ir-amount", scaledAmountText(ingredient, ratio))
+    );
+    wrap.appendChild(row);
+  });
+  return wrap;
+}
+
 function calculateNeeds(days) {
   const map = new Map();
   days.forEach((day) => {
     SERVICE_KEYS.forEach((serviceKey) => {
       const recipe = state.recipes[day.slots[serviceKey]];
       if (!recipe) return;
-      const ratio = state.people / Math.max(1, Number(recipe.basePeople) || state.people);
-      recipe.ingredients.forEach((ingredient) => addScaledIngredient(map, ingredient, ratio));
+      const ratio = recipeRatio(recipe);
+      recipe.ingredients.forEach((ingredient) => addScaledIngredient(map, ingredient, ratio, day));
     });
   });
 
@@ -569,7 +715,7 @@ function calculateNeeds(days) {
     .sort((a, b) => `${a.category} ${a.name}`.localeCompare(`${b.category} ${b.name}`, "eu"));
 }
 
-function addScaledIngredient(map, ingredient, ratio) {
+function addScaledIngredient(map, ingredient, ratio, day) {
   const item = normalizeIngredient(ingredient);
   const key = [
     item.name.trim().toLowerCase(),
@@ -590,12 +736,14 @@ function addScaledIngredient(map, ingredient, ratio) {
       amountMax: 0,
       hasNumeric: false,
       hasRange: false,
-      notes: new Set()
+      notes: new Set(),
+      days: new Set()
     });
   }
 
   const aggregate = map.get(key);
   if (item.note) aggregate.notes.add(item.note);
+  if (day) aggregate.days.add(dayNumber(day));
 
   if (!item.scalable || item.amountMin === null) {
     aggregate.scalable = false;
@@ -613,8 +761,9 @@ function addScaledIngredient(map, ingredient, ratio) {
 
 function formatNeedItem(item) {
   const note = [...item.notes].filter(Boolean).join(" · ");
+  const daysText = formatDaysUsed(item.days);
   if (!item.hasNumeric || !item.scalable) {
-    return { ...item, amountText: note || "behar adina", note };
+    return { ...item, amountText: note || "behar adina", note, daysText };
   }
 
   const min = roundAmount(item.amountMin, item.unit);
@@ -623,7 +772,15 @@ function formatNeedItem(item) {
     ? `${formatNumber(min)}-${formatNumber(max)} ${item.unit}`.trim()
     : `${formatNumber(min)} ${item.unit}`.trim();
 
-  return { ...item, amountText, note };
+  return { ...item, amountText, note, daysText };
+}
+
+function formatDaysUsed(daysSet) {
+  if (!daysSet || !daysSet.size) return "";
+  if (daysSet.size >= state.days.length && state.days.length > 1) return "Egunero";
+  return [...daysSet]
+    .sort((a, b) => (typeof a === "number" && typeof b === "number" ? a - b : String(a).localeCompare(String(b))))
+    .join(", ");
 }
 
 function roundAmount(value, unit) {
@@ -695,25 +852,35 @@ function ensureSelectedDay() {
 
 function updateDateRange() {
   const start = dom.startDateInput.value;
-  const end = dom.endDateInput.value;
+  let end = dom.endDateInput.value;
   if (!start || !end) return;
   if (start > end) {
-    dom.endDateInput.value = start;
+    end = start;
+    dom.endDateInput.value = end;
   }
-  rebuildDays(start, dom.endDateInput.value);
-  state.dateRange = { start, end: dom.endDateInput.value };
+  rebuildDays(start, end);
+  state.dateRange = { start, end };
   selectedDayId = state.days[0]?.id || "";
   persist("Datak eguneratuta.");
   render();
 }
 
+// Egunak posizioz mapeatzen dira (ez dataz), hasiera-data aldatzean menuak ez galtzeko:
+// dagoen plana data berrietara lerratzen da eta posizio berriek bakarrik hartzen dute lehenetsia/hutsa.
 function rebuildDays(start, end) {
   const dates = datesBetween(start, end);
-  const oldByDate = new Map(state.days.map((day) => [day.date, day]));
+  const previous = state.days;
   const defaults = window.IZABA_DEFAULT_DATA.days;
   state.days = dates.map((date, index) => {
-    const existing = oldByDate.get(date);
-    if (existing) return existing;
+    const existing = previous[index];
+    if (existing) {
+      return {
+        id: date,
+        date,
+        label: existing.label || defaults[index]?.label || `${index + 1}. eguna`,
+        slots: clone(existing.slots)
+      };
+    }
     const defaultDay = defaults[index];
     return {
       id: date,
@@ -725,12 +892,14 @@ function rebuildDays(start, end) {
 }
 
 function datesBetween(start, end) {
+  // UTCz lan egin behar da: data lokala eraiki eta toISOString (UTC) erabiltzeak
+  // egun bateko desplazamendua eragiten du UTCtik aurrera dauden ordu-zonetan (adib. Donostia).
   const dates = [];
-  const current = new Date(`${start}T00:00:00`);
-  const last = new Date(`${end}T00:00:00`);
+  const current = new Date(`${start}T00:00:00Z`);
+  const last = new Date(`${end}T00:00:00Z`);
   while (current <= last && dates.length < 62) {
     dates.push(current.toISOString().slice(0, 10));
-    current.setDate(current.getDate() + 1);
+    current.setUTCDate(current.getUTCDate() + 1);
   }
   return dates;
 }
@@ -875,6 +1044,30 @@ function addIngredientRow(ingredient = blankIngredient()) {
   row.querySelector('[data-field="scalable"]').checked = ingredient.scalable !== false;
   row.querySelector('[data-field="note"]').value = ingredient.note || "";
   dom.ingredientRows.appendChild(row);
+  updateRowScaled(row);
+}
+
+function updateRowScaled(row) {
+  const scaledEl = row.querySelector('[data-role="scaled"]');
+  if (!scaledEl) return;
+  const base = Math.max(1, Number(dom.recipeBasePeopleInput.value) || state.people || 1);
+  const ratio = state.people / base;
+  const ingredient = {
+    unit: row.querySelector('[data-field="unit"]').value.trim(),
+    amountMin: numberOrNull(row.querySelector('[data-field="amountMin"]').value),
+    amountMax: numberOrNull(row.querySelector('[data-field="amountMax"]').value),
+    scalable: row.querySelector('[data-field="scalable"]').checked,
+    note: row.querySelector('[data-field="note"]').value.trim()
+  };
+  if (ingredient.amountMin === null) {
+    scaledEl.textContent = "";
+    return;
+  }
+  scaledEl.textContent = `≈ ${scaledAmountText(ingredient, ratio)} · ${state.people} lagunentzat (oinarria ${base})`;
+}
+
+function updateAllRowsScaled() {
+  dom.ingredientRows.querySelectorAll(".ingredient-row").forEach(updateRowScaled);
 }
 
 function blankIngredient() {
@@ -962,6 +1155,8 @@ function slugify(text) {
 }
 
 function exportJson() {
+  if (!preflight("JSON esportatu")) return;
+  state.lastExportAt = new Date().toISOString();
   const blob = new Blob([JSON.stringify(state, null, 2)], { type: "application/json" });
   const url = URL.createObjectURL(blob);
   const link = document.createElement("a");
@@ -971,33 +1166,283 @@ function exportJson() {
   link.click();
   link.remove();
   URL.revokeObjectURL(url);
-  setStatus("JSON esportatuta.");
+  persist("JSON esportatuta. Segurtasun-kopia eginda.");
+  renderStatusPanel();
 }
 
 function importJson(file) {
   if (!file) return;
   const reader = new FileReader();
   reader.addEventListener("load", () => {
+    let parsed;
     try {
-      state = normalizeState(JSON.parse(reader.result), clone(window.IZABA_DEFAULT_DATA));
-      selectedDayId = state.days[0]?.id || "";
-      persist("JSON inportatuta.");
-      render();
+      parsed = JSON.parse(reader.result);
     } catch (error) {
       console.error(error);
-      setStatus("Ezin izan da JSON fitxategia inportatu.");
+      setStatus("Ezin izan da JSON fitxategia irakurri (formatu okerra).");
+      return;
     }
+    const next = normalizeState(parsed, clone(window.IZABA_DEFAULT_DATA));
+    const summary =
+      "Inportatu nahi duzun fitxategia:\n\n" +
+      `• ${next.days.length} egun (${next.dateRange.start} → ${next.dateRange.end})\n` +
+      `• ${next.people} lagun\n` +
+      `• ${Object.keys(next.recipes).length} errezeta\n\n` +
+      "Honek uneko plana ORDEZKATUKO du. Jarraitu?";
+    if (!confirm(summary)) {
+      setStatus("Inportazioa bertan behera utzi da.");
+      return;
+    }
+    state = next;
+    selectedDayId = state.days[0]?.id || "";
+    persist("JSON inportatuta.");
+    render();
   });
   reader.readAsText(file);
+}
+
+function preflight(actionLabel) {
+  const report = validatePlan();
+  if (!report.critical.length) return true;
+  const preview = report.critical.slice(0, 6).join("\n");
+  const extra = report.critical.length > 6 ? `\n…eta beste ${report.critical.length - 6} akats` : "";
+  return confirm(
+    `${report.critical.length} akats kritiko daude planean:\n\n${preview}${extra}\n\n${actionLabel} hala ere?`
+  );
+}
+
+function printMode(mode) {
+  if (!preflight("Inprimatu")) return;
+  const className = `print-only-${mode}`;
+  document.body.classList.add(className);
+  const cleanup = () => {
+    document.body.classList.remove(className);
+    window.removeEventListener("afterprint", cleanup);
+  };
+  window.addEventListener("afterprint", cleanup);
+  window.print();
 }
 
 function resetState() {
   if (!confirm("Hasierako Izaba plana berrezarri? Gordetako aldaketak galduko dira.")) return;
   localStorage.removeItem(STORAGE_KEY);
   state = clone(window.IZABA_DEFAULT_DATA);
+  state.purchased = {};
   selectedDayId = state.days[0]?.id || "";
   persist("Hasierako plana berrezarrita.");
   render();
+}
+
+function assignedRecipes() {
+  const ids = new Set();
+  state.days.forEach((day) => {
+    SERVICE_KEYS.forEach((serviceKey) => {
+      if (day.slots[serviceKey]) ids.add(day.slots[serviceKey]);
+    });
+  });
+  return [...ids].map((id) => state.recipes[id]).filter(Boolean);
+}
+
+function planStats() {
+  let planned = 0;
+  let total = 0;
+  state.days.forEach((day) => {
+    CALENDAR_SERVICE_KEYS.forEach((serviceKey) => {
+      total += 1;
+      if (day.slots[serviceKey]) planned += 1;
+    });
+  });
+
+  const allergens = new Map();
+  state.days.forEach((day) => {
+    allergensForDay(day).forEach((allergen) => allergens.set(allergen.key, allergen));
+  });
+
+  return {
+    dayCount: state.days.length,
+    planned,
+    total,
+    empty: total - planned,
+    allergens: [...allergens.values()]
+  };
+}
+
+function validatePlan() {
+  const critical = [];
+  const warnings = [];
+  const ok = [];
+  const recipes = assignedRecipes();
+
+  let unitlessCount = 0;
+  let rangeErrorCount = 0;
+  recipes.forEach((recipe) => {
+    if (!recipe.ingredients.length) {
+      warnings.push(`«${recipe.title}»: osagairik gabe dago (egiaztatu nahita dela).`);
+    }
+    recipe.ingredients.forEach((ingredient) => {
+      const numeric = ingredient.scalable && ingredient.amountMin !== null;
+      if (numeric && !ingredient.unit.trim()) {
+        critical.push(`«${recipe.title}» → ${ingredient.name}: kantitatea badu baina unitaterik ez.`);
+        unitlessCount += 1;
+      }
+      if (
+        ingredient.amountMin !== null &&
+        ingredient.amountMax !== null &&
+        ingredient.amountMax < ingredient.amountMin
+      ) {
+        critical.push(
+          `«${recipe.title}» → ${ingredient.name}: gutxienekoa (${ingredient.amountMin}) gehienekoa (${ingredient.amountMax}) baino handiagoa da.`
+        );
+        rangeErrorCount += 1;
+      }
+    });
+  });
+
+  state.days.forEach((day) => {
+    CALENDAR_SERVICE_KEYS.forEach((serviceKey) => {
+      if (!day.slots[serviceKey]) {
+        warnings.push(`${day.label}: ${SERVICE_LABELS[serviceKey]} hutsik dago.`);
+      }
+    });
+  });
+
+  // Izen-aldaerak (tomate / tomates / tomate frijitua...) eta unitate nahasiak.
+  const byFirstWord = new Map();
+  const unitsByName = new Map();
+  recipes.forEach((recipe) => {
+    recipe.ingredients.forEach((ingredient) => {
+      const name = ingredient.name.trim();
+      if (!name) return;
+      const normalized = normalizeSearchText(name);
+      const firstWord = normalized.split(/[^a-z0-9]+/).filter((part) => part.length >= 4)[0];
+      if (firstWord) {
+        if (!byFirstWord.has(firstWord)) byFirstWord.set(firstWord, new Set());
+        byFirstWord.get(firstWord).add(name);
+      }
+      if (ingredient.unit.trim()) {
+        if (!unitsByName.has(normalized)) unitsByName.set(normalized, new Set());
+        unitsByName.get(normalized).add(ingredient.unit.trim().toLowerCase());
+      }
+    });
+  });
+
+  byFirstWord.forEach((names) => {
+    if (names.size > 1) {
+      warnings.push(`Izen antzekoak (ez dira batuko): ${[...names].join(", ")}.`);
+    }
+  });
+  unitsByName.forEach((units, name) => {
+    if (units.size > 1) {
+      warnings.push(`Unitate nahasiak «${name}» produktuan: ${[...units].join(", ")}.`);
+    }
+  });
+
+  if (!unitlessCount) ok.push("Kantitate guztiek unitatea dute.");
+  if (!rangeErrorCount) ok.push("Min/max tarteak zuzenak dira.");
+  if (recipes.every((recipe) => recipe.ingredients.length)) ok.push("Asignatutako errezeta guztiek osagaiak dituzte.");
+
+  return { critical, warnings, ok };
+}
+
+function formatTimestamp(iso) {
+  if (!iso) return null;
+  const date = new Date(iso);
+  if (Number.isNaN(date.getTime())) return null;
+  return new Intl.DateTimeFormat("eu-ES", {
+    day: "numeric",
+    month: "short",
+    hour: "2-digit",
+    minute: "2-digit"
+  }).format(date);
+}
+
+function renderStatusPanel() {
+  if (!dom.statusCards) return;
+  const stats = planStats();
+  const report = validatePlan();
+
+  const exportPending = !state.lastExportAt || (state.updatedAt && state.updatedAt > state.lastExportAt);
+  const savedLabel = formatTimestamp(state.updatedAt);
+
+  const cards = [
+    {
+      label: "Iraupena",
+      value: `${stats.dayCount} egun`,
+      detail: `${formatDate(state.dateRange.start)} → ${formatDate(state.dateRange.end)}`
+    },
+    { label: "Lagunak", value: `${state.people}`, detail: "Eskalatze-oinarria" },
+    {
+      label: "Otorduak",
+      value: `${stats.planned}/${stats.total}`,
+      detail: stats.empty ? `${stats.empty} hutsik` : "Dena beteta",
+      tone: stats.empty ? "warn" : "ok"
+    },
+    {
+      label: "Datuen osotasuna",
+      value: report.critical.length ? `${report.critical.length} akats` : report.warnings.length ? `${report.warnings.length} abisu` : "Garbi",
+      detail: report.critical.length ? "Kantitate/unitate arazoak" : report.warnings.length ? "Begiratu xehetasunak" : "Arazorik ez",
+      tone: report.critical.length ? "danger" : report.warnings.length ? "warn" : "ok"
+    },
+    {
+      label: "Azken gordetzea",
+      value: savedLabel || "—",
+      detail: exportPending ? "Esportatu gabeko aldaketak" : "Segurtasun-kopia eguneratua",
+      tone: exportPending ? "warn" : "ok"
+    }
+  ];
+
+  dom.statusCards.textContent = "";
+  cards.forEach((card) => {
+    const node = el("div", `status-card${card.tone ? ` tone-${card.tone}` : ""}`);
+    node.append(
+      el("span", "status-card-label", card.label),
+      el("strong", "status-card-value", card.value),
+      el("span", "status-card-detail", card.detail)
+    );
+    dom.statusCards.appendChild(node);
+  });
+
+  if (stats.allergens.length) {
+    const allergenCard = el("div", "status-card");
+    allergenCard.appendChild(el("span", "status-card-label", "Alergenoak planean"));
+    allergenCard.appendChild(renderAllergenBadges(stats.allergens));
+    dom.statusCards.appendChild(allergenCard);
+  }
+
+  dom.storageNote.textContent = "";
+  dom.storageNote.append(
+    el("strong", "", "ℹ️ Datuak nabigatzaile honetan bakarrik gordetzen dira (localStorage). "),
+    document.createTextNode(
+      "Beste gailu edo nabigatzaile batean ez dira agertuko, eta cachea garbituz gero galdu daitezke. Egin segurtasun-kopia «JSON esportatu» botoiarekin."
+    )
+  );
+
+  renderValidationReport(report);
+}
+
+function renderValidationReport(report) {
+  dom.validationReport.textContent = "";
+  const groups = [
+    { title: "Akats kritikoak", items: report.critical, className: "is-critical" },
+    { title: "Abisuak", items: report.warnings, className: "is-warning" },
+    { title: "Ondo dagoena", items: report.ok, className: "is-ok" }
+  ];
+
+  groups.forEach((group) => {
+    if (!group.items.length) return;
+    const details = el("details", `validation-group ${group.className}`);
+    if (group.className === "is-critical") details.open = true;
+    const summary = el("summary");
+    summary.append(
+      el("span", "validation-dot"),
+      document.createTextNode(`${group.title} (${group.items.length})`)
+    );
+    details.appendChild(summary);
+    const list = el("ul", "validation-list");
+    group.items.forEach((item) => list.appendChild(el("li", "", item)));
+    details.appendChild(list);
+    dom.validationReport.appendChild(details);
+  });
 }
 
 function actionButton(text, action, data = {}, variant = "") {
@@ -1044,7 +1489,53 @@ dom.importFile.addEventListener("change", () => {
   dom.importFile.value = "";
 });
 dom.resetButton.addEventListener("click", resetState);
-dom.printButton.addEventListener("click", () => window.print());
+dom.printButton.addEventListener("click", () => printMode("plan"));
+dom.printShoppingButton.addEventListener("click", () => printMode("shopping"));
+dom.printKitchenButton.addEventListener("click", () => printMode("kitchen"));
+dom.totalNeedsBody.addEventListener("change", (event) => {
+  const checkbox = event.target.closest('input[type="checkbox"][data-key]');
+  if (!checkbox) return;
+  state.purchased = state.purchased || {};
+  if (checkbox.checked) {
+    state.purchased[checkbox.dataset.key] = true;
+  } else {
+    delete state.purchased[checkbox.dataset.key];
+  }
+  const row = checkbox.closest("tr");
+  row?.classList.toggle("is-purchased", checkbox.checked);
+  refreshGroupCount(row);
+  persist("Erosketa-egoera gordeta.");
+});
+
+function refreshGroupCount(row) {
+  if (!row) return;
+  let header = row.previousElementSibling;
+  while (header && !header.classList.contains("group-row")) header = header.previousElementSibling;
+  if (!header) return;
+  let total = 0;
+  let done = 0;
+  let sibling = header.nextElementSibling;
+  while (sibling && sibling.classList.contains("shop-row")) {
+    total += 1;
+    if (sibling.classList.contains("is-purchased")) done += 1;
+    sibling = sibling.nextElementSibling;
+  }
+  const cell = header.firstElementChild;
+  const label = cell.textContent.split(" · ")[0];
+  cell.textContent = `${label} · ${total} produktu (${done}/${total} markatuta)`;
+}
+dom.checkButton.addEventListener("click", () => {
+  renderStatusPanel();
+  const report = validatePlan();
+  setStatus(
+    report.critical.length
+      ? `${report.critical.length} akats kritiko eta ${report.warnings.length} abisu aurkitu dira.`
+      : report.warnings.length
+        ? `Akats kritikorik ez. ${report.warnings.length} abisu daude.`
+        : "Dena ondo: ez da arazorik aurkitu."
+  );
+  document.getElementById("egoera")?.scrollIntoView({ behavior: "smooth", block: "start" });
+});
 dom.newRecipeButton.addEventListener("click", () => openRecipeDialog());
 dom.recipeSearchInput.addEventListener("input", () => {
   recipeSearch = dom.recipeSearchInput.value;
@@ -1173,6 +1664,11 @@ dom.recipeForm.addEventListener("submit", (event) => {
 dom.closeDialogButton.addEventListener("click", closeRecipeDialog);
 dom.cancelRecipeButton.addEventListener("click", closeRecipeDialog);
 dom.addIngredientButton.addEventListener("click", () => addIngredientRow());
+dom.ingredientRows.addEventListener("input", (event) => {
+  const row = event.target.closest(".ingredient-row");
+  if (row) updateRowScaled(row);
+});
+dom.recipeBasePeopleInput.addEventListener("input", updateAllRowsScaled);
 dom.ingredientRows.addEventListener("click", (event) => {
   const button = event.target.closest(".remove-ingredient");
   if (!button) return;
@@ -1182,6 +1678,7 @@ dom.ingredientRows.addEventListener("click", (event) => {
       if (input.type !== "checkbox") input.value = "";
     });
     row.querySelector('[data-field="scalable"]').checked = true;
+    updateRowScaled(row);
   } else {
     row.remove();
   }

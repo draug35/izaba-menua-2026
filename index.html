@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Izaba Menua 2026</title>
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css?v=3">
 </head>
 <body>
   <header class="app-header">
@@ -26,6 +26,7 @@
 
   <nav class="top-nav" aria-label="Nabigazio nagusia">
     <div class="page nav-inner">
+      <a href="#egoera">Egoera</a>
       <a href="#egutegia">Egutegia</a>
       <a href="#alergenoak">Alergenoak</a>
       <a href="#eguneko-beharrak">Eguneko beharrak</a>
@@ -51,6 +52,19 @@
       <div class="status-box" id="statusBox" role="status" aria-live="polite">Prest.</div>
     </section>
 
+    <section class="status-panel" id="egoera" aria-label="Egoera orokorra">
+      <div class="section-head compact">
+        <div>
+          <h2>Egoera orokorra</h2>
+          <p>Planaren laburpena eta datuen egiaztapena. Inprimatu edo esportatu aurretik begiratu.</p>
+        </div>
+        <button class="button" type="button" id="checkButton">Egiaztatu plana</button>
+      </div>
+      <div class="status-cards" id="statusCards"></div>
+      <div class="storage-note" id="storageNote"></div>
+      <div class="validation-report" id="validationReport"></div>
+    </section>
+
     <section class="allergen-guide" id="alergenoak" aria-label="Alergeno gida">
       <div class="section-head compact">
         <div>
@@ -67,7 +81,7 @@
           <h2>Egutegia</h2>
           <p>Bazkaria, askaria eta afaria lerrokatuta daude; gosaria finkoa laburtuta agertzen da. Arrastatu errezetak egun osora edo zerbitzu zehatzera.</p>
         </div>
-        <button class="button print-button" type="button" id="printButton">Inprimatu</button>
+        <button class="button print-button" type="button" id="printButton">Inprimatu egutegia</button>
       </div>
       <div class="calendar-grid" id="calendarGrid" aria-live="polite"></div>
     </section>
@@ -79,6 +93,7 @@
             <h2 id="selectedDayTitle">Eguna</h2>
             <p id="selectedDayMeta">Aukeratu egutegiko egun bat.</p>
           </div>
+          <button class="button print-button" type="button" id="printKitchenButton">Inprimatu sukaldea</button>
         </div>
         <div id="selectedDayMeals"></div>
       </section>
@@ -110,17 +125,19 @@
       <div class="section-head">
         <div>
           <h2>Guztizko beharrak</h2>
-          <p>Datak eta lagun kopurua kontuan hartuta kalkulatutako erosketa osoa.</p>
+          <p>Erosketa osoa jatorriaren arabera multzokatuta. Markatu erositakoa edo prestatutakoa.</p>
         </div>
+        <button class="button print-button" type="button" id="printShoppingButton">Inprimatu erosketak</button>
       </div>
       <div class="table-wrap">
         <table>
           <thead>
             <tr>
-              <th>Kategoria</th>
+              <th class="check-col" aria-label="Erosita">✓</th>
               <th>Produktua</th>
+              <th>Kategoria</th>
               <th>Kantitatea</th>
-              <th>Non</th>
+              <th>Egunak</th>
               <th>Oharra</th>
             </tr>
           </thead>
@@ -243,10 +260,11 @@
         <input type="text" data-field="note" placeholder="behar adina, etiketa berrikusi...">
       </label>
       <button class="icon-button remove-ingredient" type="button" aria-label="Osagaia kendu">×</button>
+      <p class="ingredient-scaled" data-role="scaled"></p>
     </div>
   </template>
 
-  <script src="data.js"></script>
-  <script src="app.js"></script>
+  <script src="data.js?v=2"></script>
+  <script src="app.js?v=6"></script>
 </body>
 </html>
