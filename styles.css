@@ -55,7 +55,7 @@ a {
 }
 
 .page {
-  width: min(1440px, calc(100% - 28px));
+  width: calc(100% - 28px);
   margin: 0 auto;
 }
 
