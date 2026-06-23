@@ -139,7 +139,6 @@
         ing("Kremarako patata", "Barazkiak", "kg", 4, null, LOCAL, ""),
         ing("Tipula", "Barazkiak", "kg", 1.5, null, LOCAL, ""),
         ing("Barazki-salda", "Saldak", "L", 5, null, HERE, "Glutenik gabea ziurtatu."),
-        ing("Ura", "Sukaldea", "L", 5, null, KITCHEN, ""),
         ing("Oilasko-bularkia", "Haragia", "kg", 10, 11, LOCAL, ""),
         ing("Tomate frijitua", "Saltsak", "kg", 2.5, 3, HERE, "Etiketa berrikusi."),
         ing("Patata frijituak", "Oinarrizkoak", "poltsa", 10, null, LOCAL, "Poltsa handiak."),
@@ -327,7 +326,6 @@
         ing("Saltxitxak", "Haragia", "unitate", 200, 210, LOCAL, "Glutenik gabea berrikusi."),
         ing("Patata-purea", "Pasta eta arroza", "kg", 1.5, 1.8, HERE, "Glutenik gabea berrikusi."),
         ing("Esnea", "Gosaria", "L", 1.5, 2, LOCAL, ""),
-        ing("Purearako ura", "Sukaldea", "L", 4, 5, KITCHEN, ""),
         ing("Gurina", "Gosaria", "g", 750, 1000, LOCAL, ""),
         ing("Jogurtak", "Postreak", "unitate", 53, null, LOCAL, ""),
         ing("Ogia", "Ogia", "barra", 15, null, LOCAL, "")

@@ -1306,6 +1306,36 @@ tbody tr:last-child td {
   font-weight: 800;
 }
 
+.vegan-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  width: fit-content;
+  padding: 4px 9px;
+  border: 1px solid;
+  border-radius: 999px;
+  font-size: 0.76rem;
+  font-weight: 900;
+}
+
+.vegan-badge.is-vegan {
+  color: #1f6b3a;
+  background: #e7f6ea;
+  border-color: rgba(40, 122, 80, 0.55);
+}
+
+.vegan-badge.is-adaptable {
+  color: #7a5a12;
+  background: #fcf3d8;
+  border-color: rgba(160, 120, 30, 0.5);
+}
+
+.vegan-badge.is-nonvegan {
+  color: #8a3b2e;
+  background: #fdeee9;
+  border-color: rgba(179, 60, 50, 0.42);
+}
+
 @media (max-width: 1100px) {
   .app-layout {
     grid-template-columns: 1fr;

@@ -15,6 +15,13 @@ const KIND_LABELS = {
 // Index: Date.getDay() (0 = igandea) eta Date.getMonth() (0 = urtarrila).
 const EU_WEEKDAYS = ["Igan", "Astl", "Astr", "Astz", "Ostg", "Ostr", "Lar"];
 const EU_MONTHS = ["urt", "ots", "mar", "api", "mai", "eka", "uzt", "abu", "ira", "urr", "aza", "abe"];
+// Jatorri animaliako osagaiak (beganoa EZ dela markatzeko). Landare-esneak (koko-esne, soja) ez dira hemen.
+const ANIMAL_TERMS = [
+  "haragi", "oilasko", "indioilar", "txerri", "solomo", "urdaiazpiko", "bacon", "txorizo",
+  "saltxitx", "frankfurt", "albondig", "hestebete", "york", "lomo", "jamon",
+  "arrain", "atun", "hegaluze", "bakailao", "legatz", "antxoa", "itsaski", "ganba", "marisko",
+  "gazta", "gurin", "esnegain", "jogurt", "natilla", "esneki", "arrautz", "maionesa", "ezti"
+];
 const ALLERGENS = [
   {
     key: "gluten",
@@ -295,7 +302,10 @@ function renderBreakfastSummary() {
   const summary = el("section", "breakfast-summary service-breakfast");
   summary.appendChild(el("strong", "", "Gosari finkoa"));
   summary.appendChild(el("span", "", recipe ? `${recipe.title} · 3tik 11ra · kalkuluetan sartuta` : "Gosaria kalkuluetan sartuta"));
-  if (recipe) summary.appendChild(renderAllergenBadges(recipeAllergens(recipe)));
+  if (recipe) {
+    appendVeganBadge(summary, recipe);
+    summary.appendChild(renderAllergenBadges(recipeAllergens(recipe)));
+  }
   return summary;
 }
 
@@ -373,6 +383,7 @@ function renderAssignedRecipeCard(day, serviceKey, recipe) {
 
   card.appendChild(el("div", "recipe-title", recipe.title));
   card.appendChild(el("div", "recipe-meta", `${recipe.basePeople} laguneko oinarria · ${recipe.ingredients.length} osagai`));
+  appendVeganBadge(card, recipe);
   card.appendChild(renderTags(recipe.tags));
   card.appendChild(renderAllergenBadges(recipeAllergens(recipe)));
 
@@ -440,6 +451,7 @@ function renderSelectedDay() {
       item.appendChild(el("p", "", "Zerbitzu hau hutsik dago."));
     } else {
       item.appendChild(el("div", "recipe-title", recipe.title));
+      appendVeganBadge(item, recipe);
       item.appendChild(renderTags(recipe.tags));
       item.appendChild(renderAllergenBadges(recipeAllergens(recipe)));
       if (recipe.notes) item.appendChild(el("p", "", recipe.notes));
@@ -628,6 +640,7 @@ function renderRecipeLibraryCard(recipe) {
 
   card.appendChild(el("div", "recipe-title", recipe.title));
   card.appendChild(el("div", "recipe-meta", `${recipe.mealTypes.map((key) => SERVICE_LABELS[key]).join(", ")} · ${recipe.basePeople} lagun · ${recipe.ingredients.length} osagai`));
+  appendVeganBadge(card, recipe);
   card.appendChild(renderTags(recipe.tags));
   card.appendChild(renderAllergenBadges(recipeAllergens(recipe)));
   if (recipe.notes) card.appendChild(el("p", "muted", recipe.notes));
@@ -660,6 +673,34 @@ function renderTags(tags) {
   const wrap = el("div", "tags");
   (tags || []).slice(0, 5).forEach((tag) => wrap.appendChild(el("span", "tag", tag)));
   return wrap;
+}
+
+function veganStatus(recipe) {
+  if (!recipe.ingredients || !recipe.ingredients.length) return null;
+  const tags = (recipe.tags || []).map((tag) => normalizeSearchText(tag));
+  if (tags.includes("beganoa")) return "vegan";
+  // "beganoa erraz", "beganoa egokitu(a)"... → egokitua: haragia/proteina aparte joan daiteke.
+  if (tags.some((tag) => tag.startsWith("beganoa"))) return "adaptable";
+  const haystack = normalizeSearchText(
+    [recipe.title, ...recipe.ingredients.map((ing) => `${ing.name} ${ing.category} ${ing.note}`)].join(" ")
+  );
+  const hasAnimal = ANIMAL_TERMS.some((term) => containsAllergenTerm(haystack, term));
+  return hasAnimal ? "nonvegan" : "vegan";
+}
+
+const VEGAN_BADGES = {
+  vegan: { cls: "is-vegan", text: "🌱 Beganoa", title: "Beganoentzat egokia" },
+  adaptable: { cls: "is-adaptable", text: "🌱 Beganoa egokitua", title: "Beganoentzat egoki daiteke (haragia/proteina aparte prestatuta)" },
+  nonvegan: { cls: "is-nonvegan", text: "🥩 Ez beganoa", title: "Ez da beganoentzat egokia (jatorri animaliako osagaiak)" }
+};
+
+function appendVeganBadge(parent, recipe) {
+  const status = veganStatus(recipe);
+  if (!status) return;
+  const conf = VEGAN_BADGES[status];
+  const badge = el("span", `vegan-badge ${conf.cls}`, conf.text);
+  badge.title = conf.title;
+  parent.appendChild(badge);
 }
 
 function renderAllergenGuide() {
