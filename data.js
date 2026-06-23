@@ -468,6 +468,16 @@
     )
   };
 
+  // Dieta berezietako anoak (glutenik gabe) finkoak dira: zeliako kopuru txikiarentzat dira,
+  // eta EZ dira lagun kopuru osoarekin eskalatu behar.
+  Object.values(recipes).forEach((recipe) => {
+    recipe.ingredients.forEach((ingredient) => {
+      if (ingredient.category === "Glutenik gabe" || /glutenik gabe/i.test(ingredient.name)) {
+        ingredient.scalable = false;
+      }
+    });
+  });
+
   const initialSlots = [
     { breakfast: null, lunch: "etxeko-bazkaria", snack: "york-gazta-sandwicha", dinner: "karbonara-entsalada" },
     { breakfast: "gosari-finkoa", lunch: "frankfurt-bokata", snack: "indioilar-gazta-sandwicha", dinner: "kalabazin-krema-oilaskoa" },

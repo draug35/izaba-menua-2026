@@ -11,6 +11,10 @@ const KIND_LABELS = {
   kanpamendua: "🏕️ Kanpamendua",
   txangoa: "🚶 Txangoa"
 };
+// Euskarazko data-izenak eskuz: nabigatzaile askok ez dute "eu" locale-a eta gaztelaniara jausten dira.
+// Index: Date.getDay() (0 = igandea) eta Date.getMonth() (0 = urtarrila).
+const EU_WEEKDAYS = ["Igan", "Astl", "Astr", "Astz", "Ostg", "Ostr", "Lar"];
+const EU_MONTHS = ["urt", "ots", "mar", "api", "mai", "eka", "uzt", "abu", "ira", "urr", "aza", "abe"];
 const ALLERGENS = [
   {
     key: "gluten",
@@ -166,7 +170,8 @@ function normalizeState(candidate, fallback) {
     days: Array.isArray(candidate.days) && candidate.days.length ? candidate.days : fallback.days,
     updatedAt: candidate.updatedAt || null,
     lastExportAt: candidate.lastExportAt || null,
-    purchased: candidate.purchased && typeof candidate.purchased === "object" ? candidate.purchased : {}
+    purchased: candidate.purchased && typeof candidate.purchased === "object" ? candidate.purchased : {},
+    origins: candidate.origins && typeof candidate.origins === "object" ? candidate.origins : {}
   };
 
   normalized.days = normalized.days.map((day, index) => ({
@@ -463,23 +468,34 @@ function renderNeeds() {
   renderShoppingTotals(totalNeeds);
 }
 
-const SHOP_GROUP_ORDER = [
-  "Hemen erosi / eraman",
-  "Han erosi / txandaka",
-  "Sukaldea",
-  "Zalantzazkoak / besteak"
+const SHOP_GROUP_ORDER = ["Hemen erosi", "Izaban erosi", "Sukaldea", "Zalantzazkoak"];
+const ORIGIN_OPTIONS = [
+  { value: "Hemen erosi / eraman", label: "Hemen" },
+  { value: "Han erosi / txandaka", label: "Izaban" },
+  { value: "Sukaldea", label: "Sukaldea" }
 ];
 
 function shopGroupLabel(purchaseType) {
   const text = purchaseType || "";
-  if (text.includes("Hemen")) return "Hemen erosi / eraman";
-  if (text.includes("Han")) return "Han erosi / txandaka";
+  if (text.includes("Hemen")) return "Hemen erosi";
+  if (text.includes("Han") || text.includes("Izab")) return "Izaban erosi";
   if (text.includes("Sukald")) return "Sukaldea";
-  return "Zalantzazkoak / besteak";
+  return "Zalantzazkoak";
+}
+
+// Jatorriaren eta erosita-egoeraren gakoa: produktuaren araberakoa (ez jatorriaren araberakoa),
+// horrela jatorria eskuz aldatzean egoera mantentzen da.
+function stableKey(item) {
+  return [item.category, item.name, item.unit].join("|").toLowerCase();
+}
+
+function effectiveOrigin(item) {
+  state.origins = state.origins || {};
+  return state.origins[stableKey(item)] || item.purchaseType;
 }
 
 function purchasedKey(item) {
-  return [item.category, item.name, item.unit, item.purchaseType].join("|").toLowerCase();
+  return stableKey(item);
 }
 
 function renderShoppingTotals(rows) {
@@ -489,7 +505,7 @@ function renderShoppingTotals(rows) {
   if (!rows.length) {
     const row = document.createElement("tr");
     const cell = document.createElement("td");
-    cell.colSpan = 6;
+    cell.colSpan = 7;
     cell.textContent = "Ez dago kalkulatzeko osagairik.";
     row.appendChild(cell);
     target.appendChild(row);
@@ -498,7 +514,7 @@ function renderShoppingTotals(rows) {
 
   const groups = new Map();
   rows.forEach((item) => {
-    const label = shopGroupLabel(item.purchaseType);
+    const label = shopGroupLabel(effectiveOrigin(item));
     if (!groups.has(label)) groups.set(label, []);
     groups.get(label).push(item);
   });
@@ -511,7 +527,7 @@ function renderShoppingTotals(rows) {
     const headRow = document.createElement("tr");
     headRow.className = "group-row";
     const headCell = document.createElement("td");
-    headCell.colSpan = 6;
+    headCell.colSpan = 7;
     headCell.textContent = `${label} · ${items.length} produktu (${done}/${items.length} markatuta)`;
     headRow.appendChild(headCell);
     target.appendChild(headRow);
@@ -541,9 +557,26 @@ function shoppingRow(item) {
     el("td", "", item.category),
     el("td", "", item.amountText),
     el("td", "day-cell", item.daysText || ""),
+    originCell(item),
     el("td", "", item.note || "")
   );
   return row;
+}
+
+function originCell(item) {
+  const cell = document.createElement("td");
+  const select = document.createElement("select");
+  select.className = "origin-select";
+  select.dataset.role = "origin-select";
+  select.dataset.key = stableKey(item);
+  const current = effectiveOrigin(item);
+  ORIGIN_OPTIONS.forEach((option) => {
+    const node = new Option(option.label, option.value);
+    if (option.value === current) node.selected = true;
+    select.appendChild(node);
+  });
+  cell.appendChild(select);
+  return cell;
 }
 
 function renderNeedsRows(target, rows, includeNote) {
@@ -566,7 +599,7 @@ function renderNeedsRows(target, rows, includeNote) {
       el("td", "", item.amountText)
     );
     if (includeNote) row.appendChild(el("td", "day-cell", item.daysText || ""));
-    row.appendChild(cellWithPurchase(item.purchaseType));
+    row.appendChild(cellWithPurchase(effectiveOrigin(item)));
     if (includeNote) row.appendChild(el("td", "", item.note));
     target.appendChild(row);
   });
@@ -769,15 +802,18 @@ function addScaledIngredient(map, ingredient, ratio, day) {
   if (item.note) aggregate.notes.add(item.note);
   if (day) aggregate.days.add(dayNumber(day));
 
-  if (!item.scalable || item.amountMin === null) {
+  if (item.amountMin === null) {
     aggregate.scalable = false;
     aggregate.notes.add(item.note || "behar adina");
     return;
   }
 
+  // Eskalagarriak ez direnak (dieta berezietako anoak) kantitate finkoa dute: ez dira biderkatzen.
+  const factor = item.scalable ? ratio : 1;
+  if (!item.scalable) aggregate.scalable = false;
   aggregate.hasNumeric = true;
-  const scaledMin = item.amountMin * ratio;
-  const scaledMax = (item.amountMax ?? item.amountMin) * ratio;
+  const scaledMin = item.amountMin * factor;
+  const scaledMax = (item.amountMax ?? item.amountMin) * factor;
   aggregate.amountMin += scaledMin;
   aggregate.amountMax += scaledMax;
   if (item.amountMax !== null && item.amountMax !== item.amountMin) aggregate.hasRange = true;
@@ -786,7 +822,7 @@ function addScaledIngredient(map, ingredient, ratio, day) {
 function formatNeedItem(item) {
   const note = [...item.notes].filter(Boolean).join(" · ");
   const daysText = formatDaysUsed(item.days);
-  if (!item.hasNumeric || !item.scalable) {
+  if (!item.hasNumeric) {
     return { ...item, amountText: note || "behar adina", note, daysText };
   }
 
@@ -821,7 +857,7 @@ function formatNumber(value) {
 
 function cellWithPurchase(purchaseType) {
   const cell = document.createElement("td");
-  const pill = el("span", `purchase-pill${purchaseType.includes("Han") ? " local" : ""}`, purchaseType);
+  const pill = el("span", `purchase-pill${purchaseType.includes("Han") ? " local" : ""}`, shopGroupLabel(purchaseType));
   cell.appendChild(pill);
   return cell;
 }
@@ -1266,6 +1302,7 @@ function resetState() {
   localStorage.removeItem(STORAGE_KEY);
   state = clone(window.IZABA_DEFAULT_DATA);
   state.purchased = {};
+  state.origins = {};
   selectedDayId = state.days[0]?.id || "";
   persist("Hasierako plana berrezarrita.");
   render();
@@ -1386,12 +1423,9 @@ function formatTimestamp(iso) {
   if (!iso) return null;
   const date = new Date(iso);
   if (Number.isNaN(date.getTime())) return null;
-  return new Intl.DateTimeFormat("eu-ES", {
-    day: "numeric",
-    month: "short",
-    hour: "2-digit",
-    minute: "2-digit"
-  }).format(date);
+  const hh = String(date.getHours()).padStart(2, "0");
+  const mm = String(date.getMinutes()).padStart(2, "0");
+  return `${EU_MONTHS[date.getMonth()]} ${date.getDate()}, ${hh}:${mm}`;
 }
 
 function renderStatusPanel() {
@@ -1501,11 +1535,9 @@ function el(tag, className, text) {
 }
 
 function formatDate(isoDate) {
-  return new Intl.DateTimeFormat("eu-ES", {
-    weekday: "short",
-    day: "numeric",
-    month: "short"
-  }).format(new Date(`${isoDate}T00:00:00`));
+  const date = new Date(`${isoDate}T00:00:00`);
+  if (Number.isNaN(date.getTime())) return isoDate;
+  return `${EU_WEEKDAYS[date.getDay()]}, ${EU_MONTHS[date.getMonth()]} ${date.getDate()}`;
 }
 
 dom.startDateInput.addEventListener("change", updateDateRange);
@@ -1531,6 +1563,14 @@ dom.printButton.addEventListener("click", () => printMode("plan"));
 dom.printShoppingButton.addEventListener("click", () => printMode("shopping"));
 dom.printKitchenButton.addEventListener("click", () => printMode("kitchen"));
 dom.totalNeedsBody.addEventListener("change", (event) => {
+  const originSelect = event.target.closest('select[data-role="origin-select"]');
+  if (originSelect) {
+    state.origins = state.origins || {};
+    state.origins[originSelect.dataset.key] = originSelect.value;
+    persist("Jatorria eguneratuta.");
+    renderNeeds();
+    return;
+  }
   const checkbox = event.target.closest('input[type="checkbox"][data-key]');
   if (!checkbox) return;
   state.purchased = state.purchased || {};
